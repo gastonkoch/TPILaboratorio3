@@ -10,8 +10,7 @@ const Login = () => {
                 <Form.Control
                     type="text"
                     placeholder='Name...'
-                    // onChange={}
-                    // value={}
+                    
                 />
             </Form.Group>
             

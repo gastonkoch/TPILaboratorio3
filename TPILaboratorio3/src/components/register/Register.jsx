@@ -1,20 +1,23 @@
 import { Button, Form } from 'react-bootstrap';
-import './Login.css'
+import './Register.css'
 import { useForm } from '../../hook/useForm';
 import { useNavigate } from 'react-router-dom';
-const Login = () => {
+
+const Register = () => {
+
     const navigate = useNavigate()
 
-    const { email, password, onInputChange, onResetForm } = useForm({
+    const { email, password, name, onInputChange, onResetForm } = useForm({
         email: '',
-        password: ''
+        password: '',
+        name:''
     })
 
     // Estamos redirigiendo al usuario a landingpage, podemos hacerlo de esta manera ya que en el AppRouter se encuetra dicho path
-    // Replace esta indicando que la entrada en el historial del navegador sera remplazada en vez de añadir una nueva, significa que cuando el usuario vuelve atras no volveria al login
+    // Replace esta indicando que la entrada en el historial del navegador sera remplazada en vez de añadir una nueva, significa que cuando el usuario vuelve atras no volveria al register
     // State es el estado que optenemos desde la url
     // El logged indica al sistema que ya ingreso correctamente el usuario
-    const onLogin = (event) => {
+    const onRegister = (event) => {
         event.preventDefault()
 
         navigate('/landingpage',{
@@ -30,8 +33,18 @@ const Login = () => {
 
     return (
         <div className='divLogin'>
-            <Form onSubmit={onLogin} className='form'>
-                <h1>Iniciar Sesión</h1>
+            <Form onSubmit={onRegister} className='form'>
+                <h1>Registrate</h1>
+                <Form.Group controlId="userName" className='formGroup'>
+                    <Form.Label className='text-dark labelForm'>Name</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder='Ingrese su name...'
+                        name="name"
+                        value={name}
+                        onChange={onInputChange}
+                    />
+                </Form.Group>
                 <Form.Group controlId="userEmail" className='formGroup'>
                     <Form.Label className='text-dark labelForm'>Email</Form.Label>
                     <Form.Control
@@ -52,11 +65,10 @@ const Login = () => {
                         onChange={onInputChange}
                     />
                 </Form.Group>
-                <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Ingresar</Button>
+                <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Registrarse</Button>
             </Form>
-            <p className='pLogin'>¿Olvidó su contraseña?</p>
         </div>
     )
 }
 
-export default Login
+export default Register

@@ -1,10 +1,17 @@
 import './App.css'
-import Login from './components/login/Login'
+import AppRouter from './router/AppRouter'
 
 function App() {
   return (
     <>
-      <Login/>
+      <AppRouter></AppRouter>
+      {/* <Login/> */}
+      {/* <Routes>
+        <Route path='/login' element={<LandingPage></LandingPage>}></Route> */}
+        {/* <Route path='/singIn' element={}></Route>
+        <Route path='/forgetPassword' element={}></Route> */}
+      {/* </Routes> */}
+      {/* <LandingPage></LandingPage> */}
     </>
   )
 }

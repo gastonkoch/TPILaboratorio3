@@ -26,6 +26,8 @@ const Login = () => {
                         placeholder='Ingrese su email...'
                         value={email}
                         onChange={onHandleEmail}
+
+                        
                     />
                 </Form.Group>
                 <Form.Group controlId="userPassword" className='formGroup'>

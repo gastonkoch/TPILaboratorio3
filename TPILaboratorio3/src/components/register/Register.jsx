@@ -7,6 +7,8 @@ const Register = () => {
 
     const navigate = useNavigate()
 
+
+    
     const { email, password, name, onInputChange, onResetForm } = useForm({
         email: '',
         password: '',

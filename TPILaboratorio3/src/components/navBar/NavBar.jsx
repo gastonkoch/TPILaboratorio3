@@ -13,11 +13,14 @@ const NavBar = () => {
         })
     }
 
+
+
     return (
         <>
             <Navbar data-bs-theme="dark" className='navbar'>
                 <Container className='caja'>
                     <NavLink to={'/'} className='nameBussines'>Easy Grip</NavLink>
+                    <NavLink to={'/products'} className='products'>Productos</NavLink>
 
                     {
                         state?.logged ? (

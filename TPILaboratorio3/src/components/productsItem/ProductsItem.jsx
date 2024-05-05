@@ -5,13 +5,12 @@ import Card from 'react-bootstrap/Card';
 const ProductsItem = ({ id, product_name, product_price, product_description, product_stock, product_image }) => {
     return (
         <>
-            <Card style={{ width: '15rem'}}>
+            <Card style={{ width: '100%' }}>
                 <Card.Img variant="top" src={product_image} />
                 <Card.Body>
                     <Card.Title>{product_name}</Card.Title>
                     <Card.Text>
-                        {product_description}
-                        <h3>${product_price}</h3>
+                        ${product_price}
                     </Card.Text>
                     <Button variant="primary">Ver mas</Button>
                 </Card.Body>

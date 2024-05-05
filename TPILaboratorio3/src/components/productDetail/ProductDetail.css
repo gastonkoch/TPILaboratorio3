@@ -1,0 +1,12 @@
+.main-container {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.left-container {
+    width: 50%;
+}
+
+.right-container {
+    width: 50%;
+}

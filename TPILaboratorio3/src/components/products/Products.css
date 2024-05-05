@@ -3,8 +3,14 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap; 
+    margin: 60px;
+
 }
 
  .product-item{
-    margin: 3px;
+    width: 30%;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
  }

@@ -3,7 +3,7 @@ import './Login.css'
 import { useForm } from '../../hook/useForm';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate({isSignedIn, onLogIn, onLogOut})
 
 
 

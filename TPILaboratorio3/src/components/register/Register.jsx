@@ -3,7 +3,7 @@ import './Register.css'
 import { useForm } from '../../hook/useForm';
 import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({isSignedIn, onLogIn, onLogOut}) => {
 
     const navigate = useNavigate()
 

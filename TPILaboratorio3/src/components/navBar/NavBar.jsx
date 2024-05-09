@@ -13,8 +13,6 @@ const NavBar = () => {
         })
     }
 
-
-
     return (
         <>
             <Navbar data-bs-theme="dark" className='navbar'>

@@ -1,4 +1,4 @@
-.divLogin{
+.divRegister{
     background-color: #95aadf;
     border-radius: 50px ;
     display: flex;
@@ -6,7 +6,7 @@
     align-items: center;
     flex-direction: column;
     width: 350px;
-    height: 350px;
+    height: 400px;
 }
 
 .labelForm{
@@ -43,4 +43,11 @@
 .divLogin>h1{
     font-size: 30px;
     margin-bottom: 23px;
+}
+
+.divBoxRegister{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 250px;
 }

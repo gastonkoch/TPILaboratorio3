@@ -7,8 +7,6 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
 
     const navigate = useNavigate()
 
-
-    
     const { email, password, name, onInputChange, onResetForm } = useForm({
         email: '',
         password: '',
@@ -34,41 +32,43 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
     }
 
     return (
-        <div className='divLogin'>
-            <Form onSubmit={onRegister} className='form'>
-                <h1>Registrate</h1>
-                <Form.Group controlId="userName" className='formGroup'>
-                    <Form.Label className='text-dark labelForm'>Name</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder='Ingrese su name...'
-                        name="name"
-                        value={name}
-                        onChange={onInputChange}
-                    />
-                </Form.Group>
-                <Form.Group controlId="userEmail" className='formGroup'>
-                    <Form.Label className='text-dark labelForm'>Email</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder='Ingrese su email...'
-                        name="email"
-                        value={email}
-                        onChange={onInputChange}
-                    />
-                </Form.Group>
-                <Form.Group controlId="userPassword" className='formGroup'>
-                    <Form.Label className='text-dark labelForm'>Contraseña</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder='Ingrese su contraseña...'
-                        name="password"
-                        value={password}
-                        onChange={onInputChange}
-                    />
-                </Form.Group>
-                <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Registrarse</Button>
-            </Form>
+        <div className='divBoxRegister'>
+            <div className='divRegister'>
+                <Form onSubmit={onRegister} className='form'>
+                    <h1>Registrate</h1>
+                    <Form.Group controlId="userName" className='formGroup'>
+                        <Form.Label className='text-dark labelForm'>Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder='Ingrese su name...'
+                            name="name"
+                            value={name}
+                            onChange={onInputChange}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="userEmail" className='formGroup'>
+                        <Form.Label className='text-dark labelForm'>Email</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder='Ingrese su email...'
+                            name="email"
+                            value={email}
+                            onChange={onInputChange}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="userPassword" className='formGroup'>
+                        <Form.Label className='text-dark labelForm'>Contraseña</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder='Ingrese su contraseña...'
+                            name="password"
+                            value={password}
+                            onChange={onInputChange}
+                        />
+                    </Form.Group>
+                    <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Registrarse</Button>
+                </Form>
+            </div>
         </div>
     )
 }

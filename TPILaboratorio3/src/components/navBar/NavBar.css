@@ -1,21 +1,30 @@
-.nameBussines{
+/* .nameBussines{
     color: white;
     font-weight: bold;
     text-decoration: none;
     font-size: 20px;
-}
-
+    display: flex;
+    align-items: center;
+} */
 
 .navbar {
     background-color: #95aadf;
     width: 100%;
 }
-
+/* 
 .user{
     display: flex;
     align-items: center;
 }
+
 .username{
     color: black !important;
     margin-right: 10px;
 }
+
+.caja-titulos{
+    display: flex;
+    align-items: center;
+} */
+
+

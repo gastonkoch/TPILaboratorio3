@@ -44,3 +44,10 @@
     font-size: 30px;
     margin-bottom: 23px;
 }
+
+.divBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 250px;
+}

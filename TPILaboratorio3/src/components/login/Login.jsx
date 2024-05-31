@@ -30,6 +30,9 @@ const Login = () => {
     //     onResetForm();
     // }
 
+    const onRegister = () => {
+        navigate("/registrarse")
+    }
     return (
         <div className='divBox'>
             <div className='divLogin'>
@@ -58,6 +61,7 @@ const Login = () => {
                     <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Ingresar</Button>
                 </Form>
                 <p className='pLogin'>¿Olvidó su contraseña?</p>
+                <p className='pLogin' onClick={onRegister}>Registrarse</p>
             </div>
         </div>
     )

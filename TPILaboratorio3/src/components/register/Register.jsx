@@ -20,7 +20,7 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
     const onRegister = (event) => {
         event.preventDefault()
 
-        navigate('/landingpage',{
+        navigate('/',{
             replace: true,
             state: {
                 logged: true,

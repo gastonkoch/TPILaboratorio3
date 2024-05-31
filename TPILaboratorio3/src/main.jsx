@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
+import AuthenticationContext  from './services/authentication/AuthenticationContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+      <AuthenticationContext>
+        <App />
+      </AuthenticationContext>
+      
   </React.StrictMode>
 )

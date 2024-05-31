@@ -6,6 +6,7 @@ import Register from './components/register/Register';
 import Login from './components/login/Login';
 import NotFound from './components/notFound/NotFound';
 import MainLayout from './components/mainLayout/MainLayout';
+import Products from './components/products/Products';
 
   
 const App = () => {
@@ -37,8 +38,7 @@ const App = () => {
       path: "/productos",
       // element: <LandingPage />,
       element:
-        <MainLayout children={<LandingPage />}>
-            {/* <Register /> */}
+        <MainLayout children={<Products />}>
         </MainLayout>
     },
     {

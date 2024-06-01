@@ -10,11 +10,11 @@ const NavBar = () => {
     const { handleLogout, user } = useContext(AuthenticationContext);
     // const user = 2;
 
-    const onHandleLogout = () =>{
+    const onHandleLogout = () => {
         handleLogout()
     }
-    
-    const onHandleLogin = () =>{
+
+    const onHandleLogin = () => {
         navigate("/login");
     }
 
@@ -28,6 +28,10 @@ const NavBar = () => {
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link href="productos" className='products'>Productos</Nav.Link>
                         </Nav>
+                        {user &&
+                            <Navbar.Text className='username'>
+                                ¡Hola {user.name}!  
+                            </Navbar.Text>}
                         <Nav>
                             {user ? (
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogout}>Cerrar sesión</Button>

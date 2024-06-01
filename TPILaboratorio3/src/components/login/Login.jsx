@@ -16,19 +16,13 @@ const Login = () => {
     // Replace esta indicando que la entrada en el historial del navegador sera remplazada en vez de añadir una nueva, significa que cuando el usuario vuelve atras no volveria al login
     // State es el estado que optenemos desde la url
     // El logged indica al sistema que ya ingreso correctamente el usuario
-    // const onLogin = (event) => {
-    //     event.preventDefault()
+    const onLogin = (event) => {
+        event.preventDefault()
 
-    //     navigate('/landingpage',{
-    //         replace: true,
-    //         state: {
-    //             logged: true,
-    //             email
-    //         }
-    //     })
+        navigate('/')
 
-    //     onResetForm();
-    // }
+        onResetForm();
+    }
 
     const onRegister = () => {
         navigate("/registrarse")

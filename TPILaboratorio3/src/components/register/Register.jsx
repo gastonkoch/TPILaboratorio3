@@ -1,11 +1,13 @@
 import { Button, Form } from 'react-bootstrap';
 import './Register.css'
+import { useState, useContext } from "react";
 import { useForm } from '../../hook/useForm';
 import { useNavigate } from 'react-router-dom';
-
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 const Register = ({isSignedIn, onLogIn, onLogOut}) => {
 
     const navigate = useNavigate()
+    const { handleLogin } = useContext(AuthenticationContext);
 
     const { email, password, name, onInputChange, onResetForm } = useForm({
         email: '',
@@ -20,13 +22,10 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
     const onRegister = (event) => {
         event.preventDefault()
 
-        navigate('/',{
-            replace: true,
-            state: {
-                logged: true,
-                email
-            }
-        })
+
+        //FALTA LA VALIDACION DE CAMPOS
+        handleLogin(name)
+        navigate('/')
 
         onResetForm();
     }

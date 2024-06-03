@@ -1,6 +1,7 @@
 .main-container {
     display: flex;
     flex-flow: column wrap;
+    background-color: white;
 }
 
 .left-container {

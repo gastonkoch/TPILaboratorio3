@@ -1,8 +1,13 @@
 import proptypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsItem = ({ id, product_name, product_price, product_description, product_stock, product_image }) => {
+    let navigate = useNavigate()
+    const onProductDetail = () =>{
+        navigate(`/producto/${id}`)
+    }
     return (
         <>
             <Card style={{ width: '100%' }}>
@@ -12,7 +17,7 @@ const ProductsItem = ({ id, product_name, product_price, product_description, pr
                     <Card.Text>
                         ${product_price}
                     </Card.Text>
-                    <Button variant="primary">Ver mas</Button>
+                    <Button variant="primary" onClick={onProductDetail}>Ver mas</Button>
                 </Card.Body>
             </Card>
         </>

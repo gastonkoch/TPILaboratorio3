@@ -7,6 +7,7 @@ import Login from './components/login/Login';
 import NotFound from './components/notFound/NotFound';
 import MainLayout from './components/mainLayout/MainLayout';
 import Products from './components/products/Products';
+import ProductDetail from './components/productDetail/ProductDetail';
 
   
 const App = () => {
@@ -39,6 +40,12 @@ const App = () => {
       // element: <LandingPage />,
       element:
         <MainLayout children={<Products />}>
+        </MainLayout>
+    },
+    {
+      path: "/producto/:id",
+      element:
+        <MainLayout children={<ProductDetail />}>
         </MainLayout>
     },
     {

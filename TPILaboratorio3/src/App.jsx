@@ -1,6 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
-import NavBar from './components/navBar/NavBar';
 import LandingPage from './components/landingPage/LandingPage';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
@@ -29,7 +28,6 @@ const App = () => {
     },
     {
       path: "/registrarse",
-      // element: <Register />,
       element:
         <MainLayout>
             <Register />
@@ -37,7 +35,6 @@ const App = () => {
     },
     {
       path: "/productos",
-      // element: <LandingPage />,
       element:
         <MainLayout children={<Products />}>
         </MainLayout>

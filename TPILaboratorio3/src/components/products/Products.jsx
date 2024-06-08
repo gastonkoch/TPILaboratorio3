@@ -1,8 +1,8 @@
 import React from 'react'
 import ProductsItem from '../productsItem/ProductsItem'
 import data from '../products/Data_Test.json'
-
 import "./Products.css";
+
 const Products = () => {
     console.log(data)
     return (

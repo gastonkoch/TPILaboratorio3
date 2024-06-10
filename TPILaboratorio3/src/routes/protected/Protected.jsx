@@ -1,20 +1,22 @@
-// import { useContext } from "react";
-// import { Navigate } from "react-router-dom";
-// // import { AuthenticationContext } from "../../../services/authentication/authentication.context";
-// import PropTypes from "prop-types";
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
+import PropTypes from "prop-types";
 
-// const Protected = ({ children }) => {
-//   const { user } = useContext(AuthenticationContext);
 
-//   if (!user) {
-//     return <Navigate to="/login" replace />;
-//   }
+// VA A SER UTILIZADO PARA PROTEGER EL PAYMETHOD
+const Protected = ({ children }) => {
+  const { user } = useContext(AuthenticationContext);
 
-//   return children;
-// };
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
-// Protected.propTypes = {
-//   children: PropTypes.object,
-// };
+  return children;
+};
 
-// export default Protected;
+Protected.propTypes = {
+  children: PropTypes.object,
+};
+
+export default Protected;

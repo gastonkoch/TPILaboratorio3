@@ -1,32 +1,30 @@
-import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-import { useContext } from "react";
+import { Container, Nav, Navbar, Button, Dropdown } from 'react-bootstrap';
+import { useContext, useState } from "react";
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
+import Carrito from '../carrito/Carrito';
 import "./NavBar.css"
 import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-    let navigate = useNavigate()
+    let navigate = useNavigate();
     const { handleLogout, user } = useContext(AuthenticationContext);
+    const [cartProducts, setCartProducts] = useState([]); // Estado del carrito
 
     const onHandleLogout = () => {
-        handleLogout()
-    }
+        handleLogout();
+    };
 
     const onHandleLogin = () => {
         navigate("/login");
-    }
+    };
 
     const onHandleProduct = () => {
         navigate("/productos");
-    }
-
-    const onHandleCarrito = () => {
-        navigate("/carrito");
-    }
+    };
 
     const onHandleLanding = () => {
         navigate("/");
-    }
+    };
 
     return (
         <>
@@ -37,11 +35,11 @@ const NavBar = () => {
                     <Navbar.Collapse id="basic-navbar-nav" className='caja'>
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
-                            <Nav.Link onClick={onHandleCarrito} href="carrito" className='carrito'>Carrito</Nav.Link>
+                            {/* Eliminar la navegación al carrito */}
                         </Nav>
                         {user &&
                             <Navbar.Text className='username'>
-                                ¡Hola {user.name}!  
+                                ¡Hola {user.name}!
                             </Navbar.Text>}
                         <Nav>
                             {user ? (
@@ -50,12 +48,20 @@ const NavBar = () => {
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Iniciar sesión</Button>
                             )}
                         </Nav>
-
+                        {/* Componente Carrito en el Navbar */}
+                        <Dropdown align="end">
+                            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                Carrito ({cartProducts.length})
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Carrito products={cartProducts} setCartProducts={setCartProducts} />
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
         </>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

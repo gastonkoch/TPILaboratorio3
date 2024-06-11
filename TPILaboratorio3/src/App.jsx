@@ -7,6 +7,7 @@ import NotFound from './components/notFound/NotFound';
 import MainLayout from './components/mainLayout/MainLayout';
 import Products from './components/products/Products';
 import ProductDetail from './components/productDetail/ProductDetail';
+import Carrito from './components/carrito/Carrito';
 
   
 const App = () => {
@@ -37,6 +38,12 @@ const App = () => {
       path: "/productos",
       element:
         <MainLayout children={<Products />}>
+        </MainLayout>
+    },
+    {
+      path: "/carrito",
+      element:
+        <MainLayout children={<Carrito />}>
         </MainLayout>
     },
     {

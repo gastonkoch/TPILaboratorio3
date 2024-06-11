@@ -16,6 +16,14 @@ const NavBar = () => {
         navigate("/login");
     }
 
+    const onHandleProduct = () => {
+        navigate("/productos");
+    }
+
+    const onHandleCarrito = () => {
+        navigate("/carrito");
+    }
+
     const onHandleLanding = () => {
         navigate("/");
     }
@@ -28,7 +36,8 @@ const NavBar = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='caja'>
                         <Nav className="me-auto caja-titulos" >
-                            <Nav.Link href="productos" className='products'>Productos</Nav.Link>
+                            <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
+                            <Nav.Link onClick={onHandleCarrito} href="carrito" className='carrito'>Carrito</Nav.Link>
                         </Nav>
                         {user &&
                             <Navbar.Text className='username'>
@@ -41,6 +50,7 @@ const NavBar = () => {
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Iniciar sesión</Button>
                             )}
                         </Nav>
+
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

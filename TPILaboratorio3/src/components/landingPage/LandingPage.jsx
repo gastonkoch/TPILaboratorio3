@@ -9,7 +9,6 @@ const LandingPage = () => {
     
     return (
         <>
-           <Carrousel/>
            <Products/>
         </>
     )

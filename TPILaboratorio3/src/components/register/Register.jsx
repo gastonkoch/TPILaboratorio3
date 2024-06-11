@@ -1,9 +1,10 @@
 import { Button, Form } from 'react-bootstrap';
 import './Register.css'
-import { useState, useContext } from "react";
-import { useForm } from '../../hook/useForm';
+import { useState, useContext, useRef} from "react";
+import { useForm} from '../../hook/useForm';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
+
 const Register = ({isSignedIn, onLogIn, onLogOut}) => {
 
     const navigate = useNavigate()
@@ -15,6 +16,17 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
         name:''
     })
 
+    const [errors, setErrors] = useState({
+        email: false,
+        password: false,
+        name: false,
+    });
+
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+    const nombreRef = useRef(null);
+
+
     // Estamos redirigiendo al usuario a landingpage, podemos hacerlo de esta manera ya que en el AppRouter se encuetra dicho path
     // Replace esta indicando que la entrada en el historial del navegador sera remplazada en vez de añadir una nueva, significa que cuando el usuario vuelve atras no volveria al register
     // State es el estado que optenemos desde la url
@@ -22,6 +34,28 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
     const onRegister = (event) => {
         event.preventDefault()
 
+        if (!emailRef.current.value) {
+            emailRef.current.focus();
+            alert("Debe ingresar su email")
+            setErrors({ ...errors, email: true });
+            return;
+        }
+
+        if (!passwordRef.current.value) {
+            passwordRef.current.focus();
+            alert("Debe ingresar su contraseña")
+            setErrors({ ...errors, password: true });
+            return;
+        }
+
+        if (!nameRef.current.value) {
+            nameRef.current.focus();
+            alert("Debe ingresar su contraseña")
+            setErrors({ ...errors, password: true });
+            return;
+        }
+
+        setErrors({ ...errors, exist: false });
 
         //FALTA LA VALIDACION DE CAMPOS
         handleLogin(name)
@@ -42,6 +76,7 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
                             placeholder='Ingrese su name...'
                             name="name"
                             value={name}
+                            ref={nameRef}
                             onChange={onInputChange}
                         />
                     </Form.Group>
@@ -52,6 +87,7 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
                             placeholder='Ingrese su email...'
                             name="email"
                             value={email}
+                            ref={emailRef}
                             onChange={onInputChange}
                         />
                     </Form.Group>
@@ -62,6 +98,7 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
                             placeholder='Ingrese su contraseña...'
                             name="password"
                             value={password}
+                            ref={passwordRef}
                             onChange={onInputChange}
                         />
                     </Form.Group>

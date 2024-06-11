@@ -1,13 +1,27 @@
 .main-container {
     display: flex;
-    flex-flow: column wrap;
-    background-color: white;
+    margin-top: 100px;
+    background-color: #95aadf;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 25px;
+    margin-right: 25px;
+    border-radius: 25px
+    ;
 }
 
-.left-container {
-    width: 50%;
+.button {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 10px;
 }
 
-.right-container {
-    width: 50%;
+.image{
+    width: 750px;
+    height: 450px;
+    margin-left: 50px;
+}
+
+.data{
+    margin-right: 50px;
 }

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const NavBar = () => {
     let navigate = useNavigate();
     const { handleLogout, user } = useContext(AuthenticationContext);
-    const [cartProducts, setCartProducts] = useState([]); // Estado del carrito
+    const [cartProducts, setCartProducts] = useState([]);
 
     const onHandleLogout = () => {
         handleLogout();
@@ -39,7 +39,6 @@ const NavBar = () => {
                     <Navbar.Collapse id="basic-navbar-nav" className='caja'>
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
-                            {/* Eliminar la navegación al carrito */}
                         </Nav>
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
@@ -49,22 +48,24 @@ const NavBar = () => {
                             <Navbar.Text className='username'>
                                 ¡Hola {user.name}!
                             </Navbar.Text>}
+
                         <Nav>
                             {user ? (
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogout}>Cerrar sesión</Button>
                             ) : (
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Iniciar sesión</Button>
                             )}
-                        </Nav>
-                        {/* Componente Carrito en el Navbar */}
+                        </Nav>  
+                        
                         <Dropdown align="end">
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
                                 Carrito ({cartProducts.length})
                             </Dropdown.Toggle>
-                            <Dropdown.Menu>
+                            <Dropdown.Menu className='carrito-desplegable'>
                                 <Carrito products={cartProducts} setCartProducts={setCartProducts} />
                             </Dropdown.Menu>
                         </Dropdown>
+                        
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

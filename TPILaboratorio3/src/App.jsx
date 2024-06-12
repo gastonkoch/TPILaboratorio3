@@ -9,7 +9,7 @@ import Products from './components/products/Products';
 import ProductDetail from './components/productDetail/ProductDetail';
 import Carrito from './components/carrito/Carrito';
 import AddProducts from './components/addProducts/AddProducts';
-
+import PayMethod from './components/payMethod/PayMethod';
   
 const App = () => {
   const router = createBrowserRouter([
@@ -57,6 +57,12 @@ const App = () => {
       path: "/nuevoProducto",
       element:
         <MainLayout children={<AddProducts />}>
+        </MainLayout>
+    },
+    {
+    path: "/paymethod",
+      element:
+        <MainLayout children={<PayMethod />}>
         </MainLayout>
     },
     {

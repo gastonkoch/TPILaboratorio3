@@ -1,11 +1,13 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
 import PayMethod from '../payMethod/PayMethod';
-
-
+import { useNavigate } from 'react-router-dom';
+import "./Carrito.css"
 
 const Carrito = ({ products, setCartProducts }) => {
+  const [showPayMethod, setShowPayMethod] = useState(false);
+  const navigate = useNavigate();
+
   const handleRemoveProduct = (index) => {
     const newProducts = [...products];
     newProducts.splice(index, 1);
@@ -13,42 +15,33 @@ const Carrito = ({ products, setCartProducts }) => {
   };
 
   const handlePay = () => {
-    // Aquí podrías implementar alguna lógica adicional antes de llamar al componente PayMethod
-   
-    // <PayMethod></PayMethod>
-    console.log("b")
+    navigate("/paymethod")
+  };
+
+  const handleBack = () => {
+    setShowPayMethod(false);
   };
 
   return (
-    <>
-      {products.length === 0 ? (
-        <p>El carrito está vacío</p>
-      ) : (
-        <ListGroup variant="flush">
-          {products.map((product, index) => (
-            <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
-              <span>{product.name}</span>
-              <span>${product.price.toFixed(2)}</span>
-              <Button variant="danger" size="sm" onClick={() => handleRemoveProduct(index)}>Eliminar</Button>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      )}
-      <Button variant="success" onClick={handlePay} className="w-100 mt-2">
-        Pagar
-      </Button>
-    </>
+      <div className='box'>
+        <div className='top'>
+          {products.length === 0 ? <p>El carrito está vacío</p>
+                                : (<ListGroup variant="flush">
+                                    {products.map((product, index) => (
+                                      <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
+                                        <span>{product.name}</span>
+                                        <span>${product.price.toFixed(2)}</span>
+                                        <Button variant="danger" size="sm" onClick={() => handleRemoveProduct(index)}>Eliminar</Button>
+                                      </ListGroup.Item>
+                                    ))}
+                                  </ListGroup>
+                                )}
+          </div>
+          <div className='bot'> 
+            <Button variant="success" onClick={handlePay} className="w-100 mt-2">Pagar</Button>
+          </div>
+      </div>
   );
 };
-
-// Carrito.propTypes = {
-//   products: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       price: PropTypes.number.isRequired
-//     })
-//   ).isRequired,
-//   setCartProducts: PropTypes.func.isRequired
-// };
 
 export default Carrito;

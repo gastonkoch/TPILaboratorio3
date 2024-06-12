@@ -24,7 +24,7 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const nombreRef = useRef(null);
+    const nameRef = useRef(null);
 
 
     // Estamos redirigiendo al usuario a landingpage, podemos hacerlo de esta manera ya que en el AppRouter se encuetra dicho path

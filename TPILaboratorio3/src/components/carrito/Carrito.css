@@ -1,15 +1,13 @@
-.carrito .dropdown-menu {
-    width: 300px;
-    padding: 10px;
-  }
-  
-  .carrito .list-group-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .carrito .btn-danger {
-    margin-left: 10px;
-  }
-  
+/* .box {
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+} */
+
+.top {
+  flex: 1;
+}
+/* 
+.bot {
+
+} */

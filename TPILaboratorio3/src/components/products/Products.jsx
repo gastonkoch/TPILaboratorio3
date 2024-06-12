@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import ProductsItem from '../productsItem/ProductsItem';
 import data from '../products/Data_Test.json';
@@ -6,16 +6,17 @@ import "./Products.css";
 import Carrousel from '../carrousel/Carrousel';
 
 const Products = () => {
+    const [productData,setProductsData] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 16;
 
     // Calcular el índice de los productos actuales
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = data.slice(indexOfFirstProduct, indexOfLastProduct);
+    let indexOfLastProduct = currentPage * productsPerPage;
+    let indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    let currentProducts = productData.slice(indexOfFirstProduct, indexOfLastProduct);
 
     // Calcular el número total de páginas
-    const totalPages = Math.ceil(data.length / productsPerPage);
+    const totalPages = Math.ceil(productData.length / productsPerPage);
 
     // Manejar el cambio de página
     const handlePageChange = (pageNumber) => {
@@ -35,22 +36,46 @@ const Products = () => {
             setCurrentPage(currentPage - 1);
         }
     };
+    useEffect(() => {
+        fetch("https://localhost:7197/api/Product", {
+          method: "GET",
+          mode: "cors",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al obtener los productos");
+            }
+            return response.json();
+          })
+          .then((productsData) => {
+            setProductsData(productsData)
+            indexOfLastProduct = currentPage * productsPerPage;
+            indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+            currentProducts = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
+            // console.log(currentProducts)
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }, []);
 
     return (
         <div>
             <Carrousel/>
             <div className='products-container'>
                 {currentProducts.map(item => (
+                         
                     <div className="product-item" key={item.id}>
                         <ProductsItem
-                            id={item.id}
-                            product_name={item.product_name}
-                            product_price={item.product_price}
-                            product_description={item.product_description}
-                            product_stock={item.product_stock}
-                            product_image={item.product_image}
-                            product_category={item.product_category}
-                            product_brand={item.product_brand}
+                            item={item}
+                            // id={item.id}
+                            // product_name={item.product_name}
+                            // product_price={item.product_price}
+                            // product_description={item.product_description}
+                            // product_stock={item.product_stock}
+                            // product_image={item.product_image}
+                            // product_category={item.product_category}
+                            // product_brand={item.product_brand}
                         />
                     </div>
                 ))}

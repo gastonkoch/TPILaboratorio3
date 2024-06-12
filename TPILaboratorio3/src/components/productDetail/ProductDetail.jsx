@@ -27,6 +27,24 @@ const ProductDetail = () => {
 
   useEffect(() => {
     searchById(id);
+    fetch(`https://localhost:7197/api/Product/id/${id}`, {
+      method: "GET",
+      mode: "cors",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener los productos");
+        }
+        return response.json();
+      })
+      .then((productsData) => {
+        console.log(productsData)
+        setProductOnScreen(productsData)
+        console.log(productOnScreen)
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, [id]);
 
   if (error) {

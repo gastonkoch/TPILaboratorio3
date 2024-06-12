@@ -1,74 +1,69 @@
-import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-// import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Container, Nav, Navbar, Button, Dropdown } from 'react-bootstrap';
+import { useContext, useState } from "react";
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
+import Carrito from '../carrito/Carrito';
 import "./NavBar.css"
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-    // const { state } = useLocation()
-    // const navigate = useNavigate()
+    let navigate = useNavigate();
+    const { handleLogout, user } = useContext(AuthenticationContext);
+    const [cartProducts, setCartProducts] = useState([]);
 
+    const onHandleLogout = () => {
+        handleLogout();
+    };
 
-    // const onLogout = () => {
-    //     navigate('/login',{
-    //         replace:true,
-    //     })
-    // }
+    const onHandleLogin = () => {
+        navigate("/login");
+    };
+
+    const onHandleProduct = () => {
+        navigate("/productos");
+    };
+
+    const onHandleLanding = () => {
+        navigate("/");
+    };
 
     return (
         <>
-            {/* <Navbar data-bs-theme="dark" className='navbar'>
-                <Container className='caja'>
-                    <NavLink to={'/'} className='nameBussines'>Easy Grip</NavLink>
-                    <NavLink to={'/products'} className='products'>Productos</NavLink>
-
-                    {
-                        state?.logged ? (
-                            <div className='user'>
-                                <p className='username'>{state?.email}</p>
-                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onLogout}>Cerrar sesión</Button>
-                            </div>
-                        )
-                            :
-                            (
-                                <Nav className="me-auto ">
-                                    <NavLink to={'/login'} className="nav-link">Iniciar sesión</NavLink>
-                                    <NavLink to={'/register'} className="nav-link">Registrarse</NavLink>
-                                </Nav>
-                            )
-                    }
-
-                </Container>
-            </Navbar>
-            <Outlet /> */}
-
             <Navbar data-bs-theme="dark" className='navbar'>
                 <Container>
-                    <Navbar.Brand href="productos" className='nameBussines'>Easy Grip</Navbar.Brand>
+                    <Navbar.Brand href="productos" className='nameBussines' onClick={onHandleLanding}>Easy Grip</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='caja'>
                         <Nav className="me-auto caja-titulos" >
-                            <Nav.Link href="productos" className='products'>Productos</Nav.Link>
-                            <Nav.Link href="login">Iniciar sesión</Nav.Link>
-                            <Nav.Link href="registrarse">Registrarse</Nav.Link>
-                            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Another action
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">
-                                    Separated link
-                                </NavDropdown.Item>
-                            </NavDropdown> */}
+                            <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
                         </Nav>
+
+                        {user &&
+                            <Navbar.Text className='username'>
+                                ¡Hola {user.name}!
+                            </Navbar.Text>}
+
                         <Nav>
-                            <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Cerrar sesión</Button>
-                        </Nav>
+                            {user ? (
+                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogout}>Cerrar sesión</Button>
+                            ) : (
+                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Iniciar sesión</Button>
+                            )}
+                        </Nav>  
+                        
+                        <Dropdown align="end">
+                            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                Carrito ({cartProducts.length})
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className='carrito-desplegable'>
+                                <Carrito products={cartProducts} setCartProducts={setCartProducts} />
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
         </>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

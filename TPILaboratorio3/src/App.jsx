@@ -1,11 +1,14 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
-import NavBar from './components/navBar/NavBar';
 import LandingPage from './components/landingPage/LandingPage';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
 import NotFound from './components/notFound/NotFound';
 import MainLayout from './components/mainLayout/MainLayout';
+import Products from './components/products/Products';
+import ProductDetail from './components/productDetail/ProductDetail';
+import Carrito from './components/carrito/Carrito';
+import PayMethod from './components/payMethod/PayMethod';
 
   
 const App = () => {
@@ -27,7 +30,6 @@ const App = () => {
     },
     {
       path: "/registrarse",
-      // element: <Register />,
       element:
         <MainLayout>
             <Register />
@@ -35,10 +37,26 @@ const App = () => {
     },
     {
       path: "/productos",
-      // element: <LandingPage />,
       element:
-        <MainLayout children={<LandingPage />}>
-            {/* <Register /> */}
+        <MainLayout children={<Products />}>
+        </MainLayout>
+    },
+    {
+      path: "/carrito",
+      element:
+        <MainLayout children={<Carrito />}>
+        </MainLayout>
+    },
+    {
+      path: "/producto/:id",
+      element:
+        <MainLayout children={<ProductDetail />}>
+        </MainLayout>
+    },
+    {
+      path: "/paymethod",
+      element:
+        <MainLayout children={<PayMethod />}>
         </MainLayout>
     },
     {

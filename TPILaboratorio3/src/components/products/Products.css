@@ -8,9 +8,29 @@
 }
 
  .product-item{
-    width: 30%;
+    width: 23%;
     margin: 15px;
     display: flex;
     align-items: center;
     flex-flow: column wrap;
  }
+
+
+ .pagination{
+    display: flex;
+    justify-content: center;
+ }
+
+ .pagination > .button{
+    margin-right: 10px;
+    margin-bottom: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+ }
+
+ .active {
+    border: 1px solid #D3D3D3  !important;
+    background-color: #D3D3D3  !important;
+    color: grey;
+}

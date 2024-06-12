@@ -1,0 +1,13 @@
+/* .box {
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+} */
+
+.top {
+  flex: 1;
+}
+/* 
+.bot {
+
+} */

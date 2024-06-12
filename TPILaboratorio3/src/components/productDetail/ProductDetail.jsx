@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import data from '../products/Data_Test.json';
 import { useState, useEffect } from 'react';
-import { Button, Card, ListGroup, ListGroupItem} from 'react-bootstrap';
+import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
@@ -15,74 +15,71 @@ const ProductDetail = () => {
   const [productOnScreen, setProductOnScreen] = useState({});
   const [cantidad, setCantidad] = useState(1);
 
-
-  const searchById = (idParam) => {
-    const productFinded = data.find(item => item.id == idParam);
-    if (!productFinded) {
-      setError(true);
-    } else {
-      setProductOnScreen(productFinded);
-    }
-  };
-
   useEffect(() => {
-    searchById(id);
     fetch(`https://localhost:7197/api/Product/id/${id}`, {
       method: "GET",
       mode: "cors",
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al obtener los productos");
+          throw new Error("Error al obtener el producto");
         }
         return response.json();
       })
       .then((productsData) => {
-        console.log(productsData)
-        setProductOnScreen(productsData)
-        console.log(productOnScreen)
+        let productFromAPI = {
+          brand: productsData.brand,
+          category: productsData.category,
+          description: productsData.description,
+          id: productsData.id,
+          image: productsData.image,
+          name: productsData.name,
+          price: productsData.price,
+          stock: productsData.stock
+        }
+        setProductOnScreen(productFromAPI)
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [id]);
+  }, []);
 
   if (error) {
     return <div>Producto no encontrado</div>;
   }
-  
-  
+
+
   return (
     <div className="main-container">
 
       <Container>
         <Row>
           <Col xs={6} md={4}>
-            <Image className='image' src={productOnScreen.product_image} rounded />
+            <Image className='image' src={productOnScreen.image} rounded />
           </Col>
         </Row>
       </Container>
 
       <Container className='data'>
         <Form>
-            <Form.Group className="mb-3" controlId="nameId">
-              <Form.Label>{productOnScreen.product_name}</Form.Label>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="nameId">
-              <Form.Label>${productOnScreen.product_price}</Form.Label>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="descriptionId">
-              <Form.Label>{productOnScreen.product_description}</Form.Label>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="stockId">
-              <Form.Label><strong>Stock:</strong> {productOnScreen.product_stock} unidades</Form.Label>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="categoryId">
-              <Form.Label><strong>Categoría:</strong> {productOnScreen.product_category}</Form.Label>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="brandId">
-              <Form.Label><strong>Marca:</strong> {productOnScreen.product_brand}</Form.Label>
-            </Form.Group>
+          <Form.Group className="mb-3" controlId="nameId">
+            <Form.Label>{productOnScreen.name}</Form.Label>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="nameId">
+            <Form.Label>${productOnScreen.price}</Form.Label>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="descriptionId">
+            <Form.Label>{productOnScreen.description}</Form.Label>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="stockId">
+            <Form.Label><strong>Stock:</strong> {productOnScreen.stock} unidades</Form.Label>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="categoryId">
+            <Form.Label><strong>Categoría:</strong> {productOnScreen.category}</Form.Label>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="brandId">
+            <Form.Label><strong>Marca:</strong> {productOnScreen.brand}</Form.Label>
+          </Form.Group>
         </Form>
 
         <Container className='buttonsBox'>

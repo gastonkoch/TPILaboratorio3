@@ -21,6 +21,10 @@ const NavBar = () => {
     const onHandleProduct = () => {
         navigate("/productos");
     };
+    
+    const onHandleNewProduct = () => {
+        navigate("/nuevoProducto");
+    };
 
     const onHandleLanding = () => {
         navigate("/");
@@ -35,6 +39,10 @@ const NavBar = () => {
                     <Navbar.Collapse id="basic-navbar-nav" className='caja'>
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
+                            {/* Eliminar la navegación al carrito */}
+                        </Nav>
+                        <Nav className="me-auto caja-titulos" >
+                            <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
                             {/* Eliminar la navegación al carrito */}
                         </Nav>
                         {user &&

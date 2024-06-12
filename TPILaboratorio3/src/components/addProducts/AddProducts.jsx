@@ -1,57 +1,89 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-const AddProducts = ({ onBookDataSaved }) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
-  const [enteredRating, setEnteredRating] = useState("");
-  const [enteredPageCount, setEnteredPageCount] = useState("");
+const AddProducts = () => {
+  const [enteredName, setEnteredTitle] = useState("");
+  const [enteredDescription, setEnteredAuthor] = useState("");
+  const [enteredStock, setEnteredRating] = useState("");
+  const [enteredPrice, setEnteredPageCount] = useState("");
   const [enteredImageUrl, setEnteredImageUrl] = useState("");
+  const [enteredCategory, setEnteredCategory] = useState("");
+  const [enteredBrand, setEnteredBrand] = useState("");
   const [formValid, setFormValid] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-
+  const navigate = useNavigate()
   useEffect(() => {
     setFormValid(
-      enteredTitle !== "" &&
-        enteredAuthor !== "" &&
-        enteredPageCount !== "" &&
-        enteredRating !== ""
+      enteredName !== "" &&
+        enteredDescription !== "" &&
+        enteredPrice !== "" &&
+        enteredStock !== "" &&
+        enteredCategory !== "" &&
+        enteredBrand !== "" &&
+        enteredImageUrl !== ""
     );
-  }, [enteredTitle, enteredAuthor, enteredPageCount, enteredRating]);
+  }, [enteredName, enteredDescription, enteredPrice, enteredStock,enteredCategory,enteredBrand,enteredImageUrl]);
 
-  const handleChangeTitle = (e) => {
+  const handleChangeName = (e) => {
     setEnteredTitle(e.target.value);
   };
 
-  const changeAuthorHandler = (event) => {
+  const changeDescriptionHandler = (event) => {
     setEnteredAuthor(event.target.value);
   };
 
-  const changeRatingHandler = (event) => {
+  const changeStockHandler = (event) => {
     setEnteredRating(event.target.value);
   };
 
-  const changePageCountHandler = (event) => {
+  const changePriceHandler = (event) => {
     setEnteredPageCount(event.target.value);
   };
 
   const changeImageUrlHandler = (event) => {
     setEnteredImageUrl(event.target.value);
   };
+  const changeBrandHandler = (event) => {
+    setEnteredBrand(event.target.value);
+  };
 
-  const submitBookHandler = (event) => {
+  const changeCategoryHandler = (event) => {
+    setEnteredCategory(event.target.value);
+  };
+
+  const submitProductHandler = async (event) => {
     event.preventDefault();
-    const bookDto = {
+    const productDTO = {
+      brand: enteredBrand,
+      category: enteredCategory,
+      description: enteredDescription,
       id: 0,
-      bookTitle: enteredTitle,
-      bookAuthor: enteredAuthor,
-      bookRating: enteredRating !== "" ? parseInt(enteredRating, 10) : 0,
-      pageCount: parseInt(enteredPageCount, 10),
-      imageUrl: enteredImageUrl,
+      image: enteredImageUrl,
+      name: enteredName,
+      price:enteredPrice,
+      stock: enteredStock
     };
+    try {
+      const response = await fetch("https://localhost:7197/api/Product", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productDTO),
+      });
 
-    onBookDataSaved(bookDto);
+      if (!response.ok) {
+        throw new Error("Failed to add product.");
+      }
+
+      const data = await response.json();
+      navigate("/productos")
+    } catch (error) {
+      alert(error);
+    }
+
     setEnteredTitle("");
     setEnteredAuthor("");
     setEnteredRating("");
@@ -59,66 +91,82 @@ const AddProducts = ({ onBookDataSaved }) => {
     setEnteredImageUrl("");
   };
 
-  const handleClick = () => {
-    setShowForm(!showForm);
-  };
-
   return (
     <>
-      <Button onClick={handleClick}>
-        {showForm ? "Esconder" : "Agregar libro"}
-      </Button>
-      {showForm && (
         <Card className="m-4 w-50" bg="success">
           <Card.Body>
-            <Form className="text-white" onSubmit={submitBookHandler}>
+            <Form className="text-white" onSubmit={submitProductHandler}>
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookTitle">
-                    <Form.Label>Título</Form.Label>
+                    <Form.Label>Nombre</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Ingresar título"
-                      onChange={handleChangeTitle}
-                      value={enteredTitle}
+                      placeholder="Ingresar el Nombre del producto"
+                      onChange={handleChangeName}
+                      value={enteredName}
                     />
                   </Form.Group>
                 </Col>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookAuthor">
-                    <Form.Label>Autor</Form.Label>
+                    <Form.Label>Descripción</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Ingresar autor"
-                      onChange={changeAuthorHandler}
-                      value={enteredAuthor}
+                      placeholder="Ingresar descripción"
+                      onChange={changeDescriptionHandler}
+                      value={enteredDescription}
                     />
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookRating">
-                    <Form.Label>Puntuación</Form.Label>
+                  <Form.Group className="mb-3" controlId="bookPageCount">
+                    <Form.Label>Precio</Form.Label>
                     <Form.Control
                       type="number"
-                      placeholder="Ingresar cantidad de estrellas"
-                      max={5}
-                      min={0}
-                      onChange={changeRatingHandler}
-                      value={enteredRating}
+                      placeholder="Ingresar precio"
+                      min={1}
+                      onChange={changePriceHandler}
+                      value={enteredPrice}
                     />
                   </Form.Group>
                 </Col>
                 <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookPageCount">
-                    <Form.Label>Cantidad de páginas</Form.Label>
+                  <Form.Group className="mb-3" controlId="bookRating">
+                    <Form.Label>Stock</Form.Label>
                     <Form.Control
                       type="number"
-                      placeholder="Ingresar cantidad de páginas"
-                      min={1}
-                      onChange={changePageCountHandler}
-                      value={enteredPageCount}
+                      placeholder="Ingresar stock"
+                      max={10000}
+                      min={0}
+                      onChange={changeStockHandler}
+                      value={enteredStock}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3" controlId="bookPageCount">
+                    <Form.Label>Categoría</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Ingresar categoria"
+                      onChange={changeCategoryHandler}
+                      value={enteredCategory}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group className="mb-3" controlId="bookRating">
+                    <Form.Label>Marca</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Ingresar marca"
+                      onChange={changeBrandHandler}
+                      value={enteredBrand}
                     />
                   </Form.Group>
                 </Col>
@@ -136,21 +184,16 @@ const AddProducts = ({ onBookDataSaved }) => {
               </Row>
               <Row className="justify-content-end">
                 <Col md={3} className="d-flex justify-content-end">
-                  <Button variant="primary" type="submit" disabled={!formValid}>
-                    Agregar lectura
+                  <Button variant="dark" type="submit" disabled={!formValid}>
+                    Agregar Producto 
                   </Button>
                 </Col>
               </Row>
             </Form>
           </Card.Body>
         </Card>
-      )}
     </>
   );
-};
-
-NewBook.propTypes = {
-  onBookDataSaved: PropTypes.func.isRequired,
 };
 
 export default AddProducts;

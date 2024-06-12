@@ -8,6 +8,7 @@ import MainLayout from './components/mainLayout/MainLayout';
 import Products from './components/products/Products';
 import ProductDetail from './components/productDetail/ProductDetail';
 import Carrito from './components/carrito/Carrito';
+import AddProducts from './components/addProducts/AddProducts';
 
   
 const App = () => {
@@ -50,6 +51,12 @@ const App = () => {
       path: "/producto/:id",
       element:
         <MainLayout children={<ProductDetail />}>
+        </MainLayout>
+    },
+    {
+      path: "/nuevoProducto",
+      element:
+        <MainLayout children={<AddProducts />}>
         </MainLayout>
     },
     {

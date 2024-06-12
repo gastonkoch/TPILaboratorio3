@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
-  const [enteredName, setEnteredTitle] = useState("");
-  const [enteredDescription, setEnteredAuthor] = useState("");
-  const [enteredStock, setEnteredRating] = useState("");
-  const [enteredPrice, setEnteredPageCount] = useState("");
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredDescription, setEnteredDescription] = useState("");
+  const [enteredStock, setEnteredStock] = useState("");
+  const [enteredPrice, setEnteredPrice] = useState("");
   const [enteredImageUrl, setEnteredImageUrl] = useState("");
   const [enteredCategory, setEnteredCategory] = useState("");
   const [enteredBrand, setEnteredBrand] = useState("");
@@ -26,19 +26,19 @@ const AddProducts = () => {
   }, [enteredName, enteredDescription, enteredPrice, enteredStock,enteredCategory,enteredBrand,enteredImageUrl]);
 
   const handleChangeName = (e) => {
-    setEnteredTitle(e.target.value);
+    setEnteredName(e.target.value);
   };
 
   const changeDescriptionHandler = (event) => {
-    setEnteredAuthor(event.target.value);
+    setEnteredDescription(event.target.value);
   };
 
   const changeStockHandler = (event) => {
-    setEnteredRating(event.target.value);
+    setEnteredStock(event.target.value);
   };
 
   const changePriceHandler = (event) => {
-    setEnteredPageCount(event.target.value);
+    setEnteredPrice(event.target.value);
   };
 
   const changeImageUrlHandler = (event) => {
@@ -84,10 +84,10 @@ const AddProducts = () => {
       alert(error);
     }
 
-    setEnteredTitle("");
-    setEnteredAuthor("");
-    setEnteredRating("");
-    setEnteredPageCount("");
+    setEnteredName("");
+    setEnteredDescription("");
+    setEnteredStock("");
+    setEnteredPrice("");
     setEnteredImageUrl("");
   };
 

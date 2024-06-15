@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
-import data from '../products/Data_Test.json';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -8,6 +7,8 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import "./ProductDetail.css";
+
+export const ProductsAddedContext = createContext({});
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -43,6 +44,12 @@ const ProductDetail = () => {
         console.error("Error:", error);
       });
   }, []);
+
+
+const onHandleAdd = () =>{
+  
+
+}
 
   if (error) {
     return <div>Producto no encontrado</div>;
@@ -85,7 +92,7 @@ const ProductDetail = () => {
         <Container className='buttonsBox'>
           <Container className='data '>
             <Button className='button' onClick={() => setCantidad(cantidad + 1)}>+</Button>
-            <Button className='button' variant="primary" onClick={() => setCantidad(cantidad + 1)} >Agregar al Carrito ({cantidad})</Button>
+            <Button className='button' variant="primary" onClick={onHandleAdd} >Agregar al Carrito</Button>
             <Button className='button' onClick={() => setCantidad(cantidad - 1)}>-</Button>
           </Container>
 

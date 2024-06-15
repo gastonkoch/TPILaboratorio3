@@ -1,7 +1,6 @@
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import ProductsItem from '../productsItem/ProductsItem';
-import data from '../products/Data_Test.json';
 import "./Products.css";
 import Carrousel from '../carrousel/Carrousel';
 
@@ -52,7 +51,6 @@ const Products = () => {
             indexOfLastProduct = currentPage * productsPerPage;
             indexOfFirstProduct = indexOfLastProduct - productsPerPage;
             currentProducts = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
-            // console.log(currentProducts)
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -68,14 +66,6 @@ const Products = () => {
                     <div className="product-item" key={item.id}>
                         <ProductsItem
                             item={item}
-                            // id={item.id}
-                            // product_name={item.product_name}
-                            // product_price={item.product_price}
-                            // product_description={item.product_description}
-                            // product_stock={item.product_stock}
-                            // product_image={item.product_image}
-                            // product_category={item.product_category}
-                            // product_brand={item.product_brand}
                         />
                     </div>
                 ))}

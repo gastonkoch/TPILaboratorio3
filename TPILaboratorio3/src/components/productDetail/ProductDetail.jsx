@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import "./ProductDetail.css";
+import { CartContext } from '../../services/cart/CartContext';
 
 export const ProductsAddedContext = createContext({});
 
@@ -14,7 +15,8 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [productOnScreen, setProductOnScreen] = useState({});
-  const [cantidad, setCantidad] = useState(1);
+
+  const {handleAddCart} = useContext(CartContext);
 
   useEffect(() => {
     fetch(`https://localhost:7197/api/Product/id/${id}`, {
@@ -36,7 +38,8 @@ const ProductDetail = () => {
           image: productsData.image,
           name: productsData.name,
           price: productsData.price,
-          stock: productsData.stock
+          stock: productsData.stock,
+          quantity: 0
         }
         setProductOnScreen(productFromAPI)
       })
@@ -46,16 +49,33 @@ const ProductDetail = () => {
   }, []);
 
 
-const onHandleAdd = () =>{
-  
+const onHandleAdd = () => {
+  setProductOnScreen((prevProduct) => ({
+    ...prevProduct,
+    quantity: prevProduct.quantity + 1
+  }));
+};
 
+const handleAddCarrito = () => {
+  handleAddCart(productOnScreen.quantity,productOnScreen)
+  setProductOnScreen((prevProduct) => ({
+    ...prevProduct,
+    quantity: 0
+  }));
 }
 
-  if (error) {
-    return <div>Producto no encontrado</div>;
-  }
+const onHandleDelete = () => {
+  setProductOnScreen((prevProduct) => ({
+    ...prevProduct,
+    quantity: prevProduct.quantity - 1
+  }));
+};
 
 
+
+if (error) {
+  return <div>Producto no encontrado</div>;
+}
   return (
     <div className="main-container">
 
@@ -91,9 +111,9 @@ const onHandleAdd = () =>{
 
         <Container className='buttonsBox'>
           <Container className='data '>
-            <Button className='button' onClick={() => setCantidad(cantidad + 1)}>+</Button>
-            <Button className='button' variant="primary" onClick={onHandleAdd} >Agregar al Carrito</Button>
-            <Button className='button' onClick={() => setCantidad(cantidad - 1)}>-</Button>
+            <Button className='button' onClick={onHandleAdd}>+</Button>
+            <Button className='button' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
+            <Button className='button' onClick={onHandleDelete}>-</Button>
           </Container>
 
           <Container>

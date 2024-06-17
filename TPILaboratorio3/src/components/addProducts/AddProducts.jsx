@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import "./AddProducts.css";
+
 
 const AddProducts = () => {
   const [enteredName, setEnteredName] = useState("");
@@ -58,7 +60,6 @@ const AddProducts = () => {
       brand: enteredBrand,
       category: enteredCategory,
       description: enteredDescription,
-      id: 0,
       image: enteredImageUrl,
       name: enteredName,
       price:enteredPrice,
@@ -92,14 +93,15 @@ const AddProducts = () => {
   };
 
   return (
-    <>
-        <Card className="m-4 w-50" bg="success">
+    <div className="divAddProduct">
+        <Card className="m-4 w-50 formAddProduct">
+          <h1>Agregar Producto</h1>
           <Card.Body>
-            <Form className="text-white" onSubmit={submitProductHandler}>
+            <Form className="text-white box" onSubmit={submitProductHandler}>
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookTitle">
-                    <Form.Label>Nombre</Form.Label>
+                    <Form.Label className="labelForm">Nombre</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Ingresar el Nombre del producto"
@@ -110,7 +112,7 @@ const AddProducts = () => {
                 </Col>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookAuthor">
-                    <Form.Label>Descripción</Form.Label>
+                    <Form.Label className="labelForm">Descripción</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Ingresar descripción"
@@ -123,7 +125,7 @@ const AddProducts = () => {
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookPageCount">
-                    <Form.Label>Precio</Form.Label>
+                    <Form.Label className="labelForm">Precio</Form.Label>
                     <Form.Control
                       type="number"
                       placeholder="Ingresar precio"
@@ -135,7 +137,7 @@ const AddProducts = () => {
                 </Col>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookRating">
-                    <Form.Label>Stock</Form.Label>
+                    <Form.Label className="labelForm">Stock</Form.Label>
                     <Form.Control
                       type="number"
                       placeholder="Ingresar stock"
@@ -150,7 +152,7 @@ const AddProducts = () => {
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookPageCount">
-                    <Form.Label>Categoría</Form.Label>
+                    <Form.Label className="labelForm">Categoría</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Ingresar categoria"
@@ -161,7 +163,7 @@ const AddProducts = () => {
                 </Col>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="bookRating">
-                    <Form.Label>Marca</Form.Label>
+                    <Form.Label className="labelForm">Marca</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Ingresar marca"
@@ -172,7 +174,7 @@ const AddProducts = () => {
                 </Col>
               </Row>
               <Row className="justify-content-between">
-                <Form.Group className="mb-3" controlId="bookImageUrl">
+                <Form.Group className="mb-3 labelForm" controlId="bookImageUrl">
                   <Form.Label>URL de imagen</Form.Label>
                   <Form.Control
                     type="text"
@@ -182,17 +184,13 @@ const AddProducts = () => {
                   />
                 </Form.Group>
               </Row>
-              <Row className="justify-content-end">
-                <Col md={3} className="d-flex justify-content-end">
-                  <Button variant="dark" type="submit" disabled={!formValid}>
-                    Agregar Producto 
-                  </Button>
-                </Col>
-              </Row>
+              <div className="box-button-add">
+                <Button type="submit" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd button" disabled={!formValid}>Agregar</Button>
+              </div>
             </Form>
           </Card.Body>
         </Card>
-    </>
+    </div>
   );
 };
 

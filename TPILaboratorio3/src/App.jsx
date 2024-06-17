@@ -10,6 +10,7 @@ import ProductDetail from './components/productDetail/ProductDetail';
 import Carrito from './components/carrito/Carrito';
 import AddProducts from './components/addProducts/AddProducts';
 import PayMethod from './components/payMethod/PayMethod';
+import UpdateProducts from './components/updateProducts/UpdateProducts';
   
 const App = () => {
   const router = createBrowserRouter([
@@ -60,9 +61,15 @@ const App = () => {
         </MainLayout>
     },
     {
-    path: "/paymethod",
+      path: "/paymethod",
       element:
         <MainLayout children={<PayMethod />}>
+        </MainLayout>
+    },
+    {
+      path: "/updateproduct/:id",
+      element:
+        <MainLayout children={<UpdateProducts />}>
         </MainLayout>
     },
     {

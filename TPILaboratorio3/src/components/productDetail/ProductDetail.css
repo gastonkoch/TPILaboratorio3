@@ -17,9 +17,9 @@
 }
 
 .image{
-    width: 750px;
-    height: 450px;
     margin-left: 50px;
+    max-width: 750px;
+    height: 450px;
 }
 
 .data{

@@ -26,7 +26,11 @@ const Carrito = ({ setCartProducts }) => {
   };
 
   const handlePay = () => {
-    navigate('/paymethod');
+    if(products.length === 0){
+      alert("Debe agregar productos al carrito")
+    } else {
+      navigate('/updateproduct');
+    }
   };
 
   const handleBack = () => {

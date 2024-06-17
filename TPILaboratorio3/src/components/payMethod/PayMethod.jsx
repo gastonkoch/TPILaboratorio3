@@ -222,7 +222,9 @@ return (
                 </Form.Group>
             )}
 
-            <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Pagar</Button>
+            <div className='box-button-pay'>
+                <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Pagar</Button>
+            </div>
         </Form>
     </div>
 )

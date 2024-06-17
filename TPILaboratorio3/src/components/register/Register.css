@@ -51,3 +51,8 @@
     align-items: center;
     margin: 250px;
 }
+
+.box-button-register{
+    display: flex;
+    justify-content: center;
+}

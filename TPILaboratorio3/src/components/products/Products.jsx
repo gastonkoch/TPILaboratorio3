@@ -35,6 +35,8 @@ const Products = () => {
             setCurrentPage(currentPage - 1);
         }
     };
+
+    // ESTO TIENE QUE SER PARA EL SELLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     useEffect(() => {
         fetch("https://localhost:7197/api/Product", {
           method: "GET",
@@ -56,6 +58,29 @@ const Products = () => {
             console.error("Error:", error);
           });
       }, []);
+
+    // ESTO TIENE QUE SER PARA EL CUSTOMER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //   useEffect(() => {
+    //     fetch("https://localhost:7197/api/Product/disponible", {
+    //       method: "GET",
+    //       mode: "cors",
+    //     })
+    //       .then((response) => {
+    //         if (!response.ok) {
+    //           throw new Error("Error al obtener los productos");
+    //         }
+    //         return response.json();
+    //       })
+    //       .then((productsData) => {
+    //         setProductsData(productsData)
+    //         indexOfLastProduct = currentPage * productsPerPage;
+    //         indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    //         currentProducts = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error:", error);
+    //       });
+    //   }, []);
 
     return (
         <div>

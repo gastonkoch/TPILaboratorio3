@@ -19,12 +19,11 @@ export const CartContextListProvider = ({children}) => {
             });
             setCart(newListProduct);
         }
-        console.log(cart)
     };
 
     const handleProduct = () => {
         return cart
-     }
+    }
 
     return (
         <CartContext.Provider value={{handleAddCart,handleProduct}}>

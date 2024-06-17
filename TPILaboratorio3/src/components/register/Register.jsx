@@ -26,11 +26,6 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
     const passwordRef = useRef(null);
     const nameRef = useRef(null);
 
-
-    // Estamos redirigiendo al usuario a landingpage, podemos hacerlo de esta manera ya que en el AppRouter se encuetra dicho path
-    // Replace esta indicando que la entrada en el historial del navegador sera remplazada en vez de añadir una nueva, significa que cuando el usuario vuelve atras no volveria al register
-    // State es el estado que optenemos desde la url
-    // El logged indica al sistema que ya ingreso correctamente el usuario
     const onRegister = (event) => {
         event.preventDefault()
 
@@ -102,7 +97,9 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
                             onChange={onInputChange}
                         />
                     </Form.Group>
-                    <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Registrarse</Button>
+                    <div className='box-button-register'>
+                        <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Registrarse</Button>
+                    </div>
                 </Form>
             </div>
         </div>

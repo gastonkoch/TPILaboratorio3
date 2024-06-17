@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect, createContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -7,6 +7,8 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import "./ProductDetail.css";
+import { CartContext } from '../../services/cart/CartContext';
+import UpdateProducts from '../updateProducts/UpdateProducts';
 
 export const ProductsAddedContext = createContext({});
 
@@ -14,10 +16,12 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [productOnScreen, setProductOnScreen] = useState({});
-  const [cantidad, setCantidad] = useState(1);
+  const { handleAddCart } = useContext(CartContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://localhost:7197/api/Product/id/${id}`, {
+    fetch(`https://localhost:7197/api/Product/id/${id}`, { // Asegúrate de usar backticks aquí
       method: "GET",
       mode: "cors",
     })
@@ -36,7 +40,9 @@ const ProductDetail = () => {
           image: productsData.image,
           name: productsData.name,
           price: productsData.price,
-          stock: productsData.stock
+          stock: productsData.stock,
+          disponible: productsData.disponible,
+          quantity: 1
         }
         setProductOnScreen(productFromAPI)
       })
@@ -46,19 +52,77 @@ const ProductDetail = () => {
   }, []);
 
 
-const onHandleAdd = () =>{
-  
+  const onHandleAdd = () => {
+    setProductOnScreen((prevProduct) => ({
+      ...prevProduct,
+      quantity: prevProduct.quantity + 1
+    }));
+  };
 
-}
+  const handleAddCarrito = () => {
+    handleAddCart(productOnScreen.quantity, productOnScreen);
+    setProductOnScreen((prevProduct) => ({
+      ...prevProduct,
+      quantity: 1
+    }));
+  };
+
+  const onHandleDelete = () => {
+    setProductOnScreen((prevProduct) => ({
+      ...prevProduct,
+      quantity: prevProduct.quantity - 1
+    }));
+  };
+
+  const handleBaja = () => {
+    fetch(`https://localhost:7197/api/Product/baja/${id}`, {
+      method: "PUT",
+      mode: "cors",
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al actualizar el producto");
+      }
+      setProductOnScreen(prevState => ({
+        ...prevState,
+        disponible: false
+      }));
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  };
+
+  const handleAlta = () => {
+    fetch(`https://localhost:7197/api/Product/alta/${id}`, {
+      method: "PUT",
+      mode: "cors",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al actualizar el producto");
+        }
+        setProductOnScreen(prevState => ({
+          ...prevState,
+          disponible: true
+        }));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+  
 
   if (error) {
     return <div>Producto no encontrado</div>;
   }
 
+  const onHandleUpdate = () => {
+    navigate(`/updateproduct/${productOnScreen.id}`);
+  }
 
   return (
     <div className="main-container">
-
       <Container>
         <Row>
           <Col xs={6} md={4}>
@@ -87,22 +151,26 @@ const onHandleAdd = () =>{
           <Form.Group className="mb-3" controlId="brandId">
             <Form.Label><strong>Marca:</strong> {productOnScreen.brand}</Form.Label>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="disponibleId">
+            <Form.Label><strong>Disponible:</strong> {productOnScreen.disponible ? "Disponible" : "No disponible"}</Form.Label>
+          </Form.Group>
         </Form>
 
         <Container className='buttonsBox'>
-          <Container className='data '>
-            <Button className='button' onClick={() => setCantidad(cantidad + 1)}>+</Button>
-            <Button className='button' variant="primary" onClick={onHandleAdd} >Agregar al Carrito</Button>
-            <Button className='button' onClick={() => setCantidad(cantidad - 1)}>-</Button>
+          <Container className='data'>
+            <Button className='button' onClick={onHandleAdd}>+</Button>
+            <Button className='button' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
+            <Button className='button' onClick={onHandleDelete}>-</Button>
           </Container>
 
           <Container>
-            <Button className='button' variant="warning">Editar</Button>
-            <Button className='button' variant="danger">Eliminar</Button>
+            <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
+            {productOnScreen.disponible
+              ? <Button className='button' variant="danger" onClick={handleBaja}>Dar de baja</Button>
+              : <Button className='button' variant="success" onClick={handleAlta}>Dar de alta</Button>}
           </Container>
         </Container>
       </Container>
-
     </div>
   );
 };

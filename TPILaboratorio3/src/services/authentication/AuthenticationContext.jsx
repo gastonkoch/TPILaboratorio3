@@ -26,6 +26,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     </AuthenticationContext.Provider>
   );
 };
+
 export default AuthenticationContextProvider;
 AuthenticationContextProvider.propTypes = {
   children: PropType.object,

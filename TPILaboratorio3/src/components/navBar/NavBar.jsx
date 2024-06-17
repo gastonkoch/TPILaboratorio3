@@ -4,12 +4,25 @@ import { AuthenticationContext } from '../../services/authentication/Authenticat
 import Carrito from '../carrito/Carrito';
 import "./NavBar.css"
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../services/cart/CartContext';
 
 const NavBar = () => {
     let navigate = useNavigate();
     const { handleLogout, user } = useContext(AuthenticationContext);
     const [cartProducts, setCartProducts] = useState([]);
 
+    const { handleProduct } = useContext(CartContext);
+
+    const products = handleProduct(); 
+    
+    let totalQuantity = 0;
+    
+    if(products.length > 0){
+        for (const product of products) {
+            totalQuantity += product.quantity; // Corregimos el nombre de la propiedad
+        }
+    }
+    
     const onHandleLogout = () => {
         handleLogout();
     };
@@ -30,6 +43,8 @@ const NavBar = () => {
         navigate("/");
     };
 
+    
+
     return (
         <>
             <Navbar data-bs-theme="dark" className='navbar'>
@@ -42,7 +57,6 @@ const NavBar = () => {
                         </Nav>
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
-                            {/* Eliminar la navegación al carrito */}
                         </Nav>
                         {user &&
                             <Navbar.Text className='username'>
@@ -59,7 +73,7 @@ const NavBar = () => {
                         
                         <Dropdown align="end">
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                Carrito ({cartProducts.length})
+                                Carrito ({totalQuantity})
                             </Dropdown.Toggle>
                             <Dropdown.Menu className='carrito-desplegable'>
                                 <Carrito products={cartProducts} setCartProducts={setCartProducts} />

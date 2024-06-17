@@ -80,7 +80,9 @@ const Login = () => {
                             onChange={onInputChange}
                         />
                     </Form.Group>
-                    <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Ingresar</Button>
+                    <div className='box-button-login'>
+                        <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Ingresar</Button>
+                    </div>
                 </Form>
                 <p className='pLogin'>¿Olvidó su contraseña?</p>
                 <p className='pLogin' onClick={onRegister}>Registrarse</p>

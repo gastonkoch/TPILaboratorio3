@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import "./UpdateCustomer.css";
+import "./CreateCustomer.css";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
-const UpdateCustomer = () => {
+const CreateCustomer = () => {
     const { id } = useParams();
     const [customerOnScreen, setCustomerOnScreen] = useState({
         name: '',
@@ -14,40 +14,14 @@ const UpdateCustomer = () => {
         userName: '',
         adress: ''
     })
+
     let navigate = useNavigate();
 
-    useEffect(() => {
-        fetch(`https://localhost:7197/api/User/${id}`, {
-            method: "GET",
-            mode: "cors",
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Error al obtener el producto");
-                }
-                return response.json();
-            })
-            .then((productsData) => {
-                setCustomerOnScreen(prevState => ({
-                    ...prevState, // Mantén los valores existentes
-                    name: productsData.name || prevState.name,
-                    lastName: productsData.lastName || prevState.lastName,
-                    password: productsData.password || prevState.password,
-                    id: productsData.id || prevState.id,
-                    email: productsData.email || prevState.email,
-                    userName: productsData.userName || prevState.userName,
-                    adress: productsData.adress || prevState.adress,
-                }));
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }, []);
 
-    const submitUpdateCustomerHandler = (e) => {
+    const submitCreateCustomerHandler = (e) => {
         e.preventDefault()
-        fetch(`https://localhost:7197/api/User/${id}`, {
-            method: "PUT",
+        fetch(`https://localhost:7197/customer`, {
+            method: "POST",
             mode: "cors",
             headers: {
                 'Content-Type': 'application/json'
@@ -57,12 +31,12 @@ const UpdateCustomer = () => {
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Error al actualizar el producto");
-                } 
+                }
             })
             .catch((error) => {
                 console.error("Error:", error);
             });
-            navigate(`/customer`)
+        navigate(`/customer`)
     }
 
 
@@ -75,9 +49,9 @@ const UpdateCustomer = () => {
         <>
             <div className="divUpdateCustomer">
                 <Card className="m-4 w-50 formUpdateCustomer">
-                    <h1>Modificar Usuario</h1>
+                    <h1>Crear Usuario</h1>
                     <Card.Body>
-                        <Form className="text-white box" onSubmit={submitUpdateCustomerHandler}>
+                        <Form className="text-white box" onSubmit={submitCreateCustomerHandler}>
                             <Row>
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="nombre">
@@ -143,7 +117,7 @@ const UpdateCustomer = () => {
                             </Row>
 
                             <div className="box-button-update">
-                                <Button type="submit" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus">Modificar</Button>
+                                <Button type="submit" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus">Crear</Button>
                                 <Button type="button" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus botonFormUpdateCusCancel" onClick={handleCancel}>Cancelar</Button>
                             </div>
                         </Form>
@@ -154,4 +128,4 @@ const UpdateCustomer = () => {
     )
 }
 
-export default UpdateCustomer
+export default CreateCustomer

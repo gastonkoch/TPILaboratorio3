@@ -4,18 +4,22 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import "./Customers.css";
-import crear from '/public/crear3.jpg'
-import cruz from '/public/cruz2.png'
-import lapiz from '/public/lapiz.png'
-import lupa from '/public/lupa2.png'
-
+import crear from '/public/crear4.png';
+import cruz from '/public/cruz2.png';
+import lapiz from '/public/lapiz.png';
+import lupa from '/public/lupa2.png';
 
 const Customers = () => {
     const [customers, setCustomers] = useState([]);
-    const { id } = useParams();
+    const [nameSearch, setNameSearch] = useState('');
 
-    let navigate = useNavigate()
+    let navigate = useNavigate();
+
+    const handleNameSearch = (e) => {
+        setNameSearch(e.target.value);
+    };
 
     useEffect(() => {
         fetch(`https://localhost:7197/api/User/type/${0}`, {
@@ -29,13 +33,25 @@ const Customers = () => {
                 return response.json();
             })
             .then((productsData) => {
-                setCustomers(productsData);
+                setCustomers(Array.isArray(productsData) ? productsData : []);
             })
             .catch((error) => {
                 console.error("Error:", error);
             });
     }, []);
 
+    const onHandleSearch = () => {
+        const nameFilter = customers.filter(
+            (customer) =>
+                customer.name.toLowerCase().includes(nameSearch.toLowerCase())
+            )
+        setCustomers(nameFilter)
+    };
+    
+
+    const onHandleCreateCustomer = () => {
+        navigate(`/createcustomer`);
+    };
 
     const onHandleDisplayCustomer = (id) => () => {
         navigate(`/displaycustomer/${id}`);
@@ -52,8 +68,15 @@ const Customers = () => {
     return (
         <div className='boxCustomer'>
             <Form className='containerCustomer'>
-                <div className='crear-icono'>
-                    <img className="icono-grilla" src={crear} alt="crear" />
+                <div className='box-customer'>
+                    <div className='leftCustomer'>
+                        <Form.Label className="search-customer-p">Nombre: </Form.Label>
+                        <Form.Control className="search-customer" type="text" placeholder="Ingresar el nombre" onChange={handleNameSearch} />
+                        <Button type="button" className="mb-3 mt-2 ps-5 pe-5 search-customer-button" onClick={onHandleSearch}>Buscar</Button>
+                    </div>
+                    <div className='rightCustomer'>
+                        <img className="icono-grilla create" src={crear} alt="crear" style={{ cursor: 'pointer' }} onClick={onHandleCreateCustomer} />
+                    </div>
                 </div>
                 <Container fluid>
                     <Row className='row-title'>

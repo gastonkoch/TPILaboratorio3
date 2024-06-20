@@ -61,6 +61,8 @@ const UpdateProducts = () => {
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Error al actualizar el producto");
+            } else {
+                alert("Modificado con exito")
             }
         })
         .catch((error) => {

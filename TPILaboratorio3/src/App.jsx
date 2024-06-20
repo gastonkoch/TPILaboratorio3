@@ -15,6 +15,7 @@ import Customers from './components/customers/Customers';
 import UpdateCustomer from './components/updateCustomer/UpdateCustomer';
 import DisplayCustomer from './components/displayCustomer/DisplayCustomer';
 import DeleteCustomer from './components/deleteCustomer/DeleteCustomer';
+import CreateCustomer from './components/createCustomer/CreateCustomer';
   
 const App = () => {
   const router = createBrowserRouter([
@@ -74,6 +75,12 @@ const App = () => {
       path: "/customer",
       element:
         <MainLayout children={<Customers />}>
+        </MainLayout>
+    },
+    {
+      path: "/createcustomer",
+      element:
+        <MainLayout children={<CreateCustomer />}>
         </MainLayout>
     },
     {

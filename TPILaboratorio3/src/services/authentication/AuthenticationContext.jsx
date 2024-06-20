@@ -10,9 +10,34 @@ const userValue = userValueString ? JSON.parse(userValueString) : null;
 export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(userValue);
 
-  const handleLogin = (name) => {
-    localStorage.setItem("user", JSON.stringify({ name }));
-    setUser({ name });
+  const handleLogin = (email) => {
+    fetch(`https://localhost:7197/api/User/email/${email}`, { // Asegúrate de usar backticks aquí
+      method: "GET",
+      mode: "cors",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener el usuario");
+        }
+        return response.json();
+      })
+      .then((userDataFromAPI) => {
+        let userSession = {
+          id: userDataFromAPI.id,
+          name: userDataFromAPI.name,
+          lastName: userDataFromAPI.lastName,
+          email: userDataFromAPI.email,
+          userName: userDataFromAPI.userName,
+          adress: userDataFromAPI.adress
+        }
+        console.log(userSession)
+        localStorage.setItem("user", JSON.stringify({ userSession }));
+        setUser( userSession );
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    
   };
 
   const handleLogout = () => {

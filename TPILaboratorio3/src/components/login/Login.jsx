@@ -42,11 +42,33 @@ const Login = () => {
         }
 
         setErrors({ ...errors, exist: false });
-
+        let userAuthenticateDTO = {
+            userEmail : email,
+            userPassword : password
+        }
         //Busqueda en la base si el usuario existe
-        handleLogin(email)
-        navigate('/')
-        onResetForm();
+        fetch("https://localhost:7197/api/User/validate", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body: JSON.stringify(userAuthenticateDTO),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Email o contraseña inválidos");
+              }
+              return response.json();
+            })
+            .then((authenticateResponse) => {
+                handleLogin(email)
+                navigate('/')
+                onResetForm(); 
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
     }
 
     const onRegister = () => {

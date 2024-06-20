@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import "./ProductDetail.css";
 import { CartContext } from '../../services/cart/CartContext';
 import UpdateProducts from '../updateProducts/UpdateProducts';
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 
 export const ProductsAddedContext = createContext({});
 
@@ -17,7 +18,7 @@ const ProductDetail = () => {
   const [error, setError] = useState(false);
   const [productOnScreen, setProductOnScreen] = useState({});
   const { handleAddCart } = useContext(CartContext);
-
+  const { user } = useContext(AuthenticationContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -162,13 +163,13 @@ const ProductDetail = () => {
             <Button className='button' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
             <Button className='button' onClick={onHandleDelete}>-</Button>
           </Container>
-
+          {user && user.userType !== 0 &&
           <Container>
             <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
             {productOnScreen.disponible
               ? <Button className='button' variant="danger" onClick={handleBaja}>Dar de baja</Button>
               : <Button className='button' variant="success" onClick={handleAlta}>Dar de alta</Button>}
-          </Container>
+          </Container>}
         </Container>
       </Container>
     </div>

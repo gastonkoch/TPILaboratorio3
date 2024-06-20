@@ -68,7 +68,7 @@ const Register = ({isSignedIn, onLogIn, onLogOut}) => {
                         <Form.Label className='text-dark labelForm'>Name</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder='Ingrese su name...'
+                            placeholder='Ingrese su name ...'
                             name="name"
                             value={name}
                             ref={nameRef}

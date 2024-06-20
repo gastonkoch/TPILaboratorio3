@@ -11,6 +11,10 @@ import Carrito from './components/carrito/Carrito';
 import AddProducts from './components/addProducts/AddProducts';
 import PayMethod from './components/payMethod/PayMethod';
 import UpdateProducts from './components/updateProducts/UpdateProducts';
+import Customers from './components/customers/Customers';
+import UpdateCustomer from './components/updateCustomer/UpdateCustomer';
+import DisplayCustomer from './components/displayCustomer/DisplayCustomer';
+import DeleteCustomer from './components/deleteCustomer/DeleteCustomer';
   
 const App = () => {
   const router = createBrowserRouter([
@@ -64,6 +68,30 @@ const App = () => {
       path: "/paymethod",
       element:
         <MainLayout children={<PayMethod />}>
+        </MainLayout>
+    },
+    {
+      path: "/customer",
+      element:
+        <MainLayout children={<Customers />}>
+        </MainLayout>
+    },
+    {
+      path: "/displaycustomer/:id",
+      element:
+        <MainLayout children={<DisplayCustomer />}>
+        </MainLayout>
+    },
+    {
+      path: "/updatecustomer/:id",
+      element:
+        <MainLayout children={<UpdateCustomer />}>
+        </MainLayout>
+    },
+    {
+      path: "/deletecustomer/:id",
+      element:
+        <MainLayout children={<DeleteCustomer />}>
         </MainLayout>
     },
     {

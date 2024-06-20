@@ -39,6 +39,10 @@ const NavBar = () => {
         navigate("/nuevoProducto");
     };
 
+    const onHandleCustomer = () => {
+        navigate("/customer");
+    };
+
     const onHandleLanding = () => {
         navigate("/");
     };
@@ -57,6 +61,9 @@ const NavBar = () => {
                         </Nav>
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
+                        </Nav>
+                        <Nav className="me-auto caja-titulos" >
+                            <Nav.Link onClick={onHandleCustomer} className='products'>Ver clientes</Nav.Link>
                         </Nav>
                         {user &&
                             <Navbar.Text className='username'>

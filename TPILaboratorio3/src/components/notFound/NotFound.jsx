@@ -11,7 +11,6 @@ const NotFound = () => {
         a la página principal o direccionarte a la lista de productos
         .
         .
-        ESTO LO VAMOS A CAMBIAR POR BOOTSTRAP PERO EL TEXTO ESTA BIEN
       </p>
       <Link to="/">Volver a la página principal</Link>
       <Link to="/productos">Ver productos</Link>

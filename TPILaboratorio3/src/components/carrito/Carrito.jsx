@@ -29,7 +29,7 @@ const Carrito = ({ setCartProducts }) => {
     if(products.length === 0){
       alert("Debe agregar productos al carrito")
     } else {
-      navigate('/updateproduct');
+      navigate('/paymethod');
     }
   };
 

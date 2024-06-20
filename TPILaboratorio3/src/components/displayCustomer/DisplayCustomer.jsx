@@ -52,7 +52,7 @@ const DisplayCustomer = () => {
     <>
       <div className="divUpdateCustomer">
         <Card className="m-4 w-50 formUpdateCustomer">
-          <h1>Ver Usuario</h1>
+          <h1>Ver cliente</h1>
           <Card.Body>
             <Form className="text-white box">
               <Row>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import "./DeleteCustomer.css";
+import "./DisplaySeller.css";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-const DeleteCustomer = () => {
+
+const DisplaySeller = () => {
   const { id } = useParams();
-  const [customerOnScreen, setCustomerOnScreen] = useState({
+  const [sellerOnScreen, setSellerOnScreen] = useState({
     name: '',
     lastName: '',
     password: '',
@@ -27,7 +28,7 @@ const DeleteCustomer = () => {
         return response.json();
       })
       .then((productsData) => {
-        setCustomerOnScreen(prevState => ({
+        setSellerOnScreen(prevState => ({
           ...prevState, // Mantén los valores existentes
           name: productsData.name || prevState.name,
           lastName: productsData.lastName || prevState.lastName,
@@ -43,42 +44,15 @@ const DeleteCustomer = () => {
       });
   }, []);
 
-  const handleDelete = (e) => {
-    e.preventDefault()
-    fetch(`https://localhost:7197/api/User/${id}`, {
-      method: "DELETE",
-      mode: "cors",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(customerOnScreen)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error al actualizar el producto");
-        } else {
-          // alert("Eliminado con exito")
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-      navigate("/customer");
-
-  }
-
-
 
   const handleCancel = () => (
-    navigate(`/customer`)
+    navigate(`/seller`)
   )
-
-
   return (
     <>
       <div className="divUpdateCustomer">
         <Card className="m-4 w-50 formUpdateCustomer">
-          <h1>Eliminar Cliente</h1>
+          <h1>Ver vendedor</h1>
           <Card.Body>
             <Form className="text-white box">
               <Row>
@@ -88,7 +62,7 @@ const DeleteCustomer = () => {
                     <Form.Control
                       type="text"
                       placeholder="Ingresar el nombre"
-                      value={customerOnScreen.name}
+                      value={sellerOnScreen.name}
                       readOnly
                     />
                   </Form.Group>
@@ -99,7 +73,7 @@ const DeleteCustomer = () => {
                     <Form.Control
                       type="text"
                       placeholder="Ingresar apellido"
-                      value={customerOnScreen.lastName}
+                      value={sellerOnScreen.lastName}
                       readOnly
                     />
                   </Form.Group>
@@ -114,7 +88,7 @@ const DeleteCustomer = () => {
                       placeholder="Ingresar email"
                       max={10000}
                       min={0}
-                      value={customerOnScreen.email}
+                      value={sellerOnScreen.email}
                       readOnly
                     />
                   </Form.Group>
@@ -125,7 +99,7 @@ const DeleteCustomer = () => {
                     <Form.Control
                       type="text"
                       placeholder="Ingresar nombre de usuario"
-                      value={customerOnScreen.userName}
+                      value={sellerOnScreen.userName}
                       readOnly
                     />
                   </Form.Group>
@@ -138,7 +112,7 @@ const DeleteCustomer = () => {
                     <Form.Control
                       type="text"
                       placeholder="Ingresar direccion"
-                      value={customerOnScreen.adress}
+                      value={sellerOnScreen.adress}
                       readOnly
                     />
                   </Form.Group>
@@ -146,10 +120,8 @@ const DeleteCustomer = () => {
               </Row>
 
               <div className="box-button-update">
-                <Button type="button" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus" onClick={handleDelete}>Eliminar</Button>
                 <Button type="button" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus botonFormUpdateCusCancel" onClick={handleCancel}>Cancelar</Button>
               </div>
-
             </Form>
           </Card.Body>
         </Card>
@@ -158,4 +130,4 @@ const DeleteCustomer = () => {
   )
 }
 
-export default DeleteCustomer
+export default DisplaySeller

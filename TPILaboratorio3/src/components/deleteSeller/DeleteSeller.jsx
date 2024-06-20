@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import "./DeleteCustomer.css";
+import "./DeleteSeller.css";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-const DeleteCustomer = () => {
+
+const DeleteSeller = () => {
   const { id } = useParams();
   const [customerOnScreen, setCustomerOnScreen] = useState({
     name: '',
@@ -63,17 +64,13 @@ const DeleteCustomer = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-      navigate("/customer");
+    navigate("/seller");
 
   }
 
-
-
   const handleCancel = () => (
-    navigate(`/customer`)
+    navigate(`/seller`)
   )
-
-
   return (
     <>
       <div className="divUpdateCustomer">
@@ -131,19 +128,6 @@ const DeleteCustomer = () => {
                   </Form.Group>
                 </Col>
               </Row>
-              <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="direccion">
-                    <Form.Label className="labelForm">Direccion</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Ingresar direccion"
-                      value={customerOnScreen.adress}
-                      readOnly
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
 
               <div className="box-button-update">
                 <Button type="button" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus" onClick={handleDelete}>Eliminar</Button>
@@ -158,4 +142,4 @@ const DeleteCustomer = () => {
   )
 }
 
-export default DeleteCustomer
+export default DeleteSeller

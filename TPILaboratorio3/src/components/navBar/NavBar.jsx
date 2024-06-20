@@ -41,6 +41,10 @@ const NavBar = () => {
         navigate("/customer");
     };
 
+    const onHandleSeller = () => {
+        navigate("/seller");
+    };
+
     const onHandleLanding = () => {
         navigate("/");
     };
@@ -60,9 +64,13 @@ const NavBar = () => {
                                 <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
                             </Nav>
                         }
-                        {user && user.userType !== 0 &&
+                        {user && user.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
-                                <Nav.Link onClick={onHandleCustomer} className='products'>Ver clientes</Nav.Link>
+                                <Nav.Link onClick={onHandleCustomer} className='products'>Clientes</Nav.Link>
+                            </Nav>}
+                        {user && user.userType == 2 &&
+                            <Nav className="me-auto caja-titulos" >
+                                <Nav.Link onClick={onHandleSeller} className='products'>Vendedores</Nav.Link>
                             </Nav>}
                         {user &&
                             <Navbar.Text className='username'>

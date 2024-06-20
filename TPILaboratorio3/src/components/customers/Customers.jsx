@@ -68,6 +68,9 @@ const Customers = () => {
     return (
         <div className='boxCustomer'>
             <Form className='containerCustomer'>
+                <div className='titleCustomerDiv'>
+                    <h1>Clientes</h1>
+                </div>
                 <div className='box-customer'>
                     <div className='leftCustomer'>
                         <Form.Label className="search-customer-p">Nombre: </Form.Label>

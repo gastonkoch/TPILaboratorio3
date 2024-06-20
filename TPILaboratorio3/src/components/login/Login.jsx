@@ -57,6 +57,7 @@ const Login = () => {
           })
             .then((response) => {
               if (!response.ok) {
+                alert("Email o contraseña inválidos")
                 throw new Error("Email o contraseña inválidos");
               }
               return response.json();
@@ -65,9 +66,6 @@ const Login = () => {
                 handleLogin(email)
                 navigate('/')
                 onResetForm(); 
-            })
-            .catch((error) => {
-              console.error("Error:", error);
             });
     }
 

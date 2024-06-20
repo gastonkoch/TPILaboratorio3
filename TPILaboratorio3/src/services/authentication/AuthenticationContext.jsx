@@ -28,7 +28,8 @@ export const AuthenticationContextProvider = ({ children }) => {
           lastName: userDataFromAPI.lastName,
           email: userDataFromAPI.email,
           userName: userDataFromAPI.userName,
-          adress: userDataFromAPI.adress
+          adress: userDataFromAPI.adress,
+          userType : userDataFromAPI.userType
         }
         console.log(userSession)
         localStorage.setItem("user", JSON.stringify({ userSession }));

@@ -84,7 +84,6 @@ const Products = () => {
 
     return (
         <div>
-            <Carrousel/>
             <div className='products-container'>
                 {currentProducts.map(item => (
                          

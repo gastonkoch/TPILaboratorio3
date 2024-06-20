@@ -10,19 +10,17 @@ const NavBar = () => {
     let navigate = useNavigate();
     const { handleLogout, user } = useContext(AuthenticationContext);
     const [cartProducts, setCartProducts] = useState([]);
-
     const { handleProduct } = useContext(CartContext);
 
-    const products = handleProduct(); 
-    
+    const products = handleProduct();
     let totalQuantity = 0;
-    
-    if(products.length > 0){
+
+    if (products.length > 0) {
         for (const product of products) {
             totalQuantity += product.quantity; // Corregimos el nombre de la propiedad
         }
     }
-    
+
     const onHandleLogout = () => {
         handleLogout();
     };
@@ -34,7 +32,7 @@ const NavBar = () => {
     const onHandleProduct = () => {
         navigate("/productos");
     };
-    
+
     const onHandleNewProduct = () => {
         navigate("/nuevoProducto");
     };
@@ -47,24 +45,25 @@ const NavBar = () => {
         navigate("/");
     };
 
-    
-
     return (
         <>
             <Navbar data-bs-theme="dark" className='navbar'>
                 <Container>
-                    <Navbar.Brand href="productos" className='nameBussines' onClick={onHandleLanding}>Easy Grip</Navbar.Brand>
+                    <Navbar.Brand className='nameBussines' onClick={onHandleLanding}>Easy Grip</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='caja'>
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
                         </Nav>
-                        <Nav className="me-auto caja-titulos" >
-                            <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
-                        </Nav>
-                        <Nav className="me-auto caja-titulos" >
-                            <Nav.Link onClick={onHandleCustomer} className='products'>Ver clientes</Nav.Link>
-                        </Nav>
+                        {user && user.userType !== 0 &&
+                            <Nav className="me-auto caja-titulos" >
+                                <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
+                            </Nav>
+                        }
+                        {user && user.userType !== 0 &&
+                            <Nav className="me-auto caja-titulos" >
+                                <Nav.Link onClick={onHandleCustomer} className='products'>Ver clientes</Nav.Link>
+                            </Nav>}
                         {user &&
                             <Navbar.Text className='username'>
                                 ¡Hola {user.name}!
@@ -76,8 +75,8 @@ const NavBar = () => {
                             ) : (
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Iniciar sesión</Button>
                             )}
-                        </Nav>  
-                        
+                        </Nav>
+
                         <Dropdown align="end">
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
                                 Carrito ({totalQuantity})
@@ -86,7 +85,7 @@ const NavBar = () => {
                                 <Carrito products={cartProducts} setCartProducts={setCartProducts} />
                             </Dropdown.Menu>
                         </Dropdown>
-                        
+
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

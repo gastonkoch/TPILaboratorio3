@@ -1,14 +1,14 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import ProductsItem from '../productsItem/ProductsItem';
 import "./Products.css";
-import Carrousel from '../carrousel/Carrousel';
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 
 const Products = () => {
-    const [productData,setProductsData] = useState([])
+    const [productData, setProductsData] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 16;
-
+    const { user } = useContext(AuthenticationContext);
     // Calcular el índice de los productos actuales
     let indexOfLastProduct = currentPage * productsPerPage;
     let indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -39,61 +39,49 @@ const Products = () => {
     // ESTO TIENE QUE SER PARA EL SELLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     useEffect(() => {
         fetch("https://localhost:7197/api/Product", {
-          method: "GET",
-          mode: "cors",
+            method: "GET",
+            mode: "cors",
         })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Error al obtener los productos");
-            }
-            return response.json();
-          })
-          .then((productsData) => {
-            setProductsData(productsData)
-            indexOfLastProduct = currentPage * productsPerPage;
-            indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-            currentProducts = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }, []);
-
-    // ESTO TIENE QUE SER PARA EL CUSTOMER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //   useEffect(() => {
-    //     fetch("https://localhost:7197/api/Product/disponible", {
-    //       method: "GET",
-    //       mode: "cors",
-    //     })
-    //       .then((response) => {
-    //         if (!response.ok) {
-    //           throw new Error("Error al obtener los productos");
-    //         }
-    //         return response.json();
-    //       })
-    //       .then((productsData) => {
-    //         setProductsData(productsData)
-    //         indexOfLastProduct = currentPage * productsPerPage;
-    //         indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    //         currentProducts = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error:", error);
-    //       });
-    //   }, []);
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Error al obtener los productos");
+                }
+                return response.json();
+            })
+            .then((productsData) => {
+                console.log(productsData)
+                setProductsData(productsData)
+                indexOfLastProduct = currentPage * productsPerPage;
+                indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+                currentProducts = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }, []);
 
     return (
         <div>
-            <div className='products-container'>
-                {currentProducts.map(item => (
-                         
-                    <div className="product-item" key={item.id}>
-                        <ProductsItem
-                            item={item}
-                        />
-                    </div>
-                ))}
-            </div>
+            {user && user.userType !== 0 ?
+                <div className='products-container'>
+                    {currentProducts.map(item => (
+                        <div className="product-item" key={item.id}>
+                            <ProductsItem
+                                item={item}
+                            />
+                        </div>
+                    ))}
+                </div> :
+                <div className='products-container'>
+                    {currentProducts.map(item => (
+                        item.avaible && 
+                        <div className="product-item" key={item.id}>
+                            <ProductsItem
+                                item={item}
+                            />
+                        </div>
+                    ))}
+                </div>}
             <div className="pagination">
                 <Button
                     className="button"

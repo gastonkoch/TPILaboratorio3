@@ -17,7 +17,7 @@ const ProductsItem = ({item}) => {
                     <Card.Text>{item.category}</Card.Text>
                     <Card.Text>{item.brand}</Card.Text>
                     <Card.Text>${item.price}</Card.Text>
-                    <Card.Text>{item.disponible ? "Disponible" : "No disponible"}</Card.Text>
+                    <Card.Text>{item.avaible ? "Disponible" : "No disponible"}</Card.Text>
                     <Button variant="primary" onClick={onProductDetail}>Ver mas</Button>
                 </Card.Body>
             </Card>

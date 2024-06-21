@@ -33,6 +33,7 @@ const ProductDetail = () => {
         return response.json();
       })
       .then((productsData) => {
+        console.log(productsData)
         let productFromAPI = {
           brand: productsData.brand,
           category: productsData.category,
@@ -42,7 +43,7 @@ const ProductDetail = () => {
           name: productsData.name,
           price: productsData.price,
           stock: productsData.stock,
-          disponible: productsData.disponible,
+          avaible: productsData.avaible,
           quantity: 1
         }
         setProductOnScreen(productFromAPI)
@@ -86,10 +87,11 @@ const ProductDetail = () => {
       }
       setProductOnScreen(prevState => ({
         ...prevState,
-        disponible: false
+        avaible: false
       }));
     })
     .catch((error) => {
+      navigate("/*")
       console.error("Error:", error);
     });
   };
@@ -105,7 +107,7 @@ const ProductDetail = () => {
         }
         setProductOnScreen(prevState => ({
           ...prevState,
-          disponible: true
+          avaible: true
         }));
       })
       .catch((error) => {
@@ -153,7 +155,7 @@ const ProductDetail = () => {
             <Form.Label><strong>Marca:</strong> {productOnScreen.brand}</Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="disponibleId">
-            <Form.Label><strong>Disponible:</strong> {productOnScreen.disponible ? "Disponible" : "No disponible"}</Form.Label>
+            <Form.Label><strong>Disponible:</strong> {productOnScreen.avaible ? "Disponible" : "No disponible"}</Form.Label>
           </Form.Group>
         </Form>
 
@@ -166,7 +168,7 @@ const ProductDetail = () => {
           {user && user.userType !== 0 &&
           <Container>
             <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
-            {productOnScreen.disponible
+            {productOnScreen.avaible
               ? <Button className='button' variant="danger" onClick={handleBaja}>Dar de baja</Button>
               : <Button className='button' variant="success" onClick={handleAlta}>Dar de alta</Button>}
           </Container>}

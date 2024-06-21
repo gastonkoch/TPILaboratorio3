@@ -10,13 +10,18 @@ const PayMethod = () => {
     const [showCardData, setShowCardData] = useState(false);
     const [showTransferData, setShowTransferData] = useState(false);
     const [showCashData, setShowCashData] = useState(false);
-    const { nameAndLastName, email, dni, home, postalCode, onInputChange, onResetForm } = useForm({
+    const { nameAndLastName, email, dni, home, postalCode, tarjetNumber, securityCode, expirationDate, onInputChange, onResetForm } = useForm({
         nameAndLastName: '',
         email: '',
         dni: '',
         home: '',
         postalCode: '',
+        tarjetNumber: '',
+        securityCode: '',
+        expirationDate: '',    
     });
+
+    const navigate = useNavigate();
 
     const [errors, setErrors] = useState({
         email: false,
@@ -86,6 +91,8 @@ const PayMethod = () => {
             }));
             return
         }
+
+        navigate('/order');
     }
 
 return (

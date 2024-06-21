@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import "./Customers.css";
+import "./Seller.css";
 import crear from '/public/crear4.png';
 import cruz from '/public/cruz2.png';
 import lapiz from '/public/lapiz.png';
@@ -69,6 +69,9 @@ const Seller = () => {
     return (
         <div className='boxSeller'>
             <Form className='containerSeller'>
+                <div className='titleSellerDiv'>
+                    <h1>Vendedores</h1>
+                </div>
                 <div className='box-seller'>
                     <div className='leftSeller'>
                         <Form.Label className="search-seller-p">Nombre: </Form.Label>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import "./DeleteCustomer.css";
+import "./UpdateSeller.css";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-const DeleteCustomer = () => {
+
+const UpdateSeller = () => {
   const { id } = useParams();
-  const [customerOnScreen, setCustomerOnScreen] = useState({
+  const [sellerOnScreen, setSellerOnScreen] = useState({
     name: '',
     lastName: '',
     password: '',
@@ -27,7 +28,7 @@ const DeleteCustomer = () => {
         return response.json();
       })
       .then((productsData) => {
-        setCustomerOnScreen(prevState => ({
+        setSellerOnScreen(prevState => ({
           ...prevState, // Mantén los valores existentes
           name: productsData.name || prevState.name,
           lastName: productsData.lastName || prevState.lastName,
@@ -43,44 +44,37 @@ const DeleteCustomer = () => {
       });
   }, []);
 
-  const handleDelete = (e) => {
+  const submitUpdateSellerHandler = (e) => {
     e.preventDefault()
     fetch(`https://localhost:7197/api/User/${id}`, {
-      method: "DELETE",
+      method: "PUT",
       mode: "cors",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(customerOnScreen)
+      body: JSON.stringify(sellerOnScreen)
     })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al actualizar el producto");
-        } else {
-          // alert("Eliminado con exito")
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-      navigate("/customer");
-
+    navigate(`/seller`)
   }
 
-
-
   const handleCancel = () => (
-    navigate(`/customer`)
+    navigate(`/seller`)
   )
-
-
   return (
     <>
       <div className="divUpdateCustomer">
         <Card className="m-4 w-50 formUpdateCustomer">
-          <h1>Eliminar Cliente</h1>
+          <h1>Modificar vendedor</h1>
           <Card.Body>
-            <Form className="text-white box">
+            <Form className="text-white box" onSubmit={submitUpdateSellerHandler}>
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="nombre">
@@ -88,8 +82,8 @@ const DeleteCustomer = () => {
                     <Form.Control
                       type="text"
                       placeholder="Ingresar el nombre"
-                      value={customerOnScreen.name}
-                      readOnly
+                      value={sellerOnScreen.name}
+                      onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, name: e.target.value })}
                     />
                   </Form.Group>
                 </Col>
@@ -99,8 +93,8 @@ const DeleteCustomer = () => {
                     <Form.Control
                       type="text"
                       placeholder="Ingresar apellido"
-                      value={customerOnScreen.lastName}
-                      readOnly
+                      value={sellerOnScreen.lastName}
+                      onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, lastName: e.target.value })}
                     />
                   </Form.Group>
                 </Col>
@@ -114,8 +108,8 @@ const DeleteCustomer = () => {
                       placeholder="Ingresar email"
                       max={10000}
                       min={0}
-                      value={customerOnScreen.email}
-                      readOnly
+                      value={sellerOnScreen.email}
+                      onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, email: e.target.value })}
                     />
                   </Form.Group>
                 </Col>
@@ -125,31 +119,17 @@ const DeleteCustomer = () => {
                     <Form.Control
                       type="text"
                       placeholder="Ingresar nombre de usuario"
-                      value={customerOnScreen.userName}
-                      readOnly
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="direccion">
-                    <Form.Label className="labelForm">Direccion</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Ingresar direccion"
-                      value={customerOnScreen.adress}
-                      readOnly
+                      value={sellerOnScreen.userName}
+                      onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, userName: e.target.value })}
                     />
                   </Form.Group>
                 </Col>
               </Row>
 
               <div className="box-button-update">
-                <Button type="button" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus" onClick={handleDelete}>Eliminar</Button>
+                <Button type="submit" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus">Modificar</Button>
                 <Button type="button" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdateCus botonFormUpdateCusCancel" onClick={handleCancel}>Cancelar</Button>
               </div>
-
             </Form>
           </Card.Body>
         </Card>
@@ -158,4 +138,4 @@ const DeleteCustomer = () => {
   )
 }
 
-export default DeleteCustomer
+export default UpdateSeller

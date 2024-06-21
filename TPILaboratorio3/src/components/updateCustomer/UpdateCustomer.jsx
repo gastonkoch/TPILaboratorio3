@@ -75,7 +75,7 @@ const UpdateCustomer = () => {
         <>
             <div className="divUpdateCustomer">
                 <Card className="m-4 w-50 formUpdateCustomer">
-                    <h1>Modificar Usuario</h1>
+                    <h1>Modificar Cliente</h1>
                     <Card.Body>
                         <Form className="text-white box" onSubmit={submitUpdateCustomerHandler}>
                             <Row>

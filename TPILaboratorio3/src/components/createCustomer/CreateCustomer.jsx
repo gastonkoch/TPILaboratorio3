@@ -39,8 +39,6 @@ const CreateCustomer = () => {
         navigate(`/customer`)
     }
 
-
-
     const handleCancel = () => (
         navigate(`/customer`)
     )
@@ -49,7 +47,7 @@ const CreateCustomer = () => {
         <>
             <div className="divUpdateCustomer">
                 <Card className="m-4 w-50 formUpdateCustomer">
-                    <h1>Crear Usuario</h1>
+                    <h1>Crear cliente</h1>
                     <Card.Body>
                         <Form className="text-white box" onSubmit={submitCreateCustomerHandler}>
                             <Row>

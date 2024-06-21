@@ -16,6 +16,11 @@ import UpdateCustomer from './components/updateCustomer/UpdateCustomer';
 import DisplayCustomer from './components/displayCustomer/DisplayCustomer';
 import DeleteCustomer from './components/deleteCustomer/DeleteCustomer';
 import CreateCustomer from './components/createCustomer/CreateCustomer';
+import Seller from './components/seller/Seller';
+import CreateSeller from './components/createSeller/CreateSeller';
+import DisplaySeller from './components/displaySeller/DisplaySeller';
+import UpdateSeller from './components/updateSeller/UpdateSeller';
+import DeleteSeller from './components/deleteSeller/DeleteSeller';
   
 const App = () => {
   const router = createBrowserRouter([
@@ -69,6 +74,36 @@ const App = () => {
       path: "/paymethod",
       element:
         <MainLayout children={<PayMethod />}>
+        </MainLayout>
+    },
+    {
+      path: "/seller",
+      element:
+        <MainLayout children={<Seller />}>
+        </MainLayout>
+    },
+    {
+      path: "/createseller",
+      element:
+        <MainLayout children={<CreateSeller />}>
+        </MainLayout>
+    },
+    {
+      path: "/displayseller/:id",
+      element:
+        <MainLayout children={<DisplaySeller />}>
+        </MainLayout>
+    },
+    {
+      path: "/updateseller/:id",
+      element:
+        <MainLayout children={<UpdateSeller />}>
+        </MainLayout>
+    },
+    {
+      path: "/deleteseller/:id",
+      element:
+        <MainLayout children={<DeleteSeller />}>
         </MainLayout>
     },
     {

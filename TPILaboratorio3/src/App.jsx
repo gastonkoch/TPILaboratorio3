@@ -21,7 +21,8 @@ import CreateSeller from './components/createSeller/CreateSeller';
 import DisplaySeller from './components/displaySeller/DisplaySeller';
 import UpdateSeller from './components/updateSeller/UpdateSeller';
 import DeleteSeller from './components/deleteSeller/DeleteSeller';
-  
+import { Order } from './components/order/Order';
+
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -74,6 +75,12 @@ const App = () => {
       path: "/paymethod",
       element:
         <MainLayout children={<PayMethod />}>
+        </MainLayout>
+    },
+    {
+      path: "/order",
+      element:
+        <MainLayout children={<Order />}>
         </MainLayout>
     },
     {

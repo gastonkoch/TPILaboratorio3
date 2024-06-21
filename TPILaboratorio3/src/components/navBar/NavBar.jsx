@@ -5,6 +5,7 @@ import Carrito from '../carrito/Carrito';
 import "./NavBar.css"
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../services/cart/CartContext';
+import logo from '/public/logo.ico';
 
 const NavBar = () => {
     let navigate = useNavigate();
@@ -52,8 +53,8 @@ const NavBar = () => {
     return (
         <>
             <Navbar data-bs-theme="dark" className='navbar'>
-                <Container>
-                    <Navbar.Brand className='nameBussines' onClick={onHandleLanding}>Easy Grip</Navbar.Brand>
+                <Container>             
+                    <Navbar.Brand className='nameBussines' onClick={onHandleLanding}><img style={{ height: '6vh', cursor: 'pointer'  }} className="image-order" src={logo}alt="First slide"/></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='caja'>
                         <Nav className="me-auto caja-titulos" >

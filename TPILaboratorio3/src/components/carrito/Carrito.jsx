@@ -13,7 +13,7 @@ import check from '/public/check3.png';
 
 const Carrito = ({ setCartProducts }) => {
   const [showPayMethod, setShowPayMethod] = useState(false);
-  const { handleProduct } = useContext(CartContext);
+  const { handleProduct, handleAddCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [editableIndex, setEditableIndex] = useState(null);
   const [newQuantity, setNewQuantity] = useState(0);
@@ -40,9 +40,12 @@ const Carrito = ({ setCartProducts }) => {
   const handleSaveProduct = (index) => {
     const updatedProducts = [...products];
     updatedProducts[index].quantity = newQuantity;
+    // console.log(updatedProducts[index])
+    // handleAddCart(updatedProducts[index].quantity, updatedProducts[index]);
     setProducts(updatedProducts);
     setCartProducts(updatedProducts);
     setEditableIndex(null);
+ 
   };
 
   const handlePay = () => {

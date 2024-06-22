@@ -22,6 +22,7 @@ import DisplaySeller from './components/displaySeller/DisplaySeller';
 import UpdateSeller from './components/updateSeller/UpdateSeller';
 import DeleteSeller from './components/deleteSeller/DeleteSeller';
 import { Order } from './components/order/Order';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -68,8 +69,8 @@ const App = () => {
     {
       path: "/nuevoProducto",
       element:
-        <MainLayout children={<AddProducts />}>
-        </MainLayout>
+        <ProtectedRoute children={<AddProducts />}>
+        </ProtectedRoute>
     },
     {
       path: "/paymethod",

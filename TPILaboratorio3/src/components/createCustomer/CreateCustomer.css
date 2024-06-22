@@ -7,10 +7,21 @@
 }
 
 .formUpdateCustomer{
-    width: 40%;
+    width: 30% !important;
+    min-width:400px !important;
     background-color: #95aadf;
     border-radius: 50px;
     padding: 30px 40px;
+}
+
+.formUpdateCustomer > h1{
+    display: flex;
+    justify-content: center;
+}
+
+.card-body-create-customer{
+    display: flex;
+    justify-content: center;
 }
 
 .labelForm{

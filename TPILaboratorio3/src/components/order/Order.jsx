@@ -14,7 +14,6 @@ import { AuthenticationContext } from '../../services/authentication/Authenticat
 export const Order = () => {
     const { handleProduct } = useContext(CartContext);
     const { payMethod } = useContext(PayMethodContext);
-    const { user } = useContext(AuthenticationContext);
     const [products, setProducts] = useState([]);
 
     const [nameAndLastName, setNameAndLastName] = useState()
@@ -23,7 +22,6 @@ export const Order = () => {
     const [home, setHome] = useState()
     const [postalCode, setPostalCode] = useState()
     const [selectedMethod, setSelectedMethod] = useState()
-
 
     const navigate = useNavigate();
 

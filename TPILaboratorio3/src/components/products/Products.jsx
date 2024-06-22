@@ -3,9 +3,12 @@ import { Button } from 'react-bootstrap';
 import ProductsItem from '../productsItem/ProductsItem';
 import "./Products.css";
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
+import Form from 'react-bootstrap/Form';
 
 const Products = () => {
+
     const [productData, setProductsData] = useState([])
+    const [nameSearch, setNameSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 16;
     const { user } = useContext(AuthenticationContext);
@@ -58,8 +61,21 @@ const Products = () => {
             });
     }, []);
 
+    const handleNameSearch = (e) => {
+        setNameSearch(e.target.value);
+    };
+
+    const onHandleSearch = () => {
+        const nameFilter = currentProducts.filter((product) => product.name.toLowerCase().includes(nameSearch.toLowerCase()))
+        setProductsData(nameFilter)
+    };
+
     return (
         <div>
+            <div className='search-product'>
+                <Form.Control className="search-product-name" type="text" placeholder="Ingresar el nombre del producto" onChange={handleNameSearch} />
+                <Button type="button" className="mb-3 mt-2 ps-5 pe-5 search-product-button" onClick={onHandleSearch}>Buscar</Button>
+            </div>
             {user && user.userType !== 0 ?
                 <div className='products-container'>
                     {currentProducts.map(item => (
@@ -72,7 +88,7 @@ const Products = () => {
                 </div> :
                 <div className='products-container'>
                     {currentProducts.map(item => (
-                        item.avaible && 
+                        item.avaible &&
                         <div className="product-item" key={item.id}>
                             <ProductsItem
                                 item={item}

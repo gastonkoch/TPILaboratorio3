@@ -6,7 +6,7 @@
     align-items: center;
     flex-direction: column;
     width: 350px;
-    height: 350px;
+    height: 425px;
 }
 
 .labelForm{
@@ -28,7 +28,7 @@
 }
 
 .pLogin{
-    color: blue;
+    color: white;
 }
 
 .pLogin:hover{

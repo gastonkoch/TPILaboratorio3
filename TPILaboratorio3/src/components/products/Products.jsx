@@ -36,7 +36,6 @@ const Products = () => {
         }
     };
 
-    // ESTO TIENE QUE SER PARA EL SELLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     useEffect(() => {
         fetch("https://localhost:7197/api/Product", {
             method: "GET",
@@ -49,7 +48,6 @@ const Products = () => {
                 return response.json();
             })
             .then((productsData) => {
-                console.log(productsData)
                 setProductsData(productsData)
                 indexOfLastProduct = currentPage * productsPerPage;
                 indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -84,12 +82,12 @@ const Products = () => {
                 </div>}
             <div className="pagination">
                 <Button
-                    className="button"
+                    className="button button-change-page"
                     onClick={() => handlePageChange(1)}
                     disabled={currentPage === 1}
                 >{"<<"}</Button>
                 <Button
-                    className="button"
+                    className="button button-change-page"
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
                 >{"<"}</Button>
@@ -97,18 +95,18 @@ const Products = () => {
                     <Button
                         key={index + 1}
                         onClick={() => handlePageChange(index + 1)}
-                        className={`button ${currentPage === index + 1 ? 'active' : ''}`}
+                        className={`button button-change-page ${currentPage === index + 1 ? 'active' : ''}`}
                     >
                         {index + 1}
                     </Button>
                 ))}
                 <Button
-                    className="button"
+                    className="button button-change-page"
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
                 >{">"}</Button>
                 <Button
-                    className="button"
+                    className="button button-change-page"
                     onClick={() => handlePageChange(totalPages)}
                     disabled={currentPage === totalPages}
                 >{">>"}</Button>

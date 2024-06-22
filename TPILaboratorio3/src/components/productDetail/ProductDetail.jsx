@@ -33,7 +33,6 @@ const ProductDetail = () => {
         return response.json();
       })
       .then((productsData) => {
-        console.log(productsData)
         let productFromAPI = {
           brand: productsData.brand,
           category: productsData.category,
@@ -81,19 +80,19 @@ const ProductDetail = () => {
       method: "PUT",
       mode: "cors",
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error al actualizar el producto");
-      }
-      setProductOnScreen(prevState => ({
-        ...prevState,
-        avaible: false
-      }));
-    })
-    .catch((error) => {
-      navigate("/*")
-      console.error("Error:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al actualizar el producto");
+        }
+        setProductOnScreen(prevState => ({
+          ...prevState,
+          avaible: false
+        }));
+      })
+      .catch((error) => {
+        navigate("/*")
+        console.error("Error:", error);
+      });
   };
 
   const handleAlta = () => {
@@ -114,7 +113,7 @@ const ProductDetail = () => {
         console.error("Error:", error);
       });
   };
-  
+
 
   if (error) {
     return <div>Producto no encontrado</div>;
@@ -124,12 +123,16 @@ const ProductDetail = () => {
     navigate(`/updateproduct/${productOnScreen.id}`);
   }
 
+  const handleReturn = () => {
+    navigate("/productos")
+  }
+
   return (
     <div className="main-container">
       <Container>
         <Row>
-          <Col xs={6} md={4}>
-            <Image className='image' src={productOnScreen.image} rounded />
+          <Col xs={12} md={6} lg={4}>
+            <Image className='image img-fluid' src={productOnScreen.image} rounded />
           </Col>
         </Row>
       </Container>
@@ -139,7 +142,7 @@ const ProductDetail = () => {
           <Form.Group className="mb-3" controlId="nameId">
             <Form.Label>{productOnScreen.name}</Form.Label>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="nameId">
+          <Form.Group className="mb-3" controlId="priceId">
             <Form.Label>${productOnScreen.price}</Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="descriptionId">
@@ -161,20 +164,22 @@ const ProductDetail = () => {
 
         <Container className='buttonsBox'>
           <Container className='data'>
-            <Button className='button' onClick={onHandleAdd}>+</Button>
-            <Button className='button' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
-            <Button className='button' onClick={onHandleDelete}>-</Button>
+            <Button className='button button-add' onClick={onHandleAdd}>+</Button>
+            <Button className='button button-add' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
+            <Button className='button button-add' onClick={onHandleDelete}>-</Button>
+            <Button className='button button-return'  onClick={handleReturn}>Volver</Button>
           </Container>
           {user && user.userType !== 0 &&
-          <Container>
-            <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
-            {productOnScreen.avaible
-              ? <Button className='button' variant="danger" onClick={handleBaja}>Dar de baja</Button>
-              : <Button className='button' variant="success" onClick={handleAlta}>Dar de alta</Button>}
-          </Container>}
+            <Container>
+              <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
+              {productOnScreen.avaible
+                ? <Button className='button' variant="danger" onClick={handleBaja}>Dar de baja</Button>
+                : <Button className='button' variant="success" onClick={handleAlta}>Dar de alta</Button>}
+            </Container>}
         </Container>
       </Container>
     </div>
+
   );
 };
 

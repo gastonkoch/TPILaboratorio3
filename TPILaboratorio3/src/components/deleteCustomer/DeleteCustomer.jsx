@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import "./DeleteCustomer.css";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+
 const DeleteCustomer = () => {
   const { id } = useParams();
   const [customerOnScreen, setCustomerOnScreen] = useState({

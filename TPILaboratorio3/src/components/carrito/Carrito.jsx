@@ -6,6 +6,8 @@ import './Carrito.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import PropTypes from "prop-types";
+
 
 const Carrito = ({ setCartProducts }) => {
   const [showPayMethod, setShowPayMethod] = useState(false);
@@ -61,5 +63,10 @@ const Carrito = ({ setCartProducts }) => {
     </div>
   );
 };
+
+Carrito.propTypes = {
+  setCartProducts: PropTypes.func
+};
+
 
 export default Carrito;

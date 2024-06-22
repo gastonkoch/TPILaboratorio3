@@ -62,16 +62,16 @@ const NavBar = () => {
                         </Nav>
                         {user && user.userType !== 0 &&
                             <Nav className="me-auto caja-titulos" >
-                                <Nav.Link onClick={onHandleNewProduct} className='products'>Agregar Producto</Nav.Link>
+                                <Nav.Link onClick={onHandleNewProduct} className='option-navbar'>Agregar Producto</Nav.Link>
                             </Nav>
                         }
                         {user && user.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
-                                <Nav.Link onClick={onHandleCustomer} className='products'>Clientes</Nav.Link>
+                                <Nav.Link onClick={onHandleCustomer} className='option-navbar'>Clientes</Nav.Link>
                             </Nav>}
                         {user && user.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
-                                <Nav.Link onClick={onHandleSeller} className='products'>Vendedores</Nav.Link>
+                                <Nav.Link onClick={onHandleSeller} className='option-navbar'>Vendedores</Nav.Link>
                             </Nav>}
                         {user &&
                             <Navbar.Text className='username'>
@@ -80,14 +80,14 @@ const NavBar = () => {
 
                         <Nav>
                             {user ? (
-                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogout}>Cerrar sesión</Button>
+                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogout}>Logout</Button>
                             ) : (
-                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Iniciar sesión</Button>
+                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Login</Button>
                             )}
                         </Nav>
 
                         <Dropdown align="end">
-                            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                            <Dropdown.Toggle className='button-cart-navbar' id="dropdown-basic">
                                 Carrito ({totalQuantity})
                             </Dropdown.Toggle>
                             <Dropdown.Menu className='carrito-desplegable'>

@@ -4,6 +4,7 @@ import { useState, useContext, useRef } from "react";
 import { useForm } from '../../hook/useForm';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
+import PropTypes from "prop-types";
 
 const Register = ({ isSignedIn, onLogIn, onLogOut }) => {
 
@@ -249,5 +250,12 @@ const Register = ({ isSignedIn, onLogIn, onLogOut }) => {
         </div>
     )
 }
+
+
+Register.propTypes = {
+    isSignedIn: PropTypes.func,
+    onLogIn: PropTypes.func,
+    onLogOut: PropTypes.func
+  };
 
 export default Register

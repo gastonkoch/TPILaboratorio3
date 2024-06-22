@@ -96,7 +96,7 @@ const AddProducts = () => {
     <div className="divAddProduct">
         <Card className="m-4 w-50 formAddProduct">
           <h1>Agregar Producto</h1>
-          <Card.Body>
+          <Card.Body className="card-body-add-product">
             <Form className="text-white box" onSubmit={submitProductHandler}>
               <Row>
                 <Col md={6}>

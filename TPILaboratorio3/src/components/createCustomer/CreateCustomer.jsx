@@ -48,7 +48,7 @@ const CreateCustomer = () => {
             <div className="divUpdateCustomer">
                 <Card className="m-4 w-50 formUpdateCustomer">
                     <h1>Crear cliente</h1>
-                    <Card.Body>
+                    <Card.Body className="card-body-create-customer">
                         <Form className="text-white box" onSubmit={submitCreateCustomerHandler}>
                             <Row>
                                 <Col md={6}>

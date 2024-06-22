@@ -131,7 +131,7 @@ const ProductDetail = () => {
     <div className="main-container">
       <Container>
         <Row>
-          <Col xs={12} md={6} lg={4}>
+          <Col>
             <Image className='image img-fluid' src={productOnScreen.image} rounded />
           </Col>
         </Row>

@@ -7,9 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../services/cart/CartContext';
 import logo from '/public/logo.ico';
 
+const userValueString = localStorage.getItem("user");
+const userValue = userValueString ? JSON.parse(userValueString) : null;
+const userValueSession = userValue ? userValue.userSession : null;
+
 const NavBar = () => {
+    const [user, setUser] = useState(userValueSession)
     let navigate = useNavigate();
-    const { handleLogout, user } = useContext(AuthenticationContext);
+    const { handleLogout } = useContext(AuthenticationContext);
     const [cartProducts, setCartProducts] = useState([]);
     const { handleProduct } = useContext(CartContext);
 
@@ -77,7 +82,6 @@ const NavBar = () => {
                             <Navbar.Text className='username'>
                                 ¡Hola {user.name}!
                             </Navbar.Text>}
-
                         <Nav>
                             {user ? (
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogout}>Logout</Button>

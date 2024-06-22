@@ -8,13 +8,11 @@ import { AuthenticationContext } from '../../services/authentication/Authenticat
 import { CartContext } from '../../services/cart/CartContext';
 
 const PayMethod = () => {
-    const { handleProduct } = useContext(CartContext);
     const { handlePayMethod } = useContext(PayMethodContext);
     const [selectedMethod, setSelectedMethod] = useState('');
     const [showCardData, setShowCardData] = useState(false);
     const [showTransferData, setShowTransferData] = useState(false);
     const [showCashData, setShowCashData] = useState(false);
-    const { user } = useContext(AuthenticationContext);
     const [userId, setUserId] = useState(null);
     const { nameAndLastName, email, dni, home, postalCode, tarjetNumber, securityCode, expirationDate, onInputChange, onResetForm } = useForm({
         nameAndLastName: '',
@@ -37,12 +35,6 @@ const PayMethod = () => {
         postalCode: false,
     });
 
-    useEffect(() => {
-        if (user) {
-            const { id } = user;
-            setUserId(id);
-        } 
-    }, [user]);
 
     const handleMethodChange = (event) => {
         const selectedValue = event.target.value;
@@ -105,33 +97,6 @@ const PayMethod = () => {
             }));
             return;
         }
-
-        const cart = handleProduct();
-        const productIds = cart.map(item => item.id);
-        console.log(productIds)
-
-        const data = {
-            userId: userId,
-            cart: cart
-        };
-        
-        
-        fetch(`https://localhost:7197/api/Order`, {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Error al actualizar el producto");
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
 
         let metodoPago = {
             nameAndLastName: nameAndLastName,

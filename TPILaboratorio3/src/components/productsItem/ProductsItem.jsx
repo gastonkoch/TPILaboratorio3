@@ -2,6 +2,7 @@ import proptypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
+import './ProductsItem.css'
 
 const ProductsItem = ({item}) => {
     let navigate = useNavigate()
@@ -10,15 +11,15 @@ const ProductsItem = ({item}) => {
     }
     return (
         <>
-            <Card style={{ width: '100%' }}>
-                <Card.Img variant="top" src={item.image} />
-                <Card.Body>
+            <Card className='product-item-card'>
+                <Card.Img variant="top" src={item.image} className='product-image'/>
+                <Card.Body className='product-data'>
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>{item.category}</Card.Text>
                     <Card.Text>{item.brand}</Card.Text>
                     <Card.Text>${item.price}</Card.Text>
                     <Card.Text>{item.avaible ? "Disponible" : "No disponible"}</Card.Text>
-                    <Button variant="primary" onClick={onProductDetail}>Ver mas</Button>
+                    <Button onClick={onProductDetail} className='button-product-item'>Ver mas</Button>
                 </Card.Body>
             </Card>
         </>

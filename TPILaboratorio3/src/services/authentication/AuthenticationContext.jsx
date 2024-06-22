@@ -31,7 +31,6 @@ export const AuthenticationContextProvider = ({ children }) => {
           adress: userDataFromAPI.adress,
           userType : userDataFromAPI.userType
         }
-        console.log(userSession)
         localStorage.setItem("user", JSON.stringify({ userSession }));
         setUser( userSession );
       })

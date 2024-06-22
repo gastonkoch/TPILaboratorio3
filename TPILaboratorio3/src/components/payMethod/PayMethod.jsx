@@ -1,11 +1,12 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { useForm } from '../../hook/useForm';
 import './PayMethod.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { PayMethodContext } from '../../services/cart/PayMethodContext';
 
 const PayMethod = () => {
-    
+    const { handlePayMethod } = useContext(PayMethodContext);
     const [selectedMethod, setSelectedMethod] = useState('');
     const [showCardData, setShowCardData] = useState(false);
     const [showTransferData, setShowTransferData] = useState(false);
@@ -91,6 +92,17 @@ const PayMethod = () => {
             }));
             return
         }
+
+        let metodoPago = {
+            nameAndLastName: nameAndLastName,
+            email: email,
+            dni: dni,
+            home: home,
+            postalCode: postalCode,
+            selectedMethod: selectedMethod
+        };
+
+        handlePayMethod(metodoPago)
 
         navigate('/order');
     }

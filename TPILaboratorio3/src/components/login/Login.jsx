@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 
 const Login = () => {
-
     const { email, password, onInputChange, onResetForm} = useForm({
         email: '',
         password: ''

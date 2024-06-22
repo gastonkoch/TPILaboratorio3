@@ -3,7 +3,7 @@
    align-items: center;
    justify-content: center;
    flex-wrap: wrap; 
-   margin: 60px;
+   margin: 20px 60px 60px 60px;
 }
 
  .product-item{
@@ -13,7 +13,6 @@
     align-items: center;
     flex-flow: column wrap;
  }
-
 
  .pagination{
     display: flex;
@@ -48,5 +47,30 @@
    border:#2c3959 ;
 }
 
+.search-product{
+   margin-top: 25px;
+   display: flex;
+   justify-content: center;
+}
+
+.search-product-name{
+   height: 50px;
+   width: 400px;
+}
+
+.search-product-button{
+   background-color: white;
+   font-size: 15px;
+   color:#2c3959;
+   border:white ;
+   font-weight: bold;
+   margin-left: 10px;
+}
+
+.search-product-button:hover{
+   background-color: gray !important;
+   color:white !important;
+   font-weight: bold;
+}
 
 

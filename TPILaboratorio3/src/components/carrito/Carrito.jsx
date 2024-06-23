@@ -39,13 +39,15 @@ const Carrito = ({ setCartProducts }) => {
 
   const handleSaveProduct = (index) => {
     const updatedProducts = [...products];
-    updatedProducts[index].quantity = newQuantity;
-    // console.log(updatedProducts[index])
-    // handleAddCart(updatedProducts[index].quantity, updatedProducts[index]);
-    setProducts(updatedProducts);
-    setCartProducts(updatedProducts);
-    setEditableIndex(null);
- 
+    if(newQuantity > 0){
+      updatedProducts[index].quantity = newQuantity;
+      setProducts(updatedProducts);
+      setCartProducts(updatedProducts);
+      setEditableIndex(null);
+    } else {
+      alert("La cantidad no puede ser menor a uno")
+    }
+    
   };
 
   const handlePay = () => {

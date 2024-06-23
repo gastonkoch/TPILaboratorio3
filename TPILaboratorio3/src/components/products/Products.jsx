@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import ProductsItem from '../productsItem/ProductsItem';
 import "./Products.css";
@@ -7,11 +7,12 @@ import Form from 'react-bootstrap/Form';
 
 const Products = () => {
 
-    const [productData, setProductsData] = useState([])
+    const [productData, setProductsData] = useState([]);
     const [nameSearch, setNameSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 16;
     const { user } = useContext(AuthenticationContext);
+
     // Calcular el índice de los productos actuales
     let indexOfLastProduct = currentPage * productsPerPage;
     let indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -21,23 +22,23 @@ const Products = () => {
     const totalPages = Math.ceil(productData.length / productsPerPage);
 
     // Manejar el cambio de página
-    const handlePageChange = (pageNumber) => {
+    const handlePageChange = useCallback((pageNumber) => {
         setCurrentPage(pageNumber);
-    };
+    }, []);
 
     // Manejar el cambio a la página siguiente
-    const handleNextPage = () => {
+    const handleNextPage = useCallback(() => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
-    };
+    }, [currentPage, totalPages]);
 
     // Manejar el cambio a la página anterior
-    const handlePrevPage = () => {
+    const handlePrevPage = useCallback(() => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
         }
-    };
+    }, [currentPage]);
 
     useEffect(() => {
         fetch("https://localhost:7197/api/Product", {
@@ -65,10 +66,11 @@ const Products = () => {
         setNameSearch(e.target.value);
     };
 
-    const onHandleSearch = () => {
-        const nameFilter = currentProducts.filter((product) => product.name.toLowerCase().includes(nameSearch.toLowerCase()))
-        setProductsData(nameFilter)
-    };
+    const onHandleSearch = useCallback(() => {
+        const nameFilter = currentProducts.filter((product) => product.name.toLowerCase().includes(nameSearch.toLowerCase()));
+        setProductsData(nameFilter);
+    }, [nameSearch, currentProducts]);
+
 
     return (
         <div>
@@ -88,7 +90,7 @@ const Products = () => {
                 </div> :
                 <div className='products-container'>
                     {currentProducts.map(item => (
-                        item.avaible &&
+                        item.available &&
                         <div className="product-item" key={item.id}>
                             <ProductsItem
                                 item={item}

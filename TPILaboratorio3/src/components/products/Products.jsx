@@ -41,6 +41,7 @@ const Products = () => {
     }, [currentPage]);
 
     useEffect(() => {
+        console.log("HOLAAAAAA")
         fetch("https://localhost:7197/api/Product", {
             method: "GET",
             mode: "cors",
@@ -52,6 +53,8 @@ const Products = () => {
                 return response.json();
             })
             .then((productsData) => {
+                console.log("que onda perro")
+                console.log(productData)
                 setProductsData(productsData)
                 indexOfLastProduct = currentPage * productsPerPage;
                 indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -60,7 +63,7 @@ const Products = () => {
             .catch((error) => {
                 console.error("Error:", error);
             });
-    }, []);
+    }, [user]);
 
     const handleNameSearch = (e) => {
         setNameSearch(e.target.value);

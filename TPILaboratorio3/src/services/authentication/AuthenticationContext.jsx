@@ -31,6 +31,7 @@ export const AuthenticationContextProvider = ({ children }) => {
           adress: userDataFromAPI.adress,
           userType : userDataFromAPI.userType
         }
+        console.log("usuario:" ,userSession)
         localStorage.setItem("user", JSON.stringify({ userSession }));
         setUser( userSession );
       })
@@ -43,6 +44,7 @@ export const AuthenticationContextProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
+    // window.location.href = '/'
   };
 
   return (

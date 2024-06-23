@@ -18,6 +18,7 @@ export const CartContextListProvider = ({children}) => {
                 return product;
             });
             setCart(newListProduct);
+            localStorage.setItem("products", JSON.stringify({ newListProduct }));
         }
     };
 

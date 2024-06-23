@@ -11,13 +11,17 @@ import lapiz from '/public/lapiz.png';
 import cruz from '/public/cruz2.png';
 import check from '/public/check3.png';
 
+const userValueString = localStorage.getItem("user");
+const userValue = userValueString ? JSON.parse(userValueString) : null;
+const userValueSession = userValue ? userValue.userSession : null;
+   
 const Carrito = ({ setCartProducts }) => {
   const [showPayMethod, setShowPayMethod] = useState(false);
   const { handleProduct, handleAddCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [editableIndex, setEditableIndex] = useState(null);
   const [newQuantity, setNewQuantity] = useState(0);
-
+  const [user, setUser] = useState(userValueSession)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,6 +58,7 @@ const Carrito = ({ setCartProducts }) => {
     if (products.length === 0) {
       alert("Debe agregar productos al carrito");
     } else {
+      !user ? alert("Debe loguearse primero") :
       navigate('/paymethod');
     }
   };

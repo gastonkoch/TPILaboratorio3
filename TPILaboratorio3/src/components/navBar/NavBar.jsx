@@ -17,7 +17,7 @@ const NavBar = () => {
     const { handleLogout } = useContext(AuthenticationContext);
     const [cartProducts, setCartProducts] = useState([]);
     const { handleProduct } = useContext(CartContext);
-
+    console.log(user)
     const products = handleProduct();
     let totalQuantity = 0;
 

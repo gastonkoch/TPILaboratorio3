@@ -1,15 +1,14 @@
 import MainLayout from '../mainLayout/MainLayout';
 import { useState } from 'react';
-import Login from '../login/Login';
 import Unauthorize from '../unauthorize/Unauthorize';
 
 const userValueString = localStorage.getItem("user");
 const userValue = userValueString ? JSON.parse(userValueString) : null;
 const userValueSession = userValue ? userValue.userSession : null;
-const ProtectedRoute = ({children}) => {
+const ProtectedForSellers = ({children}) => {
     const [user,setUser] = useState(userValueSession)
 
-    if (!user) {
+    if (!user || (user && user.userType !== 2)) {
         return (
         <MainLayout>
           <Unauthorize/>
@@ -17,9 +16,9 @@ const ProtectedRoute = ({children}) => {
         )
     } 
     return (
-    <MainLayout children={children}>
-    </MainLayout>
+        <MainLayout children={children}>
+        </MainLayout>
     )
 };
 
-export default ProtectedRoute;
+export default ProtectedForSellers;

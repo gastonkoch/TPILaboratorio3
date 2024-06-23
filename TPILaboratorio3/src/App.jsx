@@ -22,6 +22,9 @@ import DisplaySeller from './components/displaySeller/DisplaySeller';
 import UpdateSeller from './components/updateSeller/UpdateSeller';
 import DeleteSeller from './components/deleteSeller/DeleteSeller';
 import { Order } from './components/order/Order';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
+import ProtectedForClients from './components/protectedForClients/ProtectedForClients';
+import ProtectedForSellers from './components/protectedForSellers/ProtectedForSellers';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -29,7 +32,7 @@ const App = () => {
       path: "/",
       element: (
         <MainLayout>
-            <LandingPage />
+          <LandingPage />
         </MainLayout>
       ),
     },
@@ -44,7 +47,7 @@ const App = () => {
       path: "/registrarse",
       element:
         <MainLayout>
-            <Register />
+          <Register />
         </MainLayout>
     },
     {
@@ -56,8 +59,8 @@ const App = () => {
     {
       path: "/carrito",
       element:
-        <MainLayout children={<Carrito />}>
-        </MainLayout>
+        <ProtectedRoute children={<Carrito />}>
+        </ProtectedRoute>
     },
     {
       path: "/producto/:id",
@@ -68,90 +71,92 @@ const App = () => {
     {
       path: "/nuevoProducto",
       element:
-        <MainLayout children={<AddProducts />}>
-        </MainLayout>
+        <ProtectedForClients children={<AddProducts />}>
+        </ProtectedForClients>
     },
     {
       path: "/paymethod",
       element:
-        <MainLayout children={<PayMethod />}>
-        </MainLayout>
+        <ProtectedRoute children={<PayMethod />}>
+        </ProtectedRoute>
     },
     {
       path: "/order",
       element:
-        <MainLayout children={<Order />}>
-        </MainLayout>
+        <ProtectedRoute children={<Order />}>
+        </ProtectedRoute>
     },
     {
       path: "/seller",
       element:
-        <MainLayout children={<Seller />}>
-        </MainLayout>
+        <ProtectedForSellers children={<Seller />}>
+        </ProtectedForSellers>
     },
     {
       path: "/createseller",
       element:
-        <MainLayout children={<CreateSeller />}>
-        </MainLayout>
+        <ProtectedForSellers children={<CreateSeller />}>
+        </ProtectedForSellers>
     },
     {
       path: "/displayseller/:id",
       element:
-        <MainLayout children={<DisplaySeller />}>
-        </MainLayout>
+        <ProtectedForSellers children={<DisplaySeller />}>
+        </ProtectedForSellers>
     },
     {
       path: "/updateseller/:id",
       element:
-        <MainLayout children={<UpdateSeller />}>
-        </MainLayout>
+        <ProtectedForSellers children={<UpdateSeller />}>
+        </ProtectedForSellers>
     },
     {
       path: "/deleteseller/:id",
       element:
-        <MainLayout children={<DeleteSeller />}>
-        </MainLayout>
+        <ProtectedForSellers children={<DeleteSeller />}>
+        </ProtectedForSellers>
     },
     {
       path: "/customer",
       element:
-        <MainLayout children={<Customers />}>
-        </MainLayout>
+        <ProtectedForSellers children={<Customers />}>
+        </ProtectedForSellers>
     },
     {
       path: "/createcustomer",
       element:
-        <MainLayout children={<CreateCustomer />}>
-        </MainLayout>
+        <ProtectedForSellers children={<CreateCustomer />}>
+        </ProtectedForSellers>
     },
     {
       path: "/displaycustomer/:id",
       element:
-        <MainLayout children={<DisplayCustomer />}>
-        </MainLayout>
+        <ProtectedForSellers children={<DisplayCustomer />}>
+        </ProtectedForSellers>
     },
     {
       path: "/updatecustomer/:id",
       element:
-        <MainLayout children={<UpdateCustomer />}>
-        </MainLayout>
+        <ProtectedForSellers children={<UpdateCustomer />}>
+        </ProtectedForSellers>
     },
     {
       path: "/deletecustomer/:id",
       element:
-        <MainLayout children={<DeleteCustomer />}>
-        </MainLayout>
+        <ProtectedForSellers children={<DeleteCustomer />}>
+        </ProtectedForSellers>
     },
     {
       path: "/updateproduct/:id",
       element:
-        <MainLayout children={<UpdateProducts />}>
-        </MainLayout>
+        <ProtectedForClients children={<UpdateProducts />}>
+        </ProtectedForClients>
     },
     {
       path: "*",
-      element: <NotFound />,
+      element:
+        <MainLayout children={<NotFound />}>
+        </MainLayout>
     },
   ]);
   return (

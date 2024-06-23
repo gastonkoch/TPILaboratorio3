@@ -6,7 +6,7 @@
     align-items: center;
     flex-direction: column;
     width: 350px;
-    min-height: 650px;
+    height: 660px;
 }
 
 .labelForm{
@@ -49,7 +49,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 250px;
+    margin: 100px;
 }
 
 .box-button-register{

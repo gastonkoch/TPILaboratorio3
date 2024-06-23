@@ -20,7 +20,7 @@ const ProductDetail = () => {
   const { handleAddCart } = useContext(CartContext);
   const { user } = useContext(AuthenticationContext);
   const navigate = useNavigate();
-
+  console.log(user)
   useEffect(() => {
     fetch(`https://localhost:7197/api/Product/id/${id}`, { // Asegúrate de usar backticks aquí
       method: "GET",
@@ -61,6 +61,7 @@ const ProductDetail = () => {
   };
 
   const handleAddCarrito = () => {
+    !user ? alert("Debe loguearse primero") :
     handleAddCart(productOnScreen.quantity, productOnScreen);
     setProductOnScreen((prevProduct) => ({
       ...prevProduct,
@@ -169,7 +170,7 @@ const ProductDetail = () => {
             <Button className='button button-add' onClick={onHandleDelete}>-</Button>
             <Button className='button button-return'  onClick={handleReturn}>Volver</Button>
           </Container>
-          {user && user.userType !== 0 &&
+          {user && user.userSession.userType !== 0 &&
             <Container>
               <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
               {productOnScreen.avaible

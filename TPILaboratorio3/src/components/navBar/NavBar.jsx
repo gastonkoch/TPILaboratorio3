@@ -28,6 +28,7 @@ const NavBar = () => {
     }
 
     const onHandleLogout = () => {
+        window.location.href = '/'
         handleLogout();
     };
 
@@ -98,7 +99,6 @@ const NavBar = () => {
                                 <Carrito products={cartProducts} setCartProducts={setCartProducts} />
                             </Dropdown.Menu>
                         </Dropdown>
-
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 const Products = () => {
 
     const [productData, setProductsData] = useState([]);
+    const [productDataFilter, setProductsFilter] = useState([]);
     const [nameSearch, setNameSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 16;
@@ -41,7 +42,6 @@ const Products = () => {
     }, [currentPage]);
 
     useEffect(() => {
-        console.log("HOLAAAAAA")
         fetch("https://localhost:7197/api/Product", {
             method: "GET",
             mode: "cors",
@@ -53,9 +53,8 @@ const Products = () => {
                 return response.json();
             })
             .then((productsData) => {
-                console.log("que onda perro")
-                console.log(productData)
                 setProductsData(productsData)
+                setProductsFilter(productsData)
                 indexOfLastProduct = currentPage * productsPerPage;
                 indexOfFirstProduct = indexOfLastProduct - productsPerPage;
                 currentProducts = productsData.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -63,15 +62,21 @@ const Products = () => {
             .catch((error) => {
                 console.error("Error:", error);
             });
-    }, [user]);
+    }, []);
 
     const handleNameSearch = (e) => {
         setNameSearch(e.target.value);
     };
 
     const onHandleSearch = useCallback(() => {
-        const nameFilter = currentProducts.filter((product) => product.name.toLowerCase().includes(nameSearch.toLowerCase()));
-        setProductsData(nameFilter);
+        if (!nameSearch){
+            setProductsData(productDataFilter)
+        } else{
+            currentProducts = productDataFilter
+            const nameFilter = currentProducts.filter((product) => product.name.toLowerCase().includes(nameSearch.toLowerCase()));
+            setProductsData(nameFilter);
+        }
+       
     }, [nameSearch, currentProducts]);
 
 
@@ -81,7 +86,7 @@ const Products = () => {
                 <Form.Control className="search-product-name" type="text" placeholder="Ingresar el nombre del producto" onChange={handleNameSearch} />
                 <Button type="button" className="mb-3 mt-2 ps-5 pe-5 search-product-button" onClick={onHandleSearch}>Buscar</Button>
             </div>
-            {user && user.userType !== 0 ?
+            {(user && user.userType !== 0) &&
                 <div className='products-container'>
                     {currentProducts.map(item => (
                         <div className="product-item" key={item.id}>
@@ -90,10 +95,11 @@ const Products = () => {
                             />
                         </div>
                     ))}
-                </div> :
+                </div>}
+            {!user &&
                 <div className='products-container'>
                     {currentProducts.map(item => (
-                        item.available &&
+                        item.avaible &&
                         <div className="product-item" key={item.id}>
                             <ProductsItem
                                 item={item}

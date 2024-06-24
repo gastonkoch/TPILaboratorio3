@@ -20,7 +20,6 @@ const ProductDetail = () => {
   const { handleAddCart } = useContext(CartContext);
   const { user } = useContext(AuthenticationContext);
   const navigate = useNavigate();
-  console.log(user)
   useEffect(() => {
     fetch(`https://localhost:7197/api/Product/id/${id}`, { // Asegúrate de usar backticks aquí
       method: "GET",

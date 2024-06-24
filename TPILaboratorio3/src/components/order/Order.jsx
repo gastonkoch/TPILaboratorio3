@@ -15,10 +15,8 @@ export const Order = () => {
     const { handleProduct } = useContext(CartContext);
     const { payMethod } = useContext(PayMethodContext);
     const [products, setProducts] = useState([]);
-
     const [nameAndLastName, setNameAndLastName] = useState()
     const [email, setEmail] = useState()
-    const [dni, setDni] = useState()
     const [home, setHome] = useState()
     const [postalCode, setPostalCode] = useState()
     const [selectedMethod, setSelectedMethod] = useState()
@@ -29,7 +27,6 @@ export const Order = () => {
     const handlePayMethod = () => {
         setNameAndLastName(payMethod.nameAndLastName)
         setEmail(payMethod, email)
-        setDni(payMethod.dni)
         setHome(payMethod.home)
         setPostalCode(payMethod.postalCode)
         setSelectedMethod(payMethod.selectedMethod)
@@ -109,21 +106,21 @@ export const Order = () => {
                             <Form>
                                 <Row>
                                     <Col md={6}>
-                                        <Form.Group className="mb-3" controlId="dni">
-                                            <Form.Label className="labelForm">DNI</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                value={payMethod.dni}
-                                                readOnly
-                                            />
-                                        </Form.Group>
-                                    </Col>
-                                    <Col md={6}>
                                         <Form.Group className="mb-3" controlId="home">
                                             <Form.Label className="labelForm">Direccion</Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 value={payMethod.home}
+                                                readOnly
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={6}>
+                                        <Form.Group className="mb-3" controlId="selectedMethod">
+                                            <Form.Label className="labelForm">Metodo de pago</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                value={payMethod.selectedMethod}
                                                 readOnly
                                             />
                                         </Form.Group>
@@ -140,16 +137,7 @@ export const Order = () => {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    <Col md={6}>
-                                        <Form.Group className="mb-3" controlId="selectedMethod">
-                                            <Form.Label className="labelForm">Metodo de pago</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                value={payMethod.selectedMethod}
-                                                readOnly
-                                            />
-                                        </Form.Group>
-                                    </Col>
+                                    
                                 </Row>
                             </Form>
                         </Container>

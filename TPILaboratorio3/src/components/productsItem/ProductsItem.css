@@ -25,3 +25,17 @@
     color:#2c3959 !important;
     font-weight: bold;
 }
+
+@media (max-width: 740px) {
+    .product-item-card{
+        width: 120px;
+        height: 450px;
+    }
+ }
+
+ @media (max-width: 500px) {
+    .product-item-card{
+        width: 105px;
+        height: 580px;
+    }
+ }

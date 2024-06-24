@@ -74,3 +74,25 @@
 }
 
 
+@media (max-width: 740px) {
+   .products-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap; 
+      margin: 20px 60px 60px 60px;
+   }
+}
+
+
+@media (max-width: 620px) {
+   .products-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap; 
+      margin: 0px;
+   }
+}
+
+

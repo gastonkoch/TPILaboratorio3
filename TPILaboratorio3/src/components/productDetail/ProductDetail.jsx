@@ -61,7 +61,7 @@ const ProductDetail = () => {
 
   const handleAddCarrito = () => {
     !user ? alert("Debe loguearse primero") :
-    handleAddCart(productOnScreen.quantity, productOnScreen);
+      handleAddCart(productOnScreen.quantity, productOnScreen);
     setProductOnScreen((prevProduct) => ({
       ...prevProduct,
       quantity: 1
@@ -129,7 +129,7 @@ const ProductDetail = () => {
 
   return (
     <div className="main-container">
-      <Container>
+      <Container className='img-main-product-detail'>
         <Row>
           <Col>
             <Image className='image img-fluid' src={productOnScreen.image} rounded />
@@ -140,25 +140,25 @@ const ProductDetail = () => {
       <Container className='data'>
         <Form>
           <Form.Group className="mb-3" controlId="nameId">
-            <Form.Label>{productOnScreen.name}</Form.Label>
+            <Form.Label><b>{productOnScreen.name}</b></Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="priceId">
-            <Form.Label>${productOnScreen.price}</Form.Label>
+            <Form.Label><strong>Precio:</strong> ${productOnScreen.price}</Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="descriptionId">
-            <Form.Label>{productOnScreen.description}</Form.Label>
+            <Form.Label><strong>Descripcion: </strong>{productOnScreen.description}</Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="stockId">
-            <Form.Label><strong>Stock:</strong> {productOnScreen.stock} unidades</Form.Label>
+            <Form.Label><strong>Stock: </strong> {productOnScreen.stock} unidades</Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="categoryId">
-            <Form.Label><strong>Categoría:</strong> {productOnScreen.category}</Form.Label>
+            <Form.Label><strong>Categoría: </strong> {productOnScreen.category}</Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="brandId">
-            <Form.Label><strong>Marca:</strong> {productOnScreen.brand}</Form.Label>
+            <Form.Label><strong>Marca: </strong> {productOnScreen.brand}</Form.Label>
           </Form.Group>
           <Form.Group className="mb-3" controlId="disponibleId">
-            <Form.Label><strong>Disponible:</strong> {productOnScreen.avaible ? "Disponible" : "No disponible"}</Form.Label>
+            <Form.Label><strong>Disponible: </strong> {productOnScreen.avaible ? "Disponible" : "No disponible"}</Form.Label>
           </Form.Group>
         </Form>
 
@@ -167,19 +167,25 @@ const ProductDetail = () => {
             <Button className='button button-add' onClick={onHandleAdd}>+</Button>
             <Button className='button button-add' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
             <Button className='button button-add' onClick={onHandleDelete}>-</Button>
-            <Button className='button button-return'  onClick={handleReturn}>Volver</Button>
+            <Button className='button button-return' onClick={handleReturn}>Volver</Button>
           </Container>
+
           {user && user.userSession.userType !== 0 &&
             <Container>
               <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
-              {productOnScreen.avaible
-                ? <Button className='button' variant="danger" onClick={handleBaja}>Dar de baja</Button>
-                : <Button className='button' variant="success" onClick={handleAlta}>Dar de alta</Button>}
+
+              {user && user.userType !== 0 &&
+                <Container className='button-for-seller'>
+                  <Button className='button button-for-seller-action' variant="warning" onClick={onHandleUpdate}>Editar</Button>
+
+                  {productOnScreen.avaible
+                    ? <Button className='button button-for-seller-action' variant="danger" onClick={handleBaja}>Dar de baja</Button>
+                    : <Button className='button button-for-seller-action' variant="success" onClick={handleAlta}>Dar de alta</Button>}
+                </Container>}
             </Container>}
         </Container>
       </Container>
     </div>
-
   );
 };
 

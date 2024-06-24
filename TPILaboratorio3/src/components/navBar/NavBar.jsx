@@ -84,9 +84,9 @@ const NavBar = () => {
                             </Navbar.Text>}
                         <Nav>
                             {user ? (
-                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogout}>Logout</Button>
+                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm boton-form-nav-bar" onClick={onHandleLogout}>Cerrar sesión</Button>
                             ) : (
-                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm" onClick={onHandleLogin}>Login</Button>
+                                <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm boton-form-nav-bar" onClick={onHandleLogin}>Iniciar sesión</Button>
                             )}
                         </Nav>
 

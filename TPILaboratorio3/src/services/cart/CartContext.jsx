@@ -22,12 +22,16 @@ export const CartContextListProvider = ({children}) => {
         }
     };
 
+    const handleDeleteCart = () =>{
+        setCart([])
+    }
+
     const handleProduct = () => {
         return cart
     }
 
     return (
-        <CartContext.Provider value={{handleAddCart,handleProduct}}>
+        <CartContext.Provider value={{handleAddCart,handleProduct,handleDeleteCart}}>
             {children}
         </CartContext.Provider>
       );

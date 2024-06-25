@@ -92,7 +92,7 @@ const NavBar = () => {
 
                         <Dropdown align="end">
                             <Dropdown.Toggle className='button-cart-navbar' id="dropdown-basic">
-                                Carrito ({totalQuantity})
+                                Carrito
                             </Dropdown.Toggle>
                             <Dropdown.Menu className='carrito-desplegable'>
                                 <Carrito products={cartProducts} setCartProducts={setCartProducts} />

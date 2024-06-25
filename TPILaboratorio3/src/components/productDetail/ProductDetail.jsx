@@ -176,8 +176,6 @@ const ProductDetail = () => {
 
               {user && user.userType !== 0 &&
                 <Container className='button-for-seller'>
-                  <Button className='button button-for-seller-action' variant="warning" onClick={onHandleUpdate}>Editar</Button>
-
                   {productOnScreen.avaible
                     ? <Button className='button button-for-seller-action' variant="danger" onClick={handleBaja}>Dar de baja</Button>
                     : <Button className='button button-for-seller-action' variant="success" onClick={handleAlta}>Dar de alta</Button>}

@@ -12,7 +12,7 @@ import { PayMethodContext } from '../../services/cart/PayMethodContext';
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 
 export const Order = () => {
-    const { handleProduct } = useContext(CartContext);
+    const { handleProduct,handleDeleteCart } = useContext(CartContext);
     const { payMethod } = useContext(PayMethodContext);
     const [products, setProducts] = useState([]);
     const [nameAndLastName, setNameAndLastName] = useState()
@@ -22,7 +22,7 @@ export const Order = () => {
     const [selectedMethod, setSelectedMethod] = useState()
 
     const navigate = useNavigate();
-
+    
 
     const handlePayMethod = () => {
         setNameAndLastName(payMethod.nameAndLastName)
@@ -33,10 +33,10 @@ export const Order = () => {
     }
 
 
-
     useEffect(() => {
         setProducts(handleProduct());
-    }, [handleProduct]);
+        handleDeleteCart();
+    }, []);
 
     let totalAmount = 0;
 

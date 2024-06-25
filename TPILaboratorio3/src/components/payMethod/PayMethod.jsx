@@ -14,15 +14,18 @@ const PayMethod = () => {
     const [showTransferData, setShowTransferData] = useState(false);
     const [showCashData, setShowCashData] = useState(false);
     const [userId, setUserId] = useState(null);
-    const { nameAndLastName, email, dni, home, postalCode, tarjetNumber, securityCode, expirationDate, onInputChange, onResetForm } = useForm({
-        nameAndLastName: '',
-        email: '',
-        dni: '',
-        home: '',
+    const { user } = useContext(AuthenticationContext);
+    console.log(user.userSession)
+
+    const { nameAndLastName, email, home, postalCode, tarjetNumber, securityCode, expirationYear,expirationMonth, onInputChange, onResetForm } = useForm({
+        nameAndLastName: `${user.userSession.name} ${user.userSession.lastName}`,
+        email: user.userSession.email,
+        home: user.userSession.adress,
         postalCode: '',
         tarjetNumber: '',
         securityCode: '',
-        expirationDate: '',
+        expirationMonth: '',
+        expirationYear: '',
     });
 
     const navigate = useNavigate();
@@ -30,7 +33,6 @@ const PayMethod = () => {
     const [errors, setErrors] = useState({
         email: false,
         password: false,
-        dni: false,
         home: false,
         postalCode: false,
     });
@@ -44,10 +46,9 @@ const PayMethod = () => {
         setShowCashData(selectedValue === 'Efectivo');
     };
 
-    const nameRef = useRef(null);
-    const emailRef = useRef(null);
-    const dniRef = useRef(null);
-    const homeRef = useRef(null);
+    const nameRef = useRef(`${user.userSession.name} ${user.userSession.lastName}`);
+    const emailRef = useRef(user.userSession.email);
+    const homeRef = useRef(user.userSession.adress);
     const postalCodeRef = useRef(null);
 
     const handlePay = (e) => {
@@ -59,6 +60,7 @@ const PayMethod = () => {
                 ...prev,
                 name: true
             }));
+            alert("Por favor ingrese su nombre completo")
             return;
         }
 
@@ -68,15 +70,7 @@ const PayMethod = () => {
                 ...prev,
                 email: true
             }));
-            return;
-        }
-
-        if (!dniRef.current.value) {
-            dniRef.current.focus();
-            setErrors((prev) => ({
-                ...prev,
-                dni: true
-            }));
+            alert("Por favor ingrese su email")
             return;
         }
 
@@ -86,6 +80,7 @@ const PayMethod = () => {
                 ...prev,
                 home: true
             }));
+            alert("Por favor ingrese su domicilio")
             return;
         }
 
@@ -95,13 +90,13 @@ const PayMethod = () => {
                 ...prev,
                 postalCode: true
             }));
+            alert("Por favor ingrese su código postal")
             return;
         }
 
         let metodoPago = {
             nameAndLastName: nameAndLastName,
             email: email,
-            dni: dni,
             home: home,
             postalCode: postalCode,
             selectedMethod: selectedMethod
@@ -138,19 +133,6 @@ const PayMethod = () => {
                         ref={emailRef}
                     />
                 </Form.Group>
-
-                <Form.Group controlId="userDni" className='formGroup'>
-                    <Form.Label className='text-dark labelForm'>DNI</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder='Ingrese su DNI...'
-                        name="dni"
-                        value={dni}
-                        onChange={onInputChange}
-                        ref={dniRef}
-                    />
-                </Form.Group>
-
                 <Form.Group controlId="userHome" className='formGroup'>
                     <Form.Label className='text-dark labelForm'>Domicilio</Form.Label>
                     <Form.Control
@@ -190,7 +172,7 @@ const PayMethod = () => {
                         <Form.Group controlId="userTarjetNumber" className='formGroup'>
                             <Form.Label className='text-dark labelForm'>Numero de Tarjeta</Form.Label>
                             <Form.Control
-                                type="text"
+                                type="number"
                                 placeholder='Ingrese el numero de tarjeta...'
                                 name="tarjetNumber"
                                 value={tarjetNumber}
@@ -201,7 +183,7 @@ const PayMethod = () => {
                         <Form.Group controlId="userSecurityCode" className='formGroup'>
                             <Form.Label className='text-dark labelForm'>Codigo de seguridad</Form.Label>
                             <Form.Control
-                                type="text"
+                                type="number"
                                 placeholder='Ingrese su codigo de seguridad...'
                                 name="securityCode"
                                 value={securityCode}
@@ -209,12 +191,23 @@ const PayMethod = () => {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="userExpirationDate" className='formGroup'>
-                            <Form.Label className='text-dark labelForm'>Fecha de vencimiento</Form.Label>
+                        <Form.Group controlId="userExpirationMonth" className='formGroup'>
+                            <Form.Label className='text-dark labelForm'>Mes de vencimiento</Form.Label>
                             <Form.Control
-                                type="date"
-                                name="expirationDate"
-                                value={expirationDate}
+                                type="number"
+                                placeholder='Ingrese el mes de vencimiento...'
+                                name="expirationMonth"
+                                value={expirationMonth}
+                                onChange={onInputChange}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="userExpirationDate" className='formGroup'>
+                            <Form.Label className='text-dark labelForm'>Año vencimiento</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder='Ingrese el año de vencimiento...'
+                                name="expirationYear"
+                                value={expirationYear}
                                 onChange={onInputChange}
                             />
                         </Form.Group>
@@ -225,12 +218,15 @@ const PayMethod = () => {
                     <Form.Group controlId="userCbu" className='formGroup'>
                         <Form.Label className='text-dark labelForm'>CBU para transferir</Form.Label>
                         <Form.Control
-                            type="number"
+                            type="text"
                             name="cbu"
                             readOnly
-                            value={'12345678910'} // Esto es harcodeado es un cbu de prueba
+                            value={'285059094009041813520'} // Esto es harcodeado es un cbu de prueba
                             onChange={onInputChange}
                         />
+                        <Form.Text className="text-muted">
+                            Luego enviar comprobante a comprobantes@easygrip.com
+                        </Form.Text>
                     </Form.Group>
                 )}
 
@@ -241,7 +237,11 @@ const PayMethod = () => {
                             type="text"
                             name="paymentCode"
                             readOnly
+                            value={'45465451321657489785'}
                         />
+                        <Form.Text className="text-muted">
+                            Con el código proporcionado efectue el pago en RappiPago o PagoFacil
+                        </Form.Text>
                     </Form.Group>
                 )}
 

@@ -6,6 +6,11 @@
     height: 75%;
 }
 
+.title-paymethod{
+    display: flex;
+    justify-content: center;
+}
+
 .formPayMethod{
     width: 40%;
     background-color: #95aadf !important;
@@ -41,4 +46,22 @@
 .box-button-pay{
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 945px) {
+    .title-paymethod > h1{
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 825px) {
+    .title-paymethod > h1{
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 782px) {
+    .title-paymethod > h1{
+        font-size: 25px;
+    }
 }

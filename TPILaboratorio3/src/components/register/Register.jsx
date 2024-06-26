@@ -256,6 +256,6 @@ Register.propTypes = {
     isSignedIn: PropTypes.func,
     onLogIn: PropTypes.func,
     onLogOut: PropTypes.func
-  };
+};
 
 export default Register

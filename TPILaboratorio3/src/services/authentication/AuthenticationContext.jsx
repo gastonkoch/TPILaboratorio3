@@ -37,6 +37,7 @@ export const AuthenticationContextProvider = ({ children }) => {
       })
       .catch((error) => {
         console.error("Error:", error);
+        console.log("Errorrrr")
       });
     
   };

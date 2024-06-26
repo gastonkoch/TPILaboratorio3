@@ -44,10 +44,10 @@ const Customers = () => {
         const nameFilter = customers.filter(
             (customer) =>
                 customer.name.toLowerCase().includes(nameSearch.toLowerCase())
-            )
+        )
         setCustomers(nameFilter)
     };
-    
+
 
     const onHandleCreateCustomer = () => {
         navigate(`/createcustomer`);

@@ -68,8 +68,14 @@
     align-items: center;
     position: relative; 
     top: 0; 
-    background-color: #95aadf;
     margin-bottom: 20px;
+    border-radius: 25px;
+    color: white;
+}
+
+.titleSellerDiv > h1 {
+    background-color: #95aadf;
+    padding: 20px;
     border-radius: 25px;
 }
 

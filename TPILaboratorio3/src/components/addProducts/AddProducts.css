@@ -7,7 +7,7 @@
 }
 
 .formAddProduct{
-    width: 25% !important;
+    width: 30% !important;
     min-width:400px !important;
     background-color: #95aadf ;
     border-radius: 50px ;
@@ -22,6 +22,7 @@
 .card-body-add-product{
     display: flex;
     justify-content: center;
+    width: 100% !important;
 }
 
 .labelForm{
@@ -54,5 +55,11 @@
     display: flex;
     justify-content: center;
 }
+
+.box-add-product{
+    width: 600px;
+}
+
+
 
 

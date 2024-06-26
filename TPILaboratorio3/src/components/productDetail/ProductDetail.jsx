@@ -128,59 +128,59 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="main-container">
-      <Container className='img-main-product-detail'>
-        <Row>
-          <Col>
-            <Image className='image img-fluid' src={productOnScreen.image} rounded />
-          </Col>
-        </Row>
-      </Container>
+    <div className='box-product-detail'>
+      <Container className="main-container">
+        <Container className='img-main-product-detail'>
+          <Row>
+            <Col className='box-image-product-detail'>
+              <Image className='image img-fluid' src={productOnScreen.image} rounded />
+            </Col>
+          </Row>
+        </Container>
 
-      <Container className='data'>
-        <Form>
-          <Form.Group className="mb-3" controlId="nameId">
-            <Form.Label><b>{productOnScreen.name}</b></Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="priceId">
-            <Form.Label><strong>Precio:</strong> ${productOnScreen.price}</Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="descriptionId">
-            <Form.Label><strong>Descripcion: </strong>{productOnScreen.description}</Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="stockId">
-            <Form.Label><strong>Stock: </strong> {productOnScreen.stock} unidades</Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="categoryId">
-            <Form.Label><strong>Categoría: </strong> {productOnScreen.category}</Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="brandId">
-            <Form.Label><strong>Marca: </strong> {productOnScreen.brand}</Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="disponibleId">
-            <Form.Label><strong>Disponible: </strong> {productOnScreen.avaible ? "Disponible" : "No disponible"}</Form.Label>
-          </Form.Group>
-        </Form>
+        <Container className='data'>
+          <Form>
+            <Form.Group className="mb-3" controlId="nameId">
+              <Form.Label><b>{productOnScreen.name}</b></Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="priceId">
+              <Form.Label><strong>Precio:</strong> ${productOnScreen.price}</Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="descriptionId">
+              <Form.Label><strong>Descripcion: </strong>{productOnScreen.description}</Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="stockId">
+              <Form.Label><strong>Stock: </strong> {productOnScreen.stock} unidades</Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="categoryId">
+              <Form.Label><strong>Categoría: </strong> {productOnScreen.category}</Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="brandId">
+              <Form.Label><strong>Marca: </strong> {productOnScreen.brand}</Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="disponibleId">
+              <Form.Label><strong>Disponible: </strong> {productOnScreen.avaible ? "Disponible" : "No disponible"}</Form.Label>
+            </Form.Group>
+          </Form>
 
-        <Container className='buttonsBox'>
-          <Container className='data'>
-            <Button className='button button-add' onClick={onHandleAdd}>+</Button>
-            <Button className='button button-add' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
-            <Button className='button button-add' onClick={onHandleDelete}>-</Button>
-            <Button className='button button-return' onClick={handleReturn}>Volver</Button>
+          <Container className='buttonsBox'>
+            <Container className='data'>
+              <Button className='button button-add' onClick={onHandleAdd}>+</Button>
+              <Button className='button button-add' variant="primary" onClick={handleAddCarrito}>Agregar al Carrito {productOnScreen.quantity}</Button>
+              <Button className='button button-add' onClick={onHandleDelete}>-</Button>
+              <Button className='button button-return' onClick={handleReturn}>Volver</Button>
+            </Container>
+            {user && user.userType !== 0 &&
+              <Container className='button-for-seller'>
+                {user && user.userSession.userType !== 0 &&
+                  <Container>
+                    <Button className='button button-for-seller-action' variant="warning" onClick={onHandleUpdate}>Editar</Button>
+                    {productOnScreen.avaible
+                      ? <Button className='button button-for-seller-action' variant="danger" onClick={handleBaja}>Dar de baja</Button>
+                      : <Button className='button button-for-seller-action' variant="success" onClick={handleAlta}>Dar de alta</Button>}
+                  </Container>}
+              </Container>}
           </Container>
-
-          {user && user.userSession.userType !== 0 &&
-            <Container>
-              <Button className='button' variant="warning" onClick={onHandleUpdate}>Editar</Button>
-
-              {user && user.userType !== 0 &&
-                <Container className='button-for-seller'>
-                  {productOnScreen.avaible
-                    ? <Button className='button button-for-seller-action' variant="danger" onClick={handleBaja}>Dar de baja</Button>
-                    : <Button className='button button-for-seller-action' variant="success" onClick={handleAlta}>Dar de alta</Button>}
-                </Container>}
-            </Container>}
         </Container>
       </Container>
     </div>

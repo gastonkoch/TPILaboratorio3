@@ -1,3 +1,8 @@
+.box-product-detail{
+    display: flex;
+    justify-content: center;
+}
+
 .main-container {
     display: flex;
     margin-top: 100px;
@@ -7,6 +12,7 @@
     margin-left: 25px;
     margin-right: 25px;
     border-radius: 25px;
+    width: 100%;
 }
 
 .button {
@@ -15,12 +21,17 @@
     margin-bottom: 10px;
 }
 
+.box-image-product-detail{
+    display: flex;
+    justify-content: center;
+}
+
 .image {
     margin-left: 50px;
     min-height: 150px;
     height: 100%;
     min-width: 300px;
-    width: 80%;
+    width: 75%;
 }
 
 .data{
@@ -75,6 +86,7 @@
     }
 
     .button-for-seller-action{
-        width: 400px;
+        width: 100%;
+        margin-right: 10px;
     }
 }

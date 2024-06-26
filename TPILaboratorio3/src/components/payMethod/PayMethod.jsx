@@ -1,7 +1,7 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 import { useForm } from '../../hook/useForm';
 import './PayMethod.css';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { PayMethodContext } from '../../services/cart/PayMethodContext';
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
@@ -15,8 +15,9 @@ const PayMethod = () => {
     const [showCashData, setShowCashData] = useState(false);
     const [userId, setUserId] = useState(null);
     const { user } = useContext(AuthenticationContext);
+    console.log(user.userSession)
 
-    const { nameAndLastName, email, home, postalCode, tarjetNumber, securityCode, expirationYear, expirationMonth, onInputChange, onResetForm } = useForm({
+    const { nameAndLastName, email, home, postalCode, tarjetNumber, securityCode, expirationYear,expirationMonth, onInputChange, onResetForm } = useForm({
         nameAndLastName: `${user.userSession.name} ${user.userSession.lastName}`,
         email: user.userSession.email,
         home: user.userSession.adress,
@@ -34,11 +35,10 @@ const PayMethod = () => {
         password: false,
         home: false,
         postalCode: false,
-        tarjetNumber: false,
+        tarjetNumbe: false,
         securityCode: false,
         expirationMonth: false,
         expirationYear: false,
-        selectedMethod: false
     });
 
 
@@ -54,7 +54,7 @@ const PayMethod = () => {
     const emailRef = useRef(user.userSession.email);
     const homeRef = useRef(user.userSession.adress);
     const postalCodeRef = useRef(null);
-    const selectedMethodRef = useRef(null);
+
     const tarjetNumberRef = useRef(null);
     const securityCodeRef = useRef(null);
     const expirationMonthRef = useRef(null);
@@ -103,17 +103,7 @@ const PayMethod = () => {
             return;
         }
 
-        if (!selectedMethodRef.current.value) {
-            selectedMethodRef.current.focus();
-            setErrors((prev) => ({
-                ...prev,
-                selectedMethod: true
-            }));
-            alert("Por favor ingrese un metodo de pago")
-            return;
-        }
-
-        if (showCardData && !tarjetNumberRef.current.value) {
+        if(showCardData && !tarjetNumberRef.current.value ){
             setErrors((prev) => ({
                 ...prev,
                 tarjetNumber: true
@@ -122,7 +112,7 @@ const PayMethod = () => {
             return;
         }
 
-        if (showCardData && !securityCodeRef.current.value) {
+        if(showCardData && !securityCodeRef.current.value  ){
             setErrors((prev) => ({
                 ...prev,
                 securityCode: true
@@ -131,7 +121,7 @@ const PayMethod = () => {
             return;
         }
 
-        if (showCardData && !expirationMonthRef.current.value) {
+        if(showCardData && !expirationMonthRef.current.value  ){
             setErrors((prev) => ({
                 ...prev,
                 expirationMonth: true
@@ -140,7 +130,7 @@ const PayMethod = () => {
             return;
         }
 
-        if (showCardData && !expirationYearRef.current.value) {
+        if(showCardData && !expirationYearRef.current.value  ){
             setErrors((prev) => ({
                 ...prev,
                 expirationYear: true
@@ -164,7 +154,9 @@ const PayMethod = () => {
     return (
         <div className='divPay'>
             <Form className='formPayMethod' onSubmit={handlePay}>
-                <h1>Proceso de pago</h1>
+                <Container className='title-paymethod'>
+                    <h1>Proceso de pago</h1>
+                </Container>
                 <Form.Group controlId="userNombre" className='formGroup'>
                     <Form.Label className='text-dark labelForm'>Nombre y apellido</Form.Label>
                     <Form.Control
@@ -214,7 +206,7 @@ const PayMethod = () => {
 
                 <Form.Group className="mb-3">
                     <Form.Label className='text-dark labelForm'>Método de pago</Form.Label>
-                    <Form.Select onChange={handleMethodChange} ref={selectedMethodRef}>
+                    <Form.Select onChange={handleMethodChange}>
                         <option value="">Seleccionar</option>
                         <option value="Tarjeta">Tarjeta Debito/Crédito</option>
                         <option value="Transferencia">Transferencia</option>
@@ -237,7 +229,7 @@ const PayMethod = () => {
                         </Form.Group>
 
                         <Form.Group controlId="userSecurityCode" className='formGroup'>
-                            <Form.Label className='text-dark labelForm'>Código de seguridad</Form.Label>
+                            <Form.Label className='text-dark labelForm'>Codigo de seguridad</Form.Label>
                             <Form.Control
                                 type="number"
                                 placeholder='Ingrese su codigo de seguridad...'
@@ -280,7 +272,7 @@ const PayMethod = () => {
                             type="text"
                             name="cbu"
                             readOnly
-                            value={'3514227811100010472029'}
+                            value={'285059094009041813520'} // Esto es harcodeado es un cbu de prueba
                             onChange={onInputChange}
                         />
                         <Form.Text className="text-muted">
@@ -291,7 +283,7 @@ const PayMethod = () => {
 
                 {showCashData && (
                     <Form.Group controlId="userPaymentCode" className='formGroup'>
-                        <Form.Label className='text-dark labelForm'>Código de pago</Form.Label>
+                        <Form.Label className='text-dark labelForm'>Codigo de pago</Form.Label>
                         <Form.Control
                             type="text"
                             name="paymentCode"

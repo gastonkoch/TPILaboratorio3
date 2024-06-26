@@ -72,11 +72,11 @@ const NavBar = () => {
                         }
                         {user && user.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
-                                <Nav.Link onClick={onHandleCustomer} className='option-navbar'>Clientes</Nav.Link>
+                                <Nav.Link onClick={onHandleCustomer} className='option-navbar admin-option'>Clientes</Nav.Link>
                             </Nav>}
                         {user && user.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
-                                <Nav.Link onClick={onHandleSeller} className='option-navbar'>Vendedores</Nav.Link>
+                                <Nav.Link onClick={onHandleSeller} className='option-navbar admin-option'>Vendedores</Nav.Link>
                             </Nav>}
                         {user &&
                             <Navbar.Text className='username'>
@@ -92,7 +92,7 @@ const NavBar = () => {
 
                         <Dropdown align="end">
                             <Dropdown.Toggle className='button-cart-navbar' id="dropdown-basic">
-                                Carrito
+                                Carrito ({totalQuantity})
                             </Dropdown.Toggle>
                             <Dropdown.Menu className='carrito-desplegable'>
                                 <Carrito products={cartProducts} setCartProducts={setCartProducts} />

@@ -18,14 +18,14 @@ const AddProducts = () => {
   useEffect(() => {
     setFormValid(
       enteredName !== "" &&
-        enteredDescription !== "" &&
-        enteredPrice !== "" &&
-        enteredStock !== "" &&
-        enteredCategory !== "" &&
-        enteredBrand !== "" &&
-        enteredImageUrl !== ""
+      enteredDescription !== "" &&
+      enteredPrice !== "" &&
+      enteredStock !== "" &&
+      enteredCategory !== "" &&
+      enteredBrand !== "" &&
+      enteredImageUrl !== ""
     );
-  }, [enteredName, enteredDescription, enteredPrice, enteredStock,enteredCategory,enteredBrand,enteredImageUrl]);
+  }, [enteredName, enteredDescription, enteredPrice, enteredStock, enteredCategory, enteredBrand, enteredImageUrl]);
 
   const handleChangeName = (e) => {
     setEnteredName(e.target.value);
@@ -62,7 +62,7 @@ const AddProducts = () => {
       description: enteredDescription,
       image: enteredImageUrl,
       name: enteredName,
-      price:enteredPrice,
+      price: enteredPrice,
       stock: enteredStock
     };
     try {
@@ -94,102 +94,102 @@ const AddProducts = () => {
 
   return (
     <div className="divAddProduct">
-        <Card className="m-4 w-50 formAddProduct">
-          <h1>Agregar Producto</h1>
-          <Card.Body className="card-body-add-product">
-            <Form className="text-white box" onSubmit={submitProductHandler}>
-              <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookTitle">
-                    <Form.Label className="labelForm">Nombre</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Ingresar el Nombre del producto"
-                      onChange={handleChangeName}
-                      value={enteredName}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookAuthor">
-                    <Form.Label className="labelForm">Descripción</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Ingresar descripción"
-                      onChange={changeDescriptionHandler}
-                      value={enteredDescription}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookPageCount">
-                    <Form.Label className="labelForm">Precio</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Ingresar precio"
-                      min={1}
-                      onChange={changePriceHandler}
-                      value={enteredPrice}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookRating">
-                    <Form.Label className="labelForm">Stock</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Ingresar stock"
-                      max={10000}
-                      min={0}
-                      onChange={changeStockHandler}
-                      value={enteredStock}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookPageCount">
-                    <Form.Label className="labelForm">Categoría</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Ingresar categoria"
-                      onChange={changeCategoryHandler}
-                      value={enteredCategory}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col md={6}>
-                  <Form.Group className="mb-3" controlId="bookRating">
-                    <Form.Label className="labelForm">Marca</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Ingresar marca"
-                      onChange={changeBrandHandler}
-                      value={enteredBrand}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row className="justify-content-between">
-                <Form.Group className="mb-3 labelForm" controlId="bookImageUrl">
-                  <Form.Label>URL de imagen</Form.Label>
+      <Card className="m-4 w-50 formAddProduct">
+        <h1>Agregar Producto</h1>
+        <Card.Body className="card-body-add-product">
+          <Form className="text-white box-add-product" onSubmit={submitProductHandler}>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="bookTitle">
+                  <Form.Label className="labelForm">Nombre</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Ingresar url de imagen"
-                    onChange={changeImageUrlHandler}
-                    value={enteredImageUrl}
+                    placeholder="Ingresar el nombre"
+                    onChange={handleChangeName}
+                    value={enteredName}
                   />
                 </Form.Group>
-              </Row>
-              <div className="box-button-add">
-                <Button type="submit" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd button" disabled={!formValid}>Agregar</Button>
-              </div>
-            </Form>
-          </Card.Body>
-        </Card>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="bookAuthor">
+                  <Form.Label className="labelForm">Descripción</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Ingresar descripción"
+                    onChange={changeDescriptionHandler}
+                    value={enteredDescription}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="bookPageCount">
+                  <Form.Label className="labelForm">Precio</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Ingresar precio"
+                    min={1}
+                    onChange={changePriceHandler}
+                    value={enteredPrice}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="bookRating">
+                  <Form.Label className="labelForm">Stock</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Ingresar stock"
+                    max={10000}
+                    min={0}
+                    onChange={changeStockHandler}
+                    value={enteredStock}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="bookPageCount">
+                  <Form.Label className="labelForm">Categoría</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Ingresar categoria"
+                    onChange={changeCategoryHandler}
+                    value={enteredCategory}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="bookRating">
+                  <Form.Label className="labelForm">Marca</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Ingresar marca"
+                    onChange={changeBrandHandler}
+                    value={enteredBrand}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-between">
+              <Form.Group className="mb-3 labelForm" controlId="bookImageUrl">
+                <Form.Label>URL de imagen</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ingresar url de imagen"
+                  onChange={changeImageUrlHandler}
+                  value={enteredImageUrl}
+                />
+              </Form.Group>
+            </Row>
+            <div className="box-button-add">
+              <Button type="submit" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd button" disabled={!formValid}>Agregar</Button>
+            </div>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
   );
 };

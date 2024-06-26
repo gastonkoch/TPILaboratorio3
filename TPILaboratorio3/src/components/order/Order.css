@@ -91,3 +91,15 @@
 .message-order > h3{
     color: white;
 }
+
+@media (max-width: 768px) {
+    .box-order {
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 637px) {
+    .box-order {
+        min-width: 550px;
+    }
+}

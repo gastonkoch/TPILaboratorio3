@@ -1,3 +1,7 @@
+*{
+    font-family: "Poppins", sans-serif;
+}
+
 .nameBussines{
     color: white;
     font-weight: bold;
@@ -6,6 +10,7 @@
     display: flex;
     align-items: center;
 } 
+
 
 .navbar {
     background-color: #95aadf;
@@ -67,10 +72,9 @@
     border:#2c3959 ;
 }
 
-.products{
-    font-weight: bold;
+.products ,.admin-option{
     color: white;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .option-navbar{
@@ -83,4 +87,15 @@
         height: 55px;
     }
 
+    .option-navbar{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navbar{
+        overflow-x: auto; 
+        white-space: nowrap;
+        height: 150px;
+    }
 }

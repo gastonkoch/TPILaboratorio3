@@ -49,7 +49,7 @@ const CreateCustomer = () => {
                 <Card className="m-4 w-50 formUpdateCustomer">
                     <h1>Crear cliente</h1>
                     <Card.Body className="card-body-create-customer">
-                        <Form className="text-white box" onSubmit={submitCreateCustomerHandler}>
+                        <Form className="text-white box-add-customer" onSubmit={submitCreateCustomerHandler}>
                             <Row>
                                 <Col md={6}>
                                     <Form.Group className="mb-3" controlId="nombre">

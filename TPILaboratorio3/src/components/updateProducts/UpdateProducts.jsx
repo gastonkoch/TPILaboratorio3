@@ -40,14 +40,14 @@ const UpdateProducts = () => {
                     price: productsData.price || prevState.price,
                     stock: productsData.stock || prevState.stock,
                     disponible: productsData.disponible || prevState.disponible,
-                    quantity: 1 
+                    quantity: 1
                 }));
             })
             .catch((error) => {
                 console.error("Error:", error);
             });
     }, []);
-    
+
     const submitUpdateProductHandler = (e) => {
         e.preventDefault();
         fetch(`https://localhost:7197/api/Product/${id}`, {
@@ -58,19 +58,19 @@ const UpdateProducts = () => {
             },
             body: JSON.stringify(productOnScreen)
         })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Error al actualizar el producto");
-            } else {
-                alert("Modificado con exito")
-            }
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Error al actualizar el producto");
+                } else {
+                    alert("Modificado con exito")
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
         navigate(`/producto/${productOnScreen.id}`)
     }
-    
+
 
     const handleCancel = () => (
         navigate(`/producto/${productOnScreen.id}`)
@@ -169,7 +169,7 @@ const UpdateProducts = () => {
                                     />
                                 </Form.Group>
                             </Row>
-                            
+
                             <div className="box-button-update">
                                 <Button type="submit" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdate">Modificar</Button>
                                 <Button type="button" className="mb-3 mt-2 ps-5 pe-5 botonFormAdd botonFormUpdate botonFormUpdateCancel" onClick={handleCancel}>Cancelar</Button>

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import "./CreateSeller.css";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-
 
 const CreateSeller = () => {
   const { id } = useParams();
@@ -14,12 +13,78 @@ const CreateSeller = () => {
     email: '',
     userName: '',
     adress: ''
-  })
+  });
+
+  const [errors, setErrors] = useState({
+    name: false,
+    lastName: false,
+    password: false,
+    email: false,
+    userName: false,
+    adress: false,
+  });
+
+  const nameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const userNameRef = useRef(null);
+  const adressRef = useRef(null);
 
   let navigate = useNavigate();
 
   const submitCreateSellerHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    if (!nameRef.current.value) {
+      nameRef.current.focus();
+      setErrors((prev) => ({
+        ...prev,
+        name: true
+      }));
+      alert("Por favor ingrese su nombre");
+      return;
+    }
+
+    if (!lastNameRef.current.value) {
+      lastNameRef.current.focus();
+      setErrors((prev) => ({
+        ...prev,
+        lastName: true
+      }));
+      alert("Por favor ingrese su apellido");
+      return;
+    }
+
+    if (!emailRef.current.value) {
+      emailRef.current.focus();
+      setErrors((prev) => ({
+        ...prev,
+        email: true
+      }));
+      alert("Por favor ingrese el email");
+      return;
+    }
+
+    if (!userNameRef.current.value) {
+      userNameRef.current.focus();
+      setErrors((prev) => ({
+        ...prev,
+        userName: true
+      }));
+      alert("Por favor ingrese el user name");
+      return;
+    }
+
+    if (!adressRef.current.value) {
+      adressRef.current.focus();
+      setErrors((prev) => ({
+        ...prev,
+        adress: true
+      }));
+      alert("Por favor ingrese la direccion");
+      return;
+    }
+
     fetch(`https://localhost:7197/seller`, {
       method: "POST",
       mode: "cors",
@@ -36,7 +101,7 @@ const CreateSeller = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-    navigate(`/seller`)
+    navigate(`/seller`);
   }
 
   const handleCancel = () => (
@@ -59,6 +124,7 @@ const CreateSeller = () => {
                       placeholder="Ingresar el nombre"
                       value={sellerOnScreen.name}
                       onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, name: e.target.value })}
+                      ref={nameRef}
                     />
                   </Form.Group>
                 </Col>
@@ -70,6 +136,7 @@ const CreateSeller = () => {
                       placeholder="Ingresar apellido"
                       value={sellerOnScreen.lastName}
                       onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, lastName: e.target.value })}
+                      ref={lastNameRef}
                     />
                   </Form.Group>
                 </Col>
@@ -81,10 +148,9 @@ const CreateSeller = () => {
                     <Form.Control
                       type="email"
                       placeholder="Ingresar email"
-                      max={10000}
-                      min={0}
                       value={sellerOnScreen.email}
                       onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, email: e.target.value })}
+                      ref={emailRef}
                     />
                   </Form.Group>
                 </Col>
@@ -96,6 +162,21 @@ const CreateSeller = () => {
                       placeholder="Ingresar nombre de usuario"
                       value={sellerOnScreen.userName}
                       onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, userName: e.target.value })}
+                      ref={userNameRef}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3" controlId="direccion">
+                    <Form.Label className="labelForm">Dirección</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Ingresar la dirección"
+                      value={sellerOnScreen.adress}
+                      onChange={(e) => setSellerOnScreen({ ...sellerOnScreen, adress: e.target.value })}
+                      ref={adressRef}
                     />
                   </Form.Group>
                 </Col>
@@ -112,4 +193,4 @@ const CreateSeller = () => {
   )
 }
 
-export default CreateSeller
+export default CreateSeller;

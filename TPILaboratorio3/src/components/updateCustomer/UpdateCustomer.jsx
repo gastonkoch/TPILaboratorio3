@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import "./UpdateCustomer.css";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
@@ -14,6 +14,22 @@ const UpdateCustomer = () => {
         userName: '',
         adress: ''
     })
+
+    const [errors, setErrors] = useState({
+        name: false,
+        lastName: false,
+        password: false,
+        email: false,
+        userName: false,
+        adress: false,
+    });
+
+    const nameRef = useRef(null);
+    const lastNameRef = useRef(null);
+    const emailRef = useRef(null);
+    const userNameRef = useRef(null);
+    const adressRef = useRef(null);
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -46,6 +62,56 @@ const UpdateCustomer = () => {
 
     const submitUpdateCustomerHandler = (e) => {
         e.preventDefault()
+        if (!nameRef.current.value) {
+            nameRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor ingrese su nombre")
+            return;
+        }
+
+        if (!lastNameRef.current.value) {
+            lastNameRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                lastName: true
+            }));
+            alert("Por favor ingrese su apellido")
+            return;
+        }
+
+
+        if (!customerOnScreen.email) {
+            emailRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                email: true
+            }));
+            alert("Por favor ingrese el email")
+            return;
+        }
+
+        if (!userNameRef.current.value) {
+            userNameRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                userName: true
+            }));
+            alert("Por favor ingrese el user name")
+            return;
+        }
+
+        if (!adressRef.current.value) {
+            adressRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                adress: true
+            }));
+            alert("Por favor ingrese la direccion")
+            return;
+        }
         fetch(`https://localhost:7197/api/User/${id}`, {
             method: "PUT",
             mode: "cors",
@@ -57,12 +123,12 @@ const UpdateCustomer = () => {
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Error al actualizar el producto");
-                } 
+                }
             })
             .catch((error) => {
                 console.error("Error:", error);
             });
-            navigate(`/customer`)
+        navigate(`/customer`)
     }
 
 
@@ -87,6 +153,7 @@ const UpdateCustomer = () => {
                                             placeholder="Ingresar el nombre"
                                             value={customerOnScreen.name}
                                             onChange={(e) => setCustomerOnScreen({ ...customerOnScreen, name: e.target.value })}
+                                            ref={nameRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -98,6 +165,7 @@ const UpdateCustomer = () => {
                                             placeholder="Ingresar apellido"
                                             value={customerOnScreen.lastName}
                                             onChange={(e) => setCustomerOnScreen({ ...customerOnScreen, lastName: e.target.value })}
+                                            ref={lastNameRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -113,6 +181,7 @@ const UpdateCustomer = () => {
                                             min={0}
                                             value={customerOnScreen.email}
                                             onChange={(e) => setCustomerOnScreen({ ...customerOnScreen, email: e.target.value })}
+                                            ref={emailRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -124,6 +193,7 @@ const UpdateCustomer = () => {
                                             placeholder="Ingresar nombre de usuario"
                                             value={customerOnScreen.userName}
                                             onChange={(e) => setCustomerOnScreen({ ...customerOnScreen, userName: e.target.value })}
+                                            ref={userNameRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -137,6 +207,7 @@ const UpdateCustomer = () => {
                                             placeholder="Ingresar direccion"
                                             value={customerOnScreen.adress}
                                             onChange={(e) => setCustomerOnScreen({ ...customerOnScreen, adress: e.target.value })}
+                                            ref={adressRef}
                                         />
                                     </Form.Group>
                                 </Col>

@@ -6,6 +6,7 @@ import "./NavBar.css"
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../services/cart/CartContext';
 import logo from '/public/logo.ico';
+import cart from '/public/cart.png';
 
 const userValueString = localStorage.getItem("user");
 const userValue = userValueString ? JSON.parse(userValueString) : null;
@@ -92,7 +93,7 @@ const NavBar = () => {
 
                         <Dropdown align="end">
                             <Dropdown.Toggle className='button-cart-navbar' id="dropdown-basic">
-                                Carrito ({totalQuantity})
+                                <img style={{ height: '3vh', width: '2hv' }} className="image-order" src={cart} alt="First slide" />
                             </Dropdown.Toggle>
                             <Dropdown.Menu className='carrito-desplegable'>
                                 <Carrito products={cartProducts} setCartProducts={setCartProducts} />

@@ -1,6 +1,6 @@
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import "./UpdateProducts.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "../../hook/useForm";
 
@@ -15,6 +15,27 @@ const UpdateProducts = () => {
         brand: '',
         image: '',
     });
+
+    useState
+
+    const [errors, setErrors] = useState({
+        name: false,
+        description: false,
+        price: false,
+        stock: false,
+        category: false,
+        brand: false,
+        image: false,
+    });
+
+    const nameRef = useRef(null);
+    const descriptionRef = useRef(null);
+    const priceRef = useRef(null);
+    const stockRef = useRef(null);
+    const categoryRef = useRef(null);
+    const brandRef = useRef(null);
+    const imageRef = useRef(null);
+
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -50,6 +71,81 @@ const UpdateProducts = () => {
 
     const submitUpdateProductHandler = (e) => {
         e.preventDefault();
+
+        if (!nameRef.current.value) {
+            nameRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor ingrese su nombre")
+            return;
+        }
+
+        if (!descriptionRef.current.value) {
+            descriptionRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor la descripcion")
+            return;
+        }
+
+        if (!priceRef.current.value) {
+            priceRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor ingrese el precio")
+            return;
+        }
+
+
+        if (!stockRef.current.value) {
+            stockRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor ingrese el stock")
+            return;
+        }
+
+
+        if (!categoryRef.current.value) {
+            categoryRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor ingrese la categoria")
+            return;
+        }
+
+        if (!brandRef.current.value) {
+            brandRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor ingrese la marca")
+            return;
+        }
+
+        if (!imageRef.current.value) {
+            imageRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                name: true
+            }));
+            alert("Por favor ingrese la imagen")
+            return;
+        }
+
+
+
         fetch(`https://localhost:7197/api/Product/${id}`, {
             method: "PUT",
             mode: "cors",
@@ -92,6 +188,7 @@ const UpdateProducts = () => {
                                             placeholder="Ingresar el nombre"
                                             value={productOnScreen.name}
                                             onChange={(e) => setProductOnScreen({ ...productOnScreen, name: e.target.value })}
+                                            ref={nameRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -103,6 +200,7 @@ const UpdateProducts = () => {
                                             placeholder="Ingresar descripción"
                                             value={productOnScreen.description}
                                             onChange={(e) => setProductOnScreen({ ...productOnScreen, description: e.target.value })}
+                                            ref={descriptionRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -117,6 +215,7 @@ const UpdateProducts = () => {
                                             min={1}
                                             value={productOnScreen.price}
                                             onChange={(e) => setProductOnScreen({ ...productOnScreen, price: e.target.value })}
+                                            ref={priceRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -130,6 +229,7 @@ const UpdateProducts = () => {
                                             min={0}
                                             value={productOnScreen.stock}
                                             onChange={(e) => setProductOnScreen({ ...productOnScreen, stock: e.target.value })}
+                                            ref={stockRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -143,6 +243,7 @@ const UpdateProducts = () => {
                                             placeholder="Ingresar categoria"
                                             value={productOnScreen.category}
                                             onChange={(e) => setProductOnScreen({ ...productOnScreen, category: e.target.value })}
+                                            ref={categoryRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -154,6 +255,7 @@ const UpdateProducts = () => {
                                             placeholder="Ingresar marca"
                                             value={productOnScreen.brand}
                                             onChange={(e) => setProductOnScreen({ ...productOnScreen, brand: e.target.value })}
+                                            ref={brandRef}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -166,6 +268,7 @@ const UpdateProducts = () => {
                                         placeholder="Ingresar url de imagen"
                                         value={productOnScreen.image}
                                         onChange={(e) => setProductOnScreen({ ...productOnScreen, image: e.target.value })}
+                                        ref={imageRef}
                                     />
                                 </Form.Group>
                             </Row>

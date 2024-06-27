@@ -10,20 +10,17 @@ import PropTypes from "prop-types";
 import lapiz from '/public/lapiz.png';
 import cruz from '/public/cruz2.png';
 import check from '/public/check3.png';
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 
-const userValueString = localStorage.getItem("user");
-const userValue = userValueString ? JSON.parse(userValueString) : null;
-const userValueSession = userValue ? userValue.userSession : null;
-   
 const Carrito = ({ setCartProducts }) => {
   const [showPayMethod, setShowPayMethod] = useState(false);
   const { handleProduct, handleAddCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [editableIndex, setEditableIndex] = useState(null);
   const [newQuantity, setNewQuantity] = useState(0);
-  const [user, setUser] = useState(userValueSession)
   const navigate = useNavigate();
-
+  const { user } = useContext(AuthenticationContext);
+  
   useEffect(() => {
     setProducts(handleProduct());
   }, [handleProduct]);

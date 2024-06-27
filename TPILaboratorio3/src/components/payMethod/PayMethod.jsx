@@ -1,11 +1,11 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useContext} from 'react';
 import { useForm } from '../../hook/useForm';
 import './PayMethod.css';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { PayMethodContext } from '../../services/cart/PayMethodContext';
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
-import { CartContext } from '../../services/cart/CartContext';
+
 
 const PayMethod = () => {
     const { handlePayMethod } = useContext(PayMethodContext);

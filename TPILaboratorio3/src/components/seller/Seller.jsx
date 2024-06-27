@@ -13,6 +13,7 @@ import lupa from '/public/lupa2.png';
 
 const Seller = () => {
     const [sellers, setSellers] = useState([]);
+    const [sellersFilter, setSellersFilter] = useState([]);
     const [nameSearch, setNameSearch] = useState('');
     const { id } = useParams();
 
@@ -34,20 +35,25 @@ const Seller = () => {
                 return response.json();
             })
             .then((productsData) => {
-                setSellers(Array.isArray(productsData) ? productsData : []);
+                setSellers(productsData);
+                setSellersFilter(productsData);
             })
             .catch((error) => {
                 console.error("Error:", error);
             });
     }, []);
 
-   
+
     const onHandleSearch = () => {
-        const nameFilter = sellers.filter(
-            (seller) =>
-                seller.name.toLowerCase().includes(nameSearch.toLowerCase())
+        if (!nameSearch) {
+            setSellers(sellersFilter)
+        } else {
+            const nameFilter = sellers.filter(
+                (seller) =>
+                    seller.name.toLowerCase().includes(nameSearch.toLowerCase())
             )
-        setSellers(nameFilter)
+            setSellers(nameFilter)
+        }
     };
 
     const onHandleCreateSeller = () => {

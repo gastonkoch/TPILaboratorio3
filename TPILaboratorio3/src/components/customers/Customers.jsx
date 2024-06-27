@@ -13,6 +13,7 @@ import lupa from '/public/lupa2.png';
 
 const Customers = () => {
     const [customers, setCustomers] = useState([]);
+    const [customersFilter, setCustomersFilter] = useState([]);
     const [nameSearch, setNameSearch] = useState('');
 
     let navigate = useNavigate();
@@ -33,7 +34,8 @@ const Customers = () => {
                 return response.json();
             })
             .then((productsData) => {
-                setCustomers(Array.isArray(productsData) ? productsData : []);
+                setCustomers(productsData);
+                setCustomersFilter(productsData)
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -41,11 +43,15 @@ const Customers = () => {
     }, []);
 
     const onHandleSearch = () => {
-        const nameFilter = customers.filter(
-            (customer) =>
-                customer.name.toLowerCase().includes(nameSearch.toLowerCase())
-        )
-        setCustomers(nameFilter)
+        if (!nameSearch) {
+            setCustomers(customersFilter)
+        } else {
+            const nameFilter = customers.filter(
+                (customer) =>
+                    customer.name.toLowerCase().includes(nameSearch.toLowerCase())
+            )
+            setCustomers(nameFilter)
+        }
     };
 
 

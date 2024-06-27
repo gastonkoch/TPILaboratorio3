@@ -31,10 +31,5 @@ const ProductsItem = ({item}) => {
 export default ProductsItem
 
 ProductsItem.proptypes = {
-    id: proptypes.number,
-    product_name: proptypes.string,
-    product_price: proptypes.number,
-    product_description: proptypes.string,
-    product_stock: proptypes.number,
-    product_image: proptypes.string
+    item: proptypes.array
 }

@@ -8,19 +8,15 @@ import { CartContext } from '../../services/cart/CartContext';
 import logo from '/public/logo.ico';
 import cart from '/public/cart.png';
 
-const userValueString = localStorage.getItem("user");
-const userValue = userValueString ? JSON.parse(userValueString) : null;
-const userValueSession = userValue ? userValue.userSession : null;
 
 const NavBar = () => {
-    const [user, setUser] = useState(userValueSession)
     let navigate = useNavigate();
-    const { handleLogout } = useContext(AuthenticationContext);
+    const { handleLogout,user } = useContext(AuthenticationContext);
     const [cartProducts, setCartProducts] = useState([]);
     const { handleProduct } = useContext(CartContext);
     const products = handleProduct();
     let totalQuantity = 0;
-
+    console.log(user)
     if (products.length > 0) {
         for (const product of products) {
             totalQuantity += product.quantity; // Corregimos el nombre de la propiedad
@@ -28,7 +24,6 @@ const NavBar = () => {
     }
 
     const onHandleLogout = () => {
-        window.location.href = '/'
         handleLogout();
     };
 
@@ -66,22 +61,22 @@ const NavBar = () => {
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
                         </Nav>
-                        {user && user.userType !== 0 &&
+                        {user && user.userSession.userType !== 0 &&
                             <Nav className="me-auto caja-titulos" >
                                 <Nav.Link onClick={onHandleNewProduct} className='option-navbar'>Agregar Producto</Nav.Link>
                             </Nav>
                         }
-                        {user && user.userType == 2 &&
+                        {user && user.userSession.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
                                 <Nav.Link onClick={onHandleCustomer} className='option-navbar admin-option'>Clientes</Nav.Link>
                             </Nav>}
-                        {user && user.userType == 2 &&
+                        {user && user.userSession.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
                                 <Nav.Link onClick={onHandleSeller} className='option-navbar admin-option'>Vendedores</Nav.Link>
                             </Nav>}
                         {user &&
                             <Navbar.Text className='username'>
-                                ¡Hola {user.name}!
+                                ¡Hola {user.userSession.name}!
                             </Navbar.Text>}
                         <Nav>
                             {user ? (
@@ -90,7 +85,6 @@ const NavBar = () => {
                                 <Button type='button' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm boton-form-nav-bar" onClick={onHandleLogin}>Iniciar sesión</Button>
                             )}
                         </Nav>
-
                         <Dropdown align="end">
                             <Dropdown.Toggle className='button-cart-navbar' id="dropdown-basic">
                                 <img style={{ height: '3vh', width: '2hv' }} className="image-order" src={cart} alt="First slide" />

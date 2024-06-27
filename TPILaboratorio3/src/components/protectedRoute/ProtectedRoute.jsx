@@ -1,14 +1,11 @@
 import MainLayout from '../mainLayout/MainLayout';
-import { useState } from 'react';
-import Login from '../login/Login';
 import Unauthorize from '../unauthorize/Unauthorize';
+import PropTypes from "prop-types";
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
+import { useContext } from 'react';
 
-const userValueString = localStorage.getItem("user");
-const userValue = userValueString ? JSON.parse(userValueString) : null;
-const userValueSession = userValue ? userValue.userSession : null;
 const ProtectedRoute = ({children}) => {
-    const [user,setUser] = useState(userValueSession)
-
+    const { user } = useContext(AuthenticationContext);
     if (!user) {
         return (
         <MainLayout>
@@ -20,6 +17,11 @@ const ProtectedRoute = ({children}) => {
     <MainLayout children={children}>
     </MainLayout>
     )
+};
+
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.object
 };
 
 export default ProtectedRoute;

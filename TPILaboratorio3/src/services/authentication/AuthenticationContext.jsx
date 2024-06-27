@@ -1,6 +1,7 @@
 import { useState, createContext } from "react";
 import React from "react";
 import PropType from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 export const AuthenticationContext = createContext({});
 
@@ -45,7 +46,7 @@ export const AuthenticationContextProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
-    // window.location.href = '/'
+    window.location.href = '/'
   };
 
   return (

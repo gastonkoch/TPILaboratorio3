@@ -1,13 +1,10 @@
 import MainLayout from '../mainLayout/MainLayout';
-import { useState } from 'react';
 import Unauthorize from '../unauthorize/Unauthorize';
+import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 
-const userValueString = localStorage.getItem("user");
-const userValue = userValueString ? JSON.parse(userValueString) : null;
-const userValueSession = userValue ? userValue.userSession : null;
 const ProtectedForClients = ({children}) => {
-    const [user,setUser] = useState(userValueSession)
-
+    const { user } = useContext(AuthenticationContext);
+    
     if (!user || (user && user.userType === 0)) {
         return (
         <MainLayout>

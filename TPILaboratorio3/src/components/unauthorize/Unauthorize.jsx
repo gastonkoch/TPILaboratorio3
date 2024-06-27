@@ -5,7 +5,7 @@ const Unauthorize = () => {
         <div className='boxUnauthorize'>
             <div className='divUnauthorize'>
                 <h1>¡Lo sentimos!</h1>
-                <h1>No tienes permisos para acceder a esta página</h1>
+                <h2>No tienes permisos para acceder a esta página</h2>
                 <Link to="/">Volver a la página principal</Link>
                 <Link to="/productos">Ver productos</Link>
             </div>

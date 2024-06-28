@@ -80,7 +80,7 @@ const Login = () => {
                     <Form.Group controlId="userEmail" className='formGroup'>
                         <Form.Label className='text-dark labelForm'>Email</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="email"
                             placeholder='Ingrese su email...'
                             name="email"
                             value={email}
@@ -103,7 +103,6 @@ const Login = () => {
                         <Button type='submit' variant='warning' className="mb-3 mt-2 ps-5 pe-5 botonForm">Ingresar</Button>
                     </div>
                 </Form>
-                <p className='pLogin'>¿Olvidó su contraseña?</p>
                 <p className='pLogin' onClick={onRegister}>Registrarse</p>
             </div>
         </div>

@@ -198,7 +198,7 @@ const Register = () => {
                     <Form.Group controlId="userEmail" className='formGroup'>
                         <Form.Label className='text-dark labelForm'>Email</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="email"
                             placeholder='Ingrese su email...'
                             name="email"
                             value={email}

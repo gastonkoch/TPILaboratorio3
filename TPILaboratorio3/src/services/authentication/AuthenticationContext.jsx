@@ -1,16 +1,16 @@
 import { useState, createContext } from "react";
 import React from "react";
 import PropType from "prop-types";
-import { useNavigate } from "react-router-dom";
 
 export const AuthenticationContext = createContext({});
 
 const userValueString = localStorage.getItem("user");
 const userValue = userValueString ? JSON.parse(userValueString) : null;
-
+const userValueNode = userValue ? userValue.userSession : null;
 export const AuthenticationContextProvider = ({ children }) => {
-  const [user, setUser] = useState(userValue);
 
+  const [user, setUser] = useState(userValueNode);
+  
   const handleLogin = (email) => {
     fetch(`https://localhost:7197/api/User/email/${email}`, { // Asegúrate de usar backticks aquí
       method: "GET",
@@ -38,7 +38,6 @@ export const AuthenticationContextProvider = ({ children }) => {
       })
       .catch((error) => {
         console.error("Error:", error);
-        console.log("Errorrrr")
       });
     
   };
@@ -48,7 +47,8 @@ export const AuthenticationContextProvider = ({ children }) => {
     setUser(null);
     window.location.href = '/'
   };
-
+  
+  // userValue && setUser(userValue.userSession)
   return (
     <AuthenticationContext.Provider value={{ user, handleLogin, handleLogout }}>
       {children}

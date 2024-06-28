@@ -50,7 +50,7 @@ const NavBar = () => {
     const onHandleLanding = () => {
         navigate("/");
     };
-
+    user && console.log("objetito " ,user.userType)
     return (
         <>
             <Navbar data-bs-theme="dark" className='navbar'>
@@ -61,22 +61,22 @@ const NavBar = () => {
                         <Nav className="me-auto caja-titulos" >
                             <Nav.Link onClick={onHandleProduct} className='products'>Productos</Nav.Link>
                         </Nav>
-                        {user && user.userSession.userType !== 0 &&
+                        { user && user.userType !== 0 &&
                             <Nav className="me-auto caja-titulos" >
                                 <Nav.Link onClick={onHandleNewProduct} className='option-navbar'>Agregar Producto</Nav.Link>
                             </Nav>
                         }
-                        {user && user.userSession.userType == 2 &&
+                        {user && user.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
                                 <Nav.Link onClick={onHandleCustomer} className='option-navbar admin-option'>Clientes</Nav.Link>
                             </Nav>}
-                        {user && user.userSession.userType == 2 &&
+                        {user && user.userType == 2 &&
                             <Nav className="me-auto caja-titulos" >
                                 <Nav.Link onClick={onHandleSeller} className='option-navbar admin-option'>Vendedores</Nav.Link>
-                            </Nav>}
+                            </Nav> }
                         {user &&
                             <Navbar.Text className='username'>
-                                ¡Hola {user.userSession.name}!
+                                ¡Hola {user.name}!
                             </Navbar.Text>}
                         <Nav>
                             {user ? (

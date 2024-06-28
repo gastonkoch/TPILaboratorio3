@@ -15,17 +15,18 @@ const PayMethod = () => {
     const [showCashData, setShowCashData] = useState(false);
     const [userId, setUserId] = useState(null);
     const { user } = useContext(AuthenticationContext);
-    console.log(user.userSession)
+    console.log(user)
 
-    const { nameAndLastName, email, home, postalCode, tarjetNumber, securityCode, expirationYear,expirationMonth, onInputChange, onResetForm } = useForm({
-        nameAndLastName: `${user.userSession.name} ${user.userSession.lastName}`,
-        email: user.userSession.email,
-        home: user.userSession.adress,
+    const { nameAndLastName, email, home, postalCode, tarjetNumber, securityCode, expirationYear,expirationMonth, selectedValue, onInputChange, onResetForm } = useForm({
+        nameAndLastName: `${user.name} ${user.lastName}`,
+        email: user.email,
+        home: user.adress,
         postalCode: '',
         tarjetNumber: '',
         securityCode: '',
         expirationMonth: '',
         expirationYear: '',
+        selectedValue: ''
     });
 
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ const PayMethod = () => {
         securityCode: false,
         expirationMonth: false,
         expirationYear: false,
+        selectedValue: false
     });
 
 
@@ -50,15 +52,16 @@ const PayMethod = () => {
         setShowCashData(selectedValue === 'Efectivo');
     };
 
-    const nameRef = useRef(`${user.userSession.name} ${user.userSession.lastName}`);
-    const emailRef = useRef(user.userSession.email);
-    const homeRef = useRef(user.userSession.adress);
+    const nameRef = useRef(`${user.name} ${user.lastName}`);
+    const emailRef = useRef(user.email);
+    const homeRef = useRef(user.adress);
     const postalCodeRef = useRef(null);
 
     const tarjetNumberRef = useRef(null);
     const securityCodeRef = useRef(null);
     const expirationMonthRef = useRef(null);
     const expirationYearRef = useRef(null);
+    const selectedValueRef = useRef(null);
 
     const handlePay = (e) => {
         e.preventDefault();
@@ -100,6 +103,16 @@ const PayMethod = () => {
                 postalCode: true
             }));
             alert("Por favor ingrese su código postal")
+            return;
+        }
+
+        if (!selectedValueRef.current.value) {
+            selectedValueRef.current.focus();
+            setErrors((prev) => ({
+                ...prev,
+                selectedValue: true
+            }));
+            alert("Por favor ingrese un método de pago")
             return;
         }
 
@@ -206,7 +219,7 @@ const PayMethod = () => {
 
                 <Form.Group className="mb-3">
                     <Form.Label className='text-dark labelForm'>Método de pago</Form.Label>
-                    <Form.Select onChange={handleMethodChange}>
+                    <Form.Select onChange={handleMethodChange} ref={selectedValueRef}>
                         <option value="">Seleccionar</option>
                         <option value="Tarjeta">Tarjeta Debito/Crédito</option>
                         <option value="Transferencia">Transferencia</option>

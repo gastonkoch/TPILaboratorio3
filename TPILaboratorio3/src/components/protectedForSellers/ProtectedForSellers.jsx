@@ -5,7 +5,7 @@ import { AuthenticationContext } from '../../services/authentication/Authenticat
 const ProtectedForSellers = ({children}) => {
     const { user } = useContext(AuthenticationContext);
 
-    if (!user || (user && user.userSession.userType !== 2)) {
+    if (!user || (user && user.userType !== 2)) {
         return (
         <MainLayout>
           <Unauthorize/>

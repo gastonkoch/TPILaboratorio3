@@ -79,7 +79,6 @@ const Products = () => {
        
     }, [nameSearch, currentProducts]);
 
-
     return (
         <div>
             <div className='search-product'>
@@ -89,6 +88,17 @@ const Products = () => {
             {(user && user.userType !== 0) &&
                 <div className='products-container'>
                     {currentProducts.map(item => (
+                        <div className="product-item" key={item.id}>
+                            <ProductsItem
+                                item={item}
+                            />
+                        </div>
+                    ))}
+                </div>}
+            {(user && user.userType === 0) &&
+                <div className='products-container'>
+                    {currentProducts.map(item => (
+                        item.avaible &&
                         <div className="product-item" key={item.id}>
                             <ProductsItem
                                 item={item}

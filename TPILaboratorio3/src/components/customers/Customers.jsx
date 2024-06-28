@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -15,7 +15,7 @@ const Customers = () => {
     const [customers, setCustomers] = useState([]);
     const [customersFilter, setCustomersFilter] = useState([]);
     const [nameSearch, setNameSearch] = useState('');
-
+    
     let navigate = useNavigate();
 
     const handleNameSearch = (e) => {

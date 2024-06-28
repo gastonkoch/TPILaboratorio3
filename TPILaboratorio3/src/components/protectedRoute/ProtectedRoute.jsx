@@ -4,19 +4,19 @@ import PropTypes from "prop-types";
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 import { useContext } from 'react';
 
-const ProtectedRoute = ({children}) => {
-    const { user } = useContext(AuthenticationContext);
-    if (!user) {
-        return (
-        <MainLayout>
-          <Unauthorize/>
-        </MainLayout>
-        )
-    } 
+const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(AuthenticationContext);
+  if (!user) {
     return (
+      <MainLayout>
+        <Unauthorize />
+      </MainLayout>
+    )
+  }
+  return (
     <MainLayout children={children}>
     </MainLayout>
-    )
+  )
 };
 
 

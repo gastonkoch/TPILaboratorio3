@@ -4,10 +4,10 @@ import img2 from '/public/carrousel7.png'
 import img3 from '/public/carrousel8.png'
 
 const Carrousel = () => {
-    
-  return (
-    <>
-         <Carousel>
+
+    return (
+        <>
+            <Carousel>
                 <Carousel.Item>
                     <img style={{ height: '60vh' }}
                         className="d-block w-100"
@@ -30,8 +30,8 @@ const Carrousel = () => {
                     />
                 </Carousel.Item>
             </Carousel>
-    </>
-  )
+        </>
+    )
 }
 
 export default Carrousel

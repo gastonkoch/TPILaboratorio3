@@ -64,7 +64,7 @@ const DeleteCustomer = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-      navigate("/customer");
+    navigate("/customer");
 
   }
 

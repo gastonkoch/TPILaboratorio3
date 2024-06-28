@@ -4,16 +4,16 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import './ProductsItem.css'
 
-const ProductsItem = ({item}) => {
+const ProductsItem = ({ item }) => {
     let navigate = useNavigate()
-    const onProductDetail = () =>{
+    const onProductDetail = () => {
         navigate(`/producto/${item.id}`)
     }
     return (
         <>
             <Card className='product-item-card'>
                 <Card.Body className='product-image-box'>
-                    <Card.Img variant="top" src={item.image} className='product-image'/>
+                    <Card.Img variant="top" src={item.image} className='product-image' />
                 </Card.Body>
                 <Card.Body className='product-data'>
                     <Card.Title className='product-item-name'>{item.name}</Card.Title>

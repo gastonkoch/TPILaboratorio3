@@ -1,4 +1,4 @@
-import { useState, useRef, useContext} from 'react';
+import { useState, useRef, useContext } from 'react';
 import { useForm } from '../../hook/useForm';
 import './PayMethod.css';
 import { Button, Container, Form } from 'react-bootstrap';
@@ -13,11 +13,9 @@ const PayMethod = () => {
     const [showCardData, setShowCardData] = useState(false);
     const [showTransferData, setShowTransferData] = useState(false);
     const [showCashData, setShowCashData] = useState(false);
-    const [userId, setUserId] = useState(null);
     const { user } = useContext(AuthenticationContext);
-    console.log(user)
 
-    const { nameAndLastName, email, home, postalCode, tarjetNumber, securityCode, expirationYear,expirationMonth, selectedValue, onInputChange, onResetForm } = useForm({
+    const { nameAndLastName, email, home, postalCode, tarjetNumber, securityCode, expirationYear, expirationMonth, selectedValue, onInputChange, onResetForm } = useForm({
         nameAndLastName: `${user.name} ${user.lastName}`,
         email: user.email,
         home: user.adress,
@@ -116,7 +114,7 @@ const PayMethod = () => {
             return;
         }
 
-        if(showCardData && !tarjetNumberRef.current.value ){
+        if (showCardData && !tarjetNumberRef.current.value) {
             setErrors((prev) => ({
                 ...prev,
                 tarjetNumber: true
@@ -125,7 +123,7 @@ const PayMethod = () => {
             return;
         }
 
-        if(showCardData && !securityCodeRef.current.value  ){
+        if (showCardData && !securityCodeRef.current.value) {
             setErrors((prev) => ({
                 ...prev,
                 securityCode: true
@@ -134,7 +132,7 @@ const PayMethod = () => {
             return;
         }
 
-        if(showCardData && !expirationMonthRef.current.value  ){
+        if (showCardData && !expirationMonthRef.current.value) {
             setErrors((prev) => ({
                 ...prev,
                 expirationMonth: true
@@ -143,7 +141,7 @@ const PayMethod = () => {
             return;
         }
 
-        if(showCardData && !expirationYearRef.current.value  ){
+        if (showCardData && !expirationYearRef.current.value) {
             setErrors((prev) => ({
                 ...prev,
                 expirationYear: true

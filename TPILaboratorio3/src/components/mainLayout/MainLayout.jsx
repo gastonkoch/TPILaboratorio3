@@ -4,11 +4,11 @@ import './MainLayout.css'
 import PropTypes from "prop-types";
 
 
-const MainLayout = ({children}) => {
+const MainLayout = ({ children }) => {
   return (
     <div className='divFather'>
-        <NavBar />
-        {children}
+      <NavBar />
+      {children}
     </div>
   )
 }

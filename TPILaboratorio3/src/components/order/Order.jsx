@@ -50,7 +50,7 @@ export const Order = () => {
                 <img style={{ height: '30vh' }} className="image-order" src={logo} alt="First slide" />
             </Container>
             <Container className='message-order'>
-                    <h3>Detalle de su compra</h3>
+                <h3>Detalle de su compra</h3>
             </Container>
             <Container className='order-box'>
                 <Container className='box-order'>
@@ -137,7 +137,7 @@ export const Order = () => {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    
+
                                 </Row>
                             </Form>
                         </Container>

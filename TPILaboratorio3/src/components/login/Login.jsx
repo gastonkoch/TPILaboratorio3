@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../services/authentication/AuthenticationContext';
 
 const Login = () => {
-    const { email, password, onInputChange, onResetForm} = useForm({
+    const { email, password, onInputChange, onResetForm } = useForm({
         email: '',
         password: ''
     })
@@ -22,10 +22,10 @@ const Login = () => {
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    
+
     const onLogin = (event) => {
         event.preventDefault()
-        
+
         if (!emailRef.current.value) {
             emailRef.current.focus();
             alert("Debe ingresar su email")
@@ -42,8 +42,8 @@ const Login = () => {
 
         setErrors({ ...errors, exist: false });
         let userAuthenticateDTO = {
-            userEmail : email,
-            userPassword : password
+            userEmail: email,
+            userPassword: password
         }
         //Busqueda en la base si el usuario existe
         fetch("https://localhost:7197/api/User/validate", {
@@ -51,19 +51,19 @@ const Login = () => {
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",
-              },
+            },
             body: JSON.stringify(userAuthenticateDTO),
-          })
+        })
             .then((response) => {
-              if (!response.ok) {
-                alert("Email o contraseña inválidos")
-                throw new Error("Email o contraseña inválidos");
-              }
-              return response.json();
+                if (!response.ok) {
+                    alert("Email o contraseña inválidos")
+                    throw new Error("Email o contraseña inválidos");
+                }
+                return response.json();
             })
             .then((authenticateResponse) => {
                 handleLogin(email)
-                onResetForm(); 
+                onResetForm();
                 window.location.href = '/'
             });
     }

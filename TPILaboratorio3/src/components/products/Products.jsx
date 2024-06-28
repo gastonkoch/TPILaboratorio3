@@ -69,14 +69,14 @@ const Products = () => {
     };
 
     const onHandleSearch = useCallback(() => {
-        if (!nameSearch){
+        if (!nameSearch) {
             setProductsData(productDataFilter)
-        } else{
+        } else {
             currentProducts = productDataFilter
             const nameFilter = currentProducts.filter((product) => product.name.toLowerCase().includes(nameSearch.toLowerCase()));
             setProductsData(nameFilter);
         }
-       
+
     }, [nameSearch, currentProducts]);
 
     return (

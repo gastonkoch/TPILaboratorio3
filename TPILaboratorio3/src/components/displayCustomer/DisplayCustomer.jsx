@@ -63,7 +63,7 @@ const DisplayCustomer = () => {
                       type="text"
                       placeholder="Ingresar el nombre"
                       value={customerOnScreen.name}
-                      readOnly 
+                      readOnly
                     />
                   </Form.Group>
                 </Col>

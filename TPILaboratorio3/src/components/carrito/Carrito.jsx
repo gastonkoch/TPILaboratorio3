@@ -20,7 +20,7 @@ const Carrito = ({ setCartProducts }) => {
   const [newQuantity, setNewQuantity] = useState(0);
   const navigate = useNavigate();
   const { user } = useContext(AuthenticationContext);
-  
+
   useEffect(() => {
     setProducts(handleProduct());
   }, [handleProduct]);
@@ -40,7 +40,7 @@ const Carrito = ({ setCartProducts }) => {
 
   const handleSaveProduct = (index) => {
     const updatedProducts = [...products];
-    if(newQuantity > 0){
+    if (newQuantity > 0) {
       updatedProducts[index].quantity = newQuantity;
       setProducts(updatedProducts);
       setCartProducts(updatedProducts);
@@ -48,7 +48,7 @@ const Carrito = ({ setCartProducts }) => {
     } else {
       alert("La cantidad no puede ser menor a uno")
     }
-    
+
   };
 
   const handlePay = () => {
@@ -56,7 +56,7 @@ const Carrito = ({ setCartProducts }) => {
       alert("Debe agregar productos al carrito");
     } else {
       !user ? alert("Debe loguearse primero") :
-      navigate('/paymethod');
+        navigate('/paymethod');
     }
   };
 
